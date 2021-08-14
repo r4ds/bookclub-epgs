@@ -1,4 +1,4 @@
-# Chapter title
+# About Successful {shiny} Apps
 
 **Learning objectives:**
 
