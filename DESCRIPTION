@@ -1,0 +1,19 @@
+Package: bookclub-epgs
+Title: Engineering Production-Grade Shiny Apps Book Club
+Version: 0.0.0.9000
+Authors@R: c(
+  person("R4DS Online Learning Community", role = c("aut", "cre", "cph"))
+  )
+URL: https://r4ds.github.io/bookclub-epgs, https://github.com/r4ds/bookclub-epgs
+Depends: 
+    R (>= 3.1.0)
+Imports: 
+    bookdown,
+    details,
+    emo,
+    golem,
+    shiny,
+    tidyverse
+Remotes: 
+    hadley/emo
+    
