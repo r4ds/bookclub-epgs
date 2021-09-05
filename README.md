@@ -12,7 +12,45 @@ If you would like to present, please add your name next to a chapter using the [
 
 *Cohort 1: (starts 2021-08-25) - Wednesdays, 12pm EST/EDT*
 
-- 2021-08-25: Chapter 1: TITLE: PRESENTER TBD
+### Section I: Building successful apps
+
+- 2021-09-01: Ch1 Intro to shiny, apps, R and golem: Presenter TBD
+- 2021-09-08: Ch2+3 successful projects: Presenter TBD
+- 2021-09-15: Ch4+5 The golemverse: Presenter TBD
+
+### Section II:  Design
+
+- 2021-09-22: Ch6+7: User experience and Developer patience: Presenter TBD
+
+### Section III: Prototype
+
+- 2021-09-29: Ch8+9: Prototyping in {golem}: Presenter TBD
+
+### Section IV: Build
+
+- 2021-10-06: Ch10: Building the app in {golem}: Presenter TBD
+
+### Interlude
+
+- 2021-10-13: TBD (Interview? Show-and-Tell?)
+
+### Section V: Strengthen
+
+- 2021-10-20: Ch11+12: Testing, Environments and Version Control: Presenter TBD
+
+### Section VI: Deploy
+
+- 2021-10-27: Ch13 + Appendix A: Deploying an App, and the whole workflow: Presenter TBD
+
+### Section VII: Optimise
+
+- 2021-11-03: Ch14: The need for optimization: Presenter TBD
+- 2021-11-10: Ch15+16: Optimising shiny: Presenter TBD
+- 2021-11-17: Ch17+18 Front end shenanigans: Presenter TBD
+
+### Wrap-Up
+
+- 2021-11-24: Wrap up and discussion
 
 ## How to Present
 
