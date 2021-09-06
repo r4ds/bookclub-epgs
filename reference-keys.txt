@@ -1,4 +1,3 @@
 about-successful-shiny-apps
-slide-1-title
 meeting-videos
 cohort-1
