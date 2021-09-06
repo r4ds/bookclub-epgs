@@ -1,22 +1,15 @@
 # About Successful {shiny} Apps
 
-**Learning objectives:**
-
-- {These are nice to have, but take some extra work. It's ok to skip these if necessary.}
-
-## {Slide 1 title}
-
-- {Create slides as sections, but keep them shrot like a slide.}
-
 ## Meeting Videos
 
 ### Cohort 1
 
-`r knitr::include_url("https://www.youtube.com/embed/jrBiEppKt_0")`
+`r knitr::include_url("https://www.youtube.com/embed/Ia-sfs2gKOE")`
 
 <details>
   <summary> Meeting chat log </summary>
   
 ```
+00:10:22	Ryan Metcalf:	https://unleash-shiny.rinterface.com/index.html
 ```
 </details>
