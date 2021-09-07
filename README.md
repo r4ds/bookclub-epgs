@@ -14,8 +14,8 @@ If you would like to present, please add your name next to a chapter using the [
 
 ### Section I: Building successful apps
 
-- 2021-09-01: Ch1 Intro to shiny, apps, R and golem: Presenter TBD
-- 2021-09-08: Ch2+3 successful projects: Presenter TBD
+- 2021-09-01: Ch1 Intro to shiny, apps, R and golem: Russ Hyde
+- 2021-09-08: Ch2+3 successful projects: Ryan Metcalf
 - 2021-09-15: Ch4+5 The golemverse: Presenter TBD
 
 ### Section II:  Design
