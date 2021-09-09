@@ -1,4 +1,14 @@
 about-successful-shiny-apps
+introduction
+motivation-for-the-book-the-bookclub
+audience-for-the-book
+what-is-production
+intro-to-shiny
+what-is-a-complex-shiny-application
+types-of-complexity
+code-complexity
+app-complexity
+what-is-a-successful-shiny-app
 meeting-videos
 cohort-1
 planning-ahead
