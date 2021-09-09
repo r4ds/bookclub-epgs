@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.1 Meeting Videos | Engineering Production-Grade Shiny Apps Book Club</title>
+  <title>3.1 {shiny} app as a package | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.1 Meeting Videos | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta property="og:title" content="3.1 {shiny} app as a package | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.1 Meeting Videos | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta name="twitter:title" content="3.1 {shiny} app as a package | Engineering Production-Grade Shiny Apps Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="about-successful-shiny-apps.html"/>
-<link rel="next" href="planning-ahead.html"/>
+<link rel="prev" href="structuring-your-project.html"/>
+<link rel="next" href="using-shiny-modules.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -125,27 +125,83 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="meeting-videos" class="section level2">
-<h2><span class="header-section-number">1.1</span> Meeting Videos</h2>
-<div id="cohort-1" class="section level3">
-<h3><span class="header-section-number">1.1.1</span> Cohort 1</h3>
-<iframe src="https://www.youtube.com/embed/Ia-sfs2gKOE" width="100%" height="400px" data-external="1">
-</iframe>
-<details>
-<p><summary> Meeting chat log </summary></p>
-<pre><code>00:10:22    Ryan Metcalf:   https://unleash-shiny.rinterface.com/index.html</code></pre>
-</details>
-
+<div id="shiny-app-as-a-package" class="section level2">
+<h2><span class="header-section-number">3.1</span> {shiny} app as a package</h2>
+<ul>
+<li><code>golem</code> is an opinionated framework for building production-ready {shiny} applications</li>
+<li>learn the basic now…the rest of the book relies on it</li>
+</ul>
+<div id="what-is-in-a-production-grade-shiny-app" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> What is in a production-grade {shiny} app?</h3>
+<ul>
+<li>Use one single file, or split into two?….that is the question!</li>
+<li>We will discover, this is an arbitrary question when managing large production level shiny apps</li>
+<li><em>Modulizing</em> code will be your success factor</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>It has metadata</li>
+</ol>
+<ul>
+<li>This could include: naming convention, version numbering, what the app does, who to contact when it breaks….and it <strong>WILL</strong> break</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>It handles dependencies</li>
+</ol>
+<ul>
+<li>You need to handle them, and handle them correctly if you want to ensure a smooth deployment to production</li>
+<li><code>DESCRIPTION</code>: contains the packages your application depends on</li>
+<li><code>NAMESPACE</code>: contains the functions/packages you need to import</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>It’s split into functions</li>
+</ol>
+<ul>
+<li>When apps get big…spread the wealth to smaller manageable files</li>
+<li>The smaller files go into the <code>R/</code> directory</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>It has documentation</li>
+</ol>
+<ul>
+<li>Document, Document, Document!!!
+<ul>
+<li><code>README</code> can be simple like a markdown file</li>
+<li><code>Vignettes</code> are a bit more complex, possibly with examples</li>
+<li>Function documentation could include inline notes</li>
+<li>You may even create a <code>{pkgdown}</code> webpage for IT and other developers</li>
+</ul></li>
+</ul>
+<ol start="5" style="list-style-type: decimal">
+<li>It’s tested</li>
+</ol>
+<ul>
+<li>Nothing should go to production without being tested. Nothing.</li>
+<li>examples could include <code>{testhat}</code></li>
+</ul>
+<ol start="6" style="list-style-type: decimal">
+<li>There is a native way to build and deploy it</li>
+</ol>
+<ul>
+<li>Finally, create a <code>tar.gz</code> file to make it easy for distribution</li>
+</ul>
+</div>
+<div id="resources" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> Resources</h3>
+<ul>
+<li><a href="http://r-pkgs.had.co.nz/">R packages</a></li>
+<li><a href="https://speakerdeck.com/colinfay/building-a-package-that-lasts-erum-2018-workshop">Building a Package that Lasts</a></li>
+<li><a href="https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Creating-R-packages">Writing R Extensions</a></li>
+<li><a href="https://kbroman.org/pkg_primer/">R Package Primer - a Minimal Tutorial</a></li>
+</ul>
 </div>
 </div>
-<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="about-successful-shiny-apps.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="planning-ahead.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="structuring-your-project.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="using-shiny-modules.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -176,7 +232,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-epgs/edit/main/01-introduction.Rmd",
+"link": "https://github.com/r4ds/bookclub-epgs/edit/main/03-Structuring_Your_Project.Rmd",
 "text": "Edit"
 },
 "history": {
