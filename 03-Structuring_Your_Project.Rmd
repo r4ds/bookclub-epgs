@@ -1,0 +1,115 @@
+---
+title: "03-Structuring Your Project"
+author: "Ryan L. Metcalf"
+date: "9/8/2021"
+output: html_document
+---
+
+# Structuring Your Project
+- Learning Objectives
+  - Learn the `golem` file structure for building shiny apps
+  - Manage Dependencies and Namespace files
+  - Apply proper documentation principles for app maintenance, use, and future development
+  - Comprehend the future use of `golem`
+  
+## {shiny} app as a package
+ - `golem` is an opinionated framework for building production-ready {shiny} applications
+ - learn the basic now...the rest of the book relies on it
+ 
+### What is in a production-grade {shiny} app?
+ - Use one single file, or split into two?....that is the question!
+  - We will discover, this is an arbitrary question when managing large production level shiny apps
+ - *Modulizing* code will be your success factor
+1. It has metadata
+ - This could include: naming convention, version numbering, what the app does, who to contact when it breaks....and it **WILL** break
+2. It handles dependencies
+ - You need to handle them, and handle them correctly if you want to ensure a smooth deployment to production
+ - `DESCRIPTION`: contains the packages your application depends on
+ - `NAMESPACE`: contains the functions/packages you need to import
+3. It’s split into functions
+ - When apps get big...spread the wealth to smaller manageable files
+ - The smaller files go into the `R/` directory
+4. It has documentation
+ - Document, Document, Document!!!
+   - `README` can be simple like a markdown file
+   - `Vignettes` are a bit more complex, possibly with examples
+   - Function documentation could include inline notes
+   - You may even create a `{pkgdown}` webpage for IT and other developers
+5. It’s tested
+ - Nothing should go to production without being tested. Nothing.
+ - examples could include `{testhat}` 
+6. There is a native way to build and deploy it
+ - Finally, create a `tar.gz` file to make it easy for distribution
+
+### Resources
+ - [R packages](http://r-pkgs.had.co.nz/)
+ - [Building a Package that Lasts](https://speakerdeck.com/colinfay/building-a-package-that-lasts-erum-2018-workshop)
+ - [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Creating-R-packages)
+ - [R Package Primer - a Minimal Tutorial](https://kbroman.org/pkg_primer/)
+
+## Using {shiny} modules
+*Modulizing* code will be your success factor
+
+### Why {shiny} modules?
+1. The one million “Validate” buttons problem
+ - Creating small namespaces where you can safely define ids without conflicting with other ids in the app
+ - When you single app gets bigger....UI and Server exchange may be hundreds or thousands of lines apart. That is a lot of scrolling!
+2. Working with a bite-sized codebase
+
+>if you copy and paste something more than twice, you should make a function
+
+ - `{shiny}` modules aim at three things:
+   - simplify “id” namespacing
+   - split the codebase into a series of functions
+   - allow UI/Server parts of your app to be reused
+ - Most of the time, modules are used to do the two first. In our case, we could say that 90% of the modules we write are never reused, they are here to allow us to split the codebase into smaller, more manageable pieces.
+
+### When to use {shiny} modules
+ - Start right from the beginning
+ - Yes, this takes a bit more time, but you will be saving yourselve volumes in the future
+   - (Your future self will love you!)
+   
+### A practical walkthrough
+(Big code base example. Talk through the best way to compare)
+1. Your first {shiny} module
+2. Passing arguments to your modules
+ - [UseLink](https://connect.thinkr.fr/tidytuesday201942/)
+
+### Communication between modules
+Three primary ways to share data amongst modules:
+ - Returning a reactive function
+ - The “stratégie du petit r” (to be pronounced with a French accent of course)
+ - The “stratégie du grand R6”
+ 
+1. Returning values from the module
+ - using reactive calls is costly on the server
+2. The “stratégie du petit r”
+ - creates a sudo database shared amongst modules. More efficent, but not eloquent
+3. The “stratégie du grand R6”
+ - `{R6}` package. The best of both worlds
+ - may be foreign to some
+4. Other approaches: About {tidymodules}
+
+## Structuring your app
+A shiny app has two main components:
+ - Application logic is what makes your {shiny} app interactive
+ - Business logic includes the components with the core algorithms and functions that make your application specific to your area of work
+
+### Small is beautiful (bis repetita)
+ - Long scripts are almost always synonymous with complexity when it comes to building software
+
+### Conventions matter
+
+`app_*.R` (typically app_ui.R and app_server.R) contain the top-level functions defining your user interface and your server function.
+
+`fct_*` files contain the business logic, which are potentially large functions. They are the backbone of the application and may not be specific to a given module. They can be added using {golem} with the add_fct("name") function.
+
+`mod_*` files contain a unique module. Many {shiny} apps contain a series of tabs, or at least a tab-like pattern, so we suggest that you number them according to their step in the application. Tabs are almost always named in the user interface, so that you can use this tab name as the file name. For example, if you build a dashboard where the first tab is called “Import”, you should name your file mod_01_import.R. You can create this file with a module skeleton using golem::add_module("01_import").
+
+`utils_*` are files that contain utilities, which are small helper functions. For example, you might want to have a not_na, which is not_na <- Negate(is.na), a not_null, or small tools that you will be using application-wide. Note that you can also create utils for a specific module.
+
+`*_ui_*`, for example utils_ui.R, relates to the user interface.
+
+`*_server_*` are files that contain anything related to the application’s back-end. For example, fct_connection_server.R will contain functions that are related to the connection to a database, and are specifically used from the server side.
+
+  

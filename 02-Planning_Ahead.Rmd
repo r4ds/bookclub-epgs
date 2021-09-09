@@ -1,0 +1,67 @@
+---
+title: "02-Planning_Ahead"
+author: "Ryan L. Metcalf"
+date: "9/8/2021"
+output: html_document
+---
+
+# Planning Ahead
+## Prepare for Success
+ - Learning Objectives:
+   - Learn the KISS method
+   - Establish good version control and CI / Test
+   - Comprehend development team hierarchy
+
+>French proverb: Rome ne fut pas faite toute en un jour.
+
+>English Translation: Rome was not made all in one day.
+
+ - The chapter is preparing for a project
+ - Projects that aren't planned well encure additional cost to unwrangle bad code
+ - Setting Version Control
+ - Organizing a hierarchy of personnel
+ 
+> The sooner you start with a robust framework the better, and the longer you wait the harder it gets to convert your application to a production-ready one.
+
+## Develop with the *KISS* principle
+Definition: Keep It Simple Stupid
+
+- Kelly Johnson of Lockheed Skunkworks
+  - Develop with a common set of tools
+    - Tidyverse
+    - Dplyr
+    - ggplot2
+    - etc...
+  
+Expand on this topic for military style of *lowest common denominator*. Simple is success.
+
+- Various levels of workforce aptitude lead towards varying degrees of success
+- If your team chooses to use abstract packages or web applications, ensure there is a good reason. The more complex you build your orchestration, the harder it will be to find talent to maintain the service. Example: Microsoft or Oracle
+
+## Working as a team: Tools and structure
+- The choice of tools and how the team is structured is crucial for a successful application.
+  - Not entirely like *KISS*, but close too it. GitHub versus GitLab. Barebones hardware or Containerization.
+ 
+### From the tools point of view
+1. Version control and test all things
+ - Use Constant Innovation (CI) principles to test all code before committing
+ - Breaking things is a natural process of software engineering, notably when working on a piece of code during a long period
+ - Be informed that the codebase is broken
+ - Be able to identify changes between versions, and potentially, get back in time to a previous codebase
+   - Github/GitLab diff-docs. Example: Branch -> Change -> Test -> Commit -> Pull Request -> Merge
+2. Small is beautiful
+ - Smaller more managable pieces make it easier to develop
+ - Teams may even work in parallel (with caution)
+ - A large codebase implies that the safe way to work is to split the app into pieces
+ - Extract your core “non-reactive” functions, which we will also call the “business logic”, and include them in external files
+   - Non-vital linkages (data ingestion pipelines)
+   - Page Layout and theming (CSS or branding characteristics)
+   - Allows for expansion but won't break the core
+
+### From the team point of view
+ - Select a Manager, maybe a stakeholder or project manager. Someone who may or may not work on the codebase but is aware and knowledgeable
+ - Select one or more core developers skilled but specific in their field of study
+ - Follow *git workflow* with issue tracking and managing pull requests
+ 
+ ## Reference
+ [Lemaire, Maude. 2020. Refactoring at Scale. Henry Holt.](https://www.oreilly.com/library/view/refactoring-at-scale/9781492075523/) **NOTE: Payed Service**
