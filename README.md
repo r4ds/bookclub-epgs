@@ -21,7 +21,7 @@ If you would like to present, please add your name next to a chapter using the [
 
 ### Section II:  Design
 
-- 2021-09-29: Ch6+7: User experience and Developer patience: Presenter TBD
+- 2021-09-29: Ch6+7: User experience and Developer patience: Federica Gazzelloni
 
 ### Section III: Prototype
 
