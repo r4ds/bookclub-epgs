@@ -2,7 +2,7 @@
 
 Welcome to the R4DS Engineering Production-Grade Shiny Apps Book Club!
 
-We are working together to read [Engineering Production-Grade Shiny Apps](https://link.to.book) by AUTHORS.
+We are working together to read [Engineering Production-Grade Shiny Apps](https://engineering-shiny.org/) by Colin Fay, Sébastien Rochette, Vincent Guyader, Cervan Girard.
 Join the #book_club-epgs channel on the [R4DS Slack](https://r4ds.io/join) to participate.
 As we read, we are producing [notes about the book](https://r4ds.github.io/bookclub-URL/).
 
