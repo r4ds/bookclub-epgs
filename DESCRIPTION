@@ -10,8 +10,12 @@ Depends:
 Imports: 
     bookdown,
     details,
+    DiagrammeR,
     emo,
     golem,
+    knitr,
+    matlab,
+    nter,
     shiny,
     tidyverse
 Remotes: 
