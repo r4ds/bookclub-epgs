@@ -20,5 +20,5 @@ Imports:
     shiny,
     tidyverse
 Remotes: 
-    hadley/emo
+    hadley/emo,
     JohnCoene/nter
