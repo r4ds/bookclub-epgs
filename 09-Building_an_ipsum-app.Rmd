@@ -1,0 +1,6 @@
+---
+title: "09-Building_an_ipsum-app"
+author: "Ryan L. Metcalf"
+date: "10/6/2021"
+output: ioslides_presentation
+---
