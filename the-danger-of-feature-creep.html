@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.7 What is a successful {shiny} app? | Engineering Production-Grade Shiny Apps Book Club</title>
+  <title>4.3 The danger of feature-creep | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.7 What is a successful {shiny} app? | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta property="og:title" content="4.3 The danger of feature-creep | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.7 What is a successful {shiny} app? | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta name="twitter:title" content="4.3 The danger of feature-creep | Engineering Production-Grade Shiny Apps Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="app-complexity.html"/>
-<link rel="next" href="meeting-videos.html"/>
+<link rel="prev" href="simplicity-is-gold.html"/>
+<link rel="next" href="web-accessibility.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -239,22 +239,56 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="what-is-a-successful-shiny-app" class="section level2">
-<h2><span class="header-section-number">1.7</span> What is a successful {shiny} app?</h2>
+<div id="the-danger-of-feature-creep" class="section level2">
+<h2><span class="header-section-number">4.3</span> The danger of feature-creep</h2>
+<blockquote>
+<p>Rule of Parsimony: Write a big program only when it is clear by demonstration that nothing else will do.
+The Art of UNIX Programming (Raymond 2003)</p>
+</blockquote>
+<div id="what-is-feature-creep" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> What is feature-creep?</h3>
+<p>The process of adding features to the app that complicate the usage and the maintenance of the product, such as:</p>
 <ul>
-<li>Existence</li>
-<li>Accuracy</li>
-<li>Usability</li>
-<li>Immortality</li>
+<li>easier navigation</li>
+<li>more information</li>
+<li>more visualizations</li>
+<li>modifiable elements</li>
+<li>…</li>
 </ul>
+<p><strong>What’s behind feature-creep?</strong></p>
+<p>adding more and more things most often leads to:</p>
+<ul>
+<li>a slower app</li>
+<li>worse user experience</li>
+<li>steeper learning curve</li>
+</ul>
+</div>
+<div id="too-much-reactivity" class="section level3">
+<h3><span class="header-section-number">4.3.2</span> Too much reactivity</h3>
+<ul>
+<li>Prevent the implementation of “full reactivity”</li>
+</ul>
+<p>This is a very important part of how to make an app working smoothly, releasing the best experience to users.</p>
+<p>The book reminds that: <strong>people make mistakes</strong> while using the app</p>
+<blockquote>
+<p>be sure your app doesn’t update all the times at any given imputs</p>
+</blockquote>
+<p>If the application reacts to all of the moves, the experience using the app can be bad, imagine that all the elements on the app update at any user input</p>
+<p>The best solution is to add <strong>one reactive button</strong> to give the user the opportunity to update results once all the changes have been made.</p>
+</div>
+<div id="too-much-interactivity" class="section level3">
+<h3><span class="header-section-number">4.3.3</span> Too much interactivity</h3>
+<p><strong>A. Speed:</strong> use the features that assure fast visualizations at a given input</p>
+<p><strong>B. Visual noise:</strong> reduce the numbers of extra features</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="app-complexity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="meeting-videos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="simplicity-is-gold.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="web-accessibility.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -285,7 +319,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-epgs/edit/main/01-introduction.Rmd",
+"link": "https://github.com/r4ds/bookclub-epgs/edit/main/06-User_experience.Rmd",
 "text": "Edit"
 },
 "history": {

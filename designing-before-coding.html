@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.7 What is a successful {shiny} app? | Engineering Production-Grade Shiny Apps Book Club</title>
+  <title>5.1 Designing before coding | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.7 What is a successful {shiny} app? | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta property="og:title" content="5.1 Designing before coding | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.7 What is a successful {shiny} app? | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta name="twitter:title" content="5.1 Designing before coding | Engineering Production-Grade Shiny Apps Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="app-complexity.html"/>
-<link rel="next" href="meeting-videos.html"/>
+<link rel="prev" href="developer-patience---dont-rush-into-coding.html"/>
+<link rel="next" href="ask-questions.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -239,22 +239,74 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="what-is-a-successful-shiny-app" class="section level2">
-<h2><span class="header-section-number">1.7</span> What is a successful {shiny} app?</h2>
+<div id="designing-before-coding" class="section level2">
+<h2><span class="header-section-number">5.1</span> Designing before coding</h2>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:design"></span>
+<img src="images/07-code_design.png" alt="[Designing before coding: credits](https://matthewstrom.com/writing/designing-with-code.html)" width="50%" />
+<p class="caption">
+Figure 5.1: <a href="https://matthewstrom.com/writing/designing-with-code.html">Designing before coding: credits</a>
+</p>
+</div>
+<div id="the-urge-to-code" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> The urge to code</h3>
 <ul>
-<li>Existence</li>
-<li>Accuracy</li>
-<li>Usability</li>
-<li>Immortality</li>
+<li>technical implementation: search for an existent soultion</li>
+<li>packages</li>
+<li>pieces of code</li>
+<li>…</li>
 </ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:bigpicture"></span>
+<img src="images/07-thebigpicture.png" alt="[The Big Picture credits](http://onthemark.ca/big-picture/)" width="50%" />
+<p class="caption">
+Figure 5.2: <a href="http://onthemark.ca/big-picture/">The Big Picture credits</a>
+</p>
+</div>
+<p>Thinking about the Big Picture helps in designing your app:</p>
+<ul>
+<li>what are the inputs</li>
+<li>what are the outputs</li>
+<li>what packages/services can you use inside your application</li>
+<li>how will it fit in the rest of the project</li>
+<li>…</li>
+</ul>
+</div>
+<div id="knowing-where-to-search" class="section level3">
+<h3><span class="header-section-number">5.1.2</span> Knowing where to search</h3>
+<ul>
+<li>R and {shiny} <a href="https://engineering-shiny.org/dont-rush-into-coding.html">resources</a></li>
+<li>Web <a href="https://engineering-shiny.org/dont-rush-into-coding.html">resources</a></li>
+</ul>
+</div>
+<div id="about-concept-map" class="section level3">
+<h3><span class="header-section-number">5.1.3</span> About concept map</h3>
+<blockquote>
+<p>take a piece of paper and draw all the concepts, and all the relationships that link these concepts together.</p>
+</blockquote>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:conceptmap"></span>
+<img src="images/07-concept-map.png" alt="[The Concept Map credits](https://miro.com/blog/how-to-make-a-concept-map/)" width="50%" />
+<p class="caption">
+Figure 5.3: <a href="https://miro.com/blog/how-to-make-a-concept-map/">The Concept Map credits</a>
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:hexmakemap"></span>
+<img src="images/07-hexmakemap.png" alt="[The HexmakeMap credits](https://engineering-shiny.org/dont-rush-into-coding.html)" width="50%" />
+<p class="caption">
+Figure 5.4: <a href="https://engineering-shiny.org/dont-rush-into-coding.html">The HexmakeMap credits</a>
+</p>
+</div>
+<ul>
+<li><p>Can we point to any concept and confirm it’s there?</p></li>
+<li><p>Can we look at every relationship and see they all work as expected?</p></li>
+</ul>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="app-complexity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="meeting-videos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="developer-patience---dont-rush-into-coding.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ask-questions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -285,7 +337,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-epgs/edit/main/01-introduction.Rmd",
+"link": "https://github.com/r4ds/bookclub-epgs/edit/main/07-Dont_rush_into_coding.Rmd",
 "text": "Edit"
 },
 "history": {

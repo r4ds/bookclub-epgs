@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.7 What is a successful {shiny} app? | Engineering Production-Grade Shiny Apps Book Club</title>
+  <title>4.2 Simplicity is gold | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.7 What is a successful {shiny} app? | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta property="og:title" content="4.2 Simplicity is gold | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.7 What is a successful {shiny} app? | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta name="twitter:title" content="4.2 Simplicity is gold | Engineering Production-Grade Shiny Apps Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="app-complexity.html"/>
-<link rel="next" href="meeting-videos.html"/>
+<link rel="prev" href="introduction-1.html"/>
+<link rel="next" href="the-danger-of-feature-creep.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -239,22 +239,127 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="what-is-a-successful-shiny-app" class="section level2">
-<h2><span class="header-section-number">1.7</span> What is a successful {shiny} app?</h2>
+<div id="simplicity-is-gold" class="section level2">
+<h2><span class="header-section-number">4.2</span> Simplicity is gold</h2>
+<p>Establish some <strong>rules</strong> about your app to be:</p>
 <ul>
-<li>Existence</li>
-<li>Accuracy</li>
-<li>Usability</li>
-<li>Immortality</li>
+<li><strong>simple</strong> the app must be fast usable</li>
+<li><strong>straightforward</strong> easy to approach and use</li>
 </ul>
+<p>Based on the identification of the <strong>destination</strong> of the app:</p>
+<ul>
+<li>for professional use</li>
+<li>for fun</li>
+</ul>
+<blockquote>
+<p>The quicker you understand the interface, the better the user experience (in <strong>business</strong>)</p>
+</blockquote>
+<blockquote>
+<p>Don’t fight against the app but enjoy it (for <strong>fun</strong>)</p>
+</blockquote>
+<div class="figure"><span style="display:block;" id="fig:yesno"></span>
+<div id="htmlwidget-711021a5ef2960d4a1e2" style="width:100%;height:100%;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-711021a5ef2960d4a1e2">{"x":{"diagram":"\ngraph LR\nA((YES))-. Yes and No of your app .-B((NO))\n  \n  style A fill:#f9f\n  style B fill:#bbf\n  \n "},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 4.2: Yes and No of your app
+</p>
+</div>
+<p><strong>Yes</strong>:</p>
+<ul>
+<li>“self-explanatory” but with detailed explanations</li>
+<li>an efficient tool</li>
+</ul>
+<p><strong>No</strong>:</p>
+<ul>
+<li>fight with interface</li>
+<li>read complex material</li>
+<li>lose time understanding how to use it</li>
+</ul>
+<p>Two more important <strong>rules</strong>:</p>
+<ol style="list-style-type: decimal">
+<li>“don’t make me think”</li>
+<li>“rule of least surprise”: <strong>“Principle of Least Astonishment”</strong></li>
+</ol>
+<div id="how-we-read-the-web-scanning-content" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> How we read the web: Scanning content</h3>
+<p>The second part of this chapter focuses on what your audience is actually seeing about the app.</p>
+<blockquote>
+<p>The user of your app doesn’t read everything, but will be searching for <strong>“How to”?</strong></p>
+</blockquote>
+<div class="figure"><span style="display:block;" id="fig:howto"></span>
+<div id="htmlwidget-39e51fb4fe0e40a3c893" style="width:100%;height:100%;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-39e51fb4fe0e40a3c893">{"x":{"diagram":"\ngraph LR\nA((scan))-->B>satisfice - satisfy and suffice]\n  \n  style A fill:#bbf\n  style B fill:#f96, stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5\n  \n  #style P fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5\n\n "},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 4.3: <strong>“How to”?</strong>
+</p>
+</div>
+<p>The user might act unexpectedly on you app</p>
+<p>adopt <strong>“defensive programming”</strong> mindset is a workaround the unexpected:</p>
+<ul>
+<li><p><strong>inherent logic</strong> in the application: each sub-menu is designed to handle one specific part of your app</p></li>
+<li><p><strong>rational choice</strong>: rationality plays a good game but it is less than expected when up to a new app</p></li>
+<li><p><strong>“irrational” choices</strong>: examine the back-end for unexpected behaviors</p></li>
+</ul>
+<blockquote>
+<p><strong>"organisms adapt well enough to ‘satisfice’; they do not, in general, optimize.“</strong> by Herbert A. Simon</p>
+</blockquote>
+<p>To be <strong>failing gracefully and informatively</strong> can sometimes happen, but do not forget to put an <strong>informative bug message</strong> to avoid a grayish version of the application. Under some conditions you might not have the complete manner of all that is linked with your app (such as widgets in {DT} package)</p>
+<p><strong>Good practices</strong>:</p>
+<ul>
+<li>add a <strong>bug message</strong></li>
+<li>wrap all server calls (in case of crash reduce the amount of data loss)</li>
+<li>use a <strong>notification function</strong> with {shinyalert} and/or {attempt} packages</li>
+</ul>
+<p>As an example, if we want our app to be connected to a database, we use <code>connect_db()</code> connection in the <code>server()</code>.</p>
+<p>If the connection fails, we notify the user:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="simplicity-is-gold.html#cb3-1"></a>  conn &lt;-<span class="st"> </span>attempt<span class="op">::</span><span class="kw">attempt</span>({</span>
+<span id="cb3-2"><a href="simplicity-is-gold.html#cb3-2"></a>    <span class="kw">connect_db</span>()</span>
+<span id="cb3-3"><a href="simplicity-is-gold.html#cb3-3"></a>  })</span>
+<span id="cb3-4"><a href="simplicity-is-gold.html#cb3-4"></a>  </span>
+<span id="cb3-5"><a href="simplicity-is-gold.html#cb3-5"></a>  <span class="cf">if</span> (attempt<span class="op">::</span><span class="kw">is_try_error</span>(conn)){</span>
+<span id="cb3-6"><a href="simplicity-is-gold.html#cb3-6"></a>    <span class="co"># Notify the user</span></span>
+<span id="cb3-7"><a href="simplicity-is-gold.html#cb3-7"></a>    <span class="kw">send_notification</span>(<span class="st">&quot;Could not connect&quot;</span>)</span>
+<span id="cb3-8"><a href="simplicity-is-gold.html#cb3-8"></a>  } <span class="cf">else</span> {</span>
+<span id="cb3-9"><a href="simplicity-is-gold.html#cb3-9"></a>    <span class="co"># Continue computing if the connection was successful</span></span>
+<span id="cb3-10"><a href="simplicity-is-gold.html#cb3-10"></a>    <span class="kw">continue_computing</span>()</span>
+<span id="cb3-11"><a href="simplicity-is-gold.html#cb3-11"></a>  }</span></code></pre></div>
+</div>
+<div id="building-a-self-evident-app-or-at-least-self-explanatory" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Building a self-evident app (or at least self-explanatory)</h3>
+<ul>
+<li><strong>self-evident</strong>: no demo required</li>
+<li><strong>self-explanatory</strong>: no explanation required</li>
+</ul>
+<p>A. About the <strong>“Rule of Least Surprise”</strong> and the <strong>“Principle of Least Astonishment”</strong></p>
+<ul>
+<li>various text customization lead to conventional thinking</li>
+</ul>
+<p>B. Thinking about progression</p>
+<ul>
+<li>design a clear pattern of moving forward</li>
+<li>hide elements at step n+1 until all the requirements are fulfilled at step n.</li>
+<li>ensure some kind of linear logic through increasing readability</li>
+</ul>
+<p>compare {tidytuesday201942} to {hexmake}</p>
+<p>C. Inputs and errors</p>
+<blockquote>
+<p>Your user is BUSY BUSY BEE ….</p>
+</blockquote>
+<p>In the <code>UI</code>:</p>
+<pre><code>useShinyFeedback()</code></pre>
+<p>In the <code>server()</code>:</p>
+<pre><code>showFeedbackWarning()
+hideFeedback()</code></pre>
+<p>( the notifyjsexample repository link doesn’t work )</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="app-complexity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="meeting-videos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-danger-of-feature-creep.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -285,7 +390,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-epgs/edit/main/01-introduction.Rmd",
+"link": "https://github.com/r4ds/bookclub-epgs/edit/main/06-User_experience.Rmd",
 "text": "Edit"
 },
 "history": {

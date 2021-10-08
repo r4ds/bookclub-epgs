@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.7 What is a successful {shiny} app? | Engineering Production-Grade Shiny Apps Book Club</title>
+  <title>4.4 Web accessibility | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.7 What is a successful {shiny} app? | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta property="og:title" content="4.4 Web accessibility | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.7 What is a successful {shiny} app? | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta name="twitter:title" content="4.4 Web accessibility | Engineering Production-Grade Shiny Apps Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="app-complexity.html"/>
-<link rel="next" href="meeting-videos.html"/>
+<link rel="prev" href="the-danger-of-feature-creep.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -239,22 +239,106 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="what-is-a-successful-shiny-app" class="section level2">
-<h2><span class="header-section-number">1.7</span> What is a successful {shiny} app?</h2>
+<div id="web-accessibility" class="section level2">
+<h2><span class="header-section-number">4.4</span> Web accessibility</h2>
+<div id="about-accessibility" class="section level3">
+<h3><span class="header-section-number">4.4.1</span> About accessibility</h3>
+<p>Audience: large audience</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:accessibilityimage"></span>
+<img src="images/06-accessibility.png" alt="Accessibility in Context" width="100%" />
+<p class="caption">
+Figure 4.4: Accessibility in Context
+</p>
+</div>
+</div>
+<div id="making-your-app-accessible" class="section level3">
+<h3><span class="header-section-number">4.4.2</span> Making your app accessible</h3>
+<p><strong>A. Hierarchy:</strong> respect the order of importance</p>
+<p><strong>B. HTML element:</strong> Semantic tags, and tag metadata:</p>
 <ul>
-<li>Existence</li>
-<li>Accuracy</li>
-<li>Usability</li>
-<li>Immortality</li>
+<li><p>without “meanings”:</p>
+<pre><code>&lt;div&gt; or &lt;span&gt;</code></pre></li>
+<li><p>have a specific “meanings”: meaningful (Semantic tags)</p>
+<pre><code>&lt;title&gt; or &lt;article&gt;
+&lt;address&gt;, &lt;video&gt;, or &lt;label&gt;</code></pre></li>
+<li><p>metadata</p>
+<pre><code>alt we can use the tagAppendAttributes()</code></pre></li>
 </ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="web-accessibility.html#cb9-1"></a>ui &lt;-<span class="st"> </span><span class="cf">function</span>(){</span>
+<span id="cb9-2"><a href="web-accessibility.html#cb9-2"></a>  </span>
+<span id="cb9-3"><a href="web-accessibility.html#cb9-3"></a>  <span class="kw">tagList</span>(</span>
+<span id="cb9-4"><a href="web-accessibility.html#cb9-4"></a>    <span class="kw">plotOutput</span>(<span class="st">&quot;plot&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb9-5"><a href="web-accessibility.html#cb9-5"></a><span class="st">      </span><span class="co"># Adding the `alt` attribute to our plot</span></span>
+<span id="cb9-6"><a href="web-accessibility.html#cb9-6"></a><span class="st">      </span><span class="kw">tagAppendAttributes</span>(<span class="dt">alt =</span> <span class="st">&quot;Plot of iris&quot;</span>)</span>
+<span id="cb9-7"><a href="web-accessibility.html#cb9-7"></a>  )</span>
+<span id="cb9-8"><a href="web-accessibility.html#cb9-8"></a>}</span></code></pre></div>
+It will be crucial to <strong>screen-to-speech technology</strong>: the software will read the <code>&lt;title&gt;</code> tag, jump to the <code>&lt;nav&gt;</code>, or straight to the `
+<article>
+<p>on the page.</p>
+<p><strong>C. Navigation:</strong> make everything doable with a keyboard</p>
+<pre><code>  textInput() with a validation button and {nter} package</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="web-accessibility.html#cb11-1"></a><span class="co"># Adapted from https://github.com/JohnCoene/nter</span></span>
+<span id="cb11-2"><a href="web-accessibility.html#cb11-2"></a><span class="kw">library</span>(nter)</span>
+<span id="cb11-3"><a href="web-accessibility.html#cb11-3"></a><span class="kw">library</span>(shiny)</span>
+<span id="cb11-4"><a href="web-accessibility.html#cb11-4"></a></span>
+<span id="cb11-5"><a href="web-accessibility.html#cb11-5"></a>ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(</span>
+<span id="cb11-6"><a href="web-accessibility.html#cb11-6"></a>  <span class="co"># Setting a text input and a button</span></span>
+<span id="cb11-7"><a href="web-accessibility.html#cb11-7"></a>  <span class="kw">textInput</span>(<span class="st">&quot;text&quot;</span>, <span class="st">&quot;&quot;</span>),</span>
+<span id="cb11-8"><a href="web-accessibility.html#cb11-8"></a>  <span class="co"># This button will be clicked when &#39;Enter&#39; is pressed in </span></span>
+<span id="cb11-9"><a href="web-accessibility.html#cb11-9"></a>  <span class="co"># the textInput text</span></span>
+<span id="cb11-10"><a href="web-accessibility.html#cb11-10"></a>  <span class="kw">actionButton</span>(<span class="st">&quot;send&quot;</span>, <span class="st">&quot;Do not click hit enter&quot;</span>),</span>
+<span id="cb11-11"><a href="web-accessibility.html#cb11-11"></a>  <span class="kw">verbatimTextOutput</span>(<span class="st">&quot;typed&quot;</span>),</span>
+<span id="cb11-12"><a href="web-accessibility.html#cb11-12"></a>  <span class="co"># define the rule</span></span>
+<span id="cb11-13"><a href="web-accessibility.html#cb11-13"></a>  <span class="kw">nter</span>(<span class="st">&quot;send&quot;</span>, <span class="st">&quot;text&quot;</span>) </span>
+<span id="cb11-14"><a href="web-accessibility.html#cb11-14"></a>)</span>
+<span id="cb11-15"><a href="web-accessibility.html#cb11-15"></a></span>
+<span id="cb11-16"><a href="web-accessibility.html#cb11-16"></a>server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {</span>
+<span id="cb11-17"><a href="web-accessibility.html#cb11-17"></a>  </span>
+<span id="cb11-18"><a href="web-accessibility.html#cb11-18"></a>  r &lt;-<span class="st"> </span><span class="kw">reactiveValues</span>()</span>
+<span id="cb11-19"><a href="web-accessibility.html#cb11-19"></a>  </span>
+<span id="cb11-20"><a href="web-accessibility.html#cb11-20"></a>  <span class="co"># Define the behavior on click</span></span>
+<span id="cb11-21"><a href="web-accessibility.html#cb11-21"></a>  <span class="kw">observeEvent</span>( input<span class="op">$</span>send , {</span>
+<span id="cb11-22"><a href="web-accessibility.html#cb11-22"></a>    r<span class="op">$</span>printed &lt;-<span class="st"> </span>input<span class="op">$</span>text</span>
+<span id="cb11-23"><a href="web-accessibility.html#cb11-23"></a>  })</span>
+<span id="cb11-24"><a href="web-accessibility.html#cb11-24"></a>  </span>
+<span id="cb11-25"><a href="web-accessibility.html#cb11-25"></a>  <span class="co"># Render the text</span></span>
+<span id="cb11-26"><a href="web-accessibility.html#cb11-26"></a>  output<span class="op">$</span>typed &lt;-<span class="st"> </span><span class="kw">renderPrint</span>({</span>
+<span id="cb11-27"><a href="web-accessibility.html#cb11-27"></a>    r<span class="op">$</span>printed</span>
+<span id="cb11-28"><a href="web-accessibility.html#cb11-28"></a>  })</span>
+<span id="cb11-29"><a href="web-accessibility.html#cb11-29"></a>}</span>
+<span id="cb11-30"><a href="web-accessibility.html#cb11-30"></a></span>
+<span id="cb11-31"><a href="web-accessibility.html#cb11-31"></a><span class="kw">shinyApp</span>(ui, server)</span></code></pre></div>
+<p><strong>D. Color choices:</strong> recommended to use provided color composition such as <strong>viridis</strong> or other specific combinations.</p>
+<p>Here as an example is the build of a function, but other packages can be used such as {dichromat} packages which simulates color blindness.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="web-accessibility.html#cb12-1"></a>with_palette &lt;-<span class="st"> </span><span class="cf">function</span>(palette) {</span>
+<span id="cb12-2"><a href="web-accessibility.html#cb12-2"></a>  x &lt;-<span class="st"> </span>y &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">8</span> <span class="op">*</span><span class="st"> </span>pi, <span class="dv">8</span> <span class="op">*</span><span class="st"> </span>pi, <span class="dt">len =</span> <span class="dv">40</span>)</span>
+<span id="cb12-3"><a href="web-accessibility.html#cb12-3"></a>  r &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">outer</span>(x<span class="op">^</span><span class="dv">2</span>, y<span class="op">^</span><span class="dv">2</span>, <span class="st">&quot;+&quot;</span>))</span>
+<span id="cb12-4"><a href="web-accessibility.html#cb12-4"></a>  z &lt;-<span class="st"> </span><span class="kw">cos</span>(r<span class="op">^</span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>r <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>pi))</span>
+<span id="cb12-5"><a href="web-accessibility.html#cb12-5"></a>  <span class="kw">filled.contour</span>(</span>
+<span id="cb12-6"><a href="web-accessibility.html#cb12-6"></a>    z,</span>
+<span id="cb12-7"><a href="web-accessibility.html#cb12-7"></a>    <span class="dt">axes =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb12-8"><a href="web-accessibility.html#cb12-8"></a>    <span class="dt">color.palette =</span> palette,</span>
+<span id="cb12-9"><a href="web-accessibility.html#cb12-9"></a>    <span class="dt">asp =</span> <span class="dv">1</span></span>
+<span id="cb12-10"><a href="web-accessibility.html#cb12-10"></a>  )</span>
+<span id="cb12-11"><a href="web-accessibility.html#cb12-11"></a>}</span>
+<span id="cb12-12"><a href="web-accessibility.html#cb12-12"></a></span>
+<span id="cb12-13"><a href="web-accessibility.html#cb12-13"></a><span class="kw">with_palette</span>(matlab<span class="op">::</span>jet.colors)</span></code></pre></div>
+<p><img src="bookclub-epgs_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="evaluating-your-app-accessibility-and-further-reading" class="section level3">
+<h3><span class="header-section-number">4.4.3</span> Evaluating your app accessibility and further reading</h3>
+<p>How to evaluate accessibility?</p>
+<p><strong>A.</strong> Emulate vision deficiency using Google Chrome</p>
+<p><strong>B.</strong> External tools</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="app-complexity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="meeting-videos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="the-danger-of-feature-creep.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -285,7 +369,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-epgs/edit/main/01-introduction.Rmd",
+"link": "https://github.com/r4ds/bookclub-epgs/edit/main/06-User_experience.Rmd",
 "text": "Edit"
 },
 "history": {
