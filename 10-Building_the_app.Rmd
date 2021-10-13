@@ -6,3 +6,23 @@ output: html_document
 ---
 
 # Building the App with {golem}
+
+## Learning Outcomes
+
+## Add dependencies
+
+### Package dependencies
+
+### Importing packages and functions
+
+## Submodules and utility functions
+
+## Add tests
+
+## Documentation and code coverage
+
+### Vignette
+
+### Code coverage and Continuous Integration
+
+## Using {golem} dev functions
