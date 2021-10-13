@@ -1,7 +1,30 @@
 ---
 title: "09-Building-an-ipsum-app"
-author: "Ryan Metcalf"
+author: "Russ Hyde"
+date: "13/10/2021"
 output: html_document
 ---
 
 # Building an Ipsum App
+
+## Learning Outcomes
+
+## Prototyping is crucial
+
+### Prototype, then polish
+
+### The "UI first" approach
+
+## Prototyping {shiny}
+
+### Fast UI prototyping with {shinipsum}
+
+### Using {fakir} for fake data generation
+
+## Building with RMarkdown
+
+### Define the content of the application
+
+### Using the Rmd files as a laboratory notebook
+
+### Rmd, Vignettes, and documentation first
