@@ -9,6 +9,14 @@ output: html_document
 
 ## Learning Outcomes
 
+- Importance of Prototyping
+
+- Guide the client's focus
+
+- Use different tools for prototyping different parts of an app
+
+- Decouple UI, reactivity, and back-end
+
 ## Prototyping is crucial
 
 ### Prototype, then polish
