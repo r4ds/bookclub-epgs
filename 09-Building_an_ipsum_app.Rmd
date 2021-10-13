@@ -17,6 +17,14 @@ output: html_document
 
 - Decouple UI, reactivity, and back-end
 
+## Tools
+
+- {shinipsum}
+
+- {fakir}
+
+- `usethis::use_vignette`
+
 ## Prototyping is crucial
 
 ### Prototype, then polish
