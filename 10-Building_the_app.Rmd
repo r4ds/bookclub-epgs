@@ -9,6 +9,32 @@ output: html_document
 
 ## Learning Outcomes
 
+- Organise and state your dependencies
+
+- Split up your code into (sub)modules
+
+- Organise your functions
+
+- Test everything
+
+- Automate CI / CD services
+
+## Tools / Packages Used
+
+- {attachment}
+
+- `golem::add_[fct|utils|module]`
+
+- `usethis::use_[package|test|vignette|coverage|...]`
+
+- `devtools::build_vignettes`
+
+- {covr}, {covrpage}, CodeCov and Coveralls
+
+- CI providers: Travis, GitHub Actions, GitLab CI
+
+- `golem::[cat|make]_dev`
+
 ## Add dependencies
 
 ### Package dependencies
