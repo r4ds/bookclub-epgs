@@ -73,8 +73,29 @@ output: html_document
 
 ## Building with RMarkdown
 
+- Build the back-end without any reactive context
+
+- Provides some documentation
+
+- `usethis::use_vignette("vignetteName")`
+
 ### Define the content of the application
+
+- Rendered .Rmd is shareable content
+
+- Lets you focus on the core algorithm
+
+- Obliges you to make back-end "application independent" (write well-documented, non-reactive
+functions etc)
 
 ### Using the Rmd files as a laboratory notebook
 
+- keep track of your ideas
+
+- separation of work across multiple vignettes
+
 ### Rmd, Vignettes, and documentation first
+
+- Vignettes are first-class part of package infrastructure
+
+- They are built during package check; so you have automated check that vignettes continue to work
