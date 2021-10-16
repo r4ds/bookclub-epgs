@@ -25,33 +25,38 @@ If you would like to present, please add your name next to a chapter using the [
 
 ### Section III: Prototype
 
-- 2021-10-06: Ch8+9: Prototyping in {golem}: Presenter TBD
+- 2021-10-06: Ch8+9: Prototyping in {golem}: Presenter Ryan Metcalf
 
 ### Section IV: Build
 
-- 2021-10-13: Ch10: Building the app in {golem}: Presenter TBD
-
-### Interlude
-
-- 2021-10-20: TBD (Interview? Show-and-Tell?)
+- 2021-10-13: Ch9 (cont) & Ch10: Building the app in {golem}: Presenter Russ Hyde
 
 ### Section V: Strengthen
 
-- 2021-10-27: Ch11+12: Testing, Environments and Version Control: Presenter TBD
+- 2021-10-20: Ch11: Testing: Presenter TBD
+
+### Interlude
+
+- 2021-10-27: TBD (Interview? Show-and-Tell?)
+- 2021-11-03: Break (wait til clock-changes have synchronised around the world)
+
+### Section V (cont)
+
+- 2021-11-10: Ch12: Version Control: Presenter TBD
 
 ### Section VI: Deploy
 
-- 2021-11-03: Ch13 + Appendix A: Deploying an App, and the whole workflow: Presenter TBD
+- 2021-11-17: Ch13 + Appendix A: Deploying an App, and the whole workflow: Presenter TBD
 
 ### Section VII: Optimise
 
-- 2021-11-10: Ch14: The need for optimization: Presenter TBD
-- 2021-11-17: Ch15+16: Optimising shiny: Presenter TBD
-- 2021-11-24: Ch17+18 Front end shenanigans: Presenter TBD
+- 2021-11-24: Ch14: The need for optimization: Presenter TBD
+- 2021-12-01: Ch15+16: Optimising shiny: Presenter TBD
+- 2021-12-08: Ch17+18 Front end shenanigans: Presenter TBD
 
 ### Wrap-Up
 
-- 2021-12-01: Wrap up and discussion
+- 2021-12-15: Wrap up and discussion
 
 ## How to Present
 
