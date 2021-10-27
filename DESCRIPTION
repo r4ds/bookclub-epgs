@@ -8,11 +8,17 @@ URL: https://r4ds.github.io/bookclub-epgs, https://github.com/r4ds/bookclub-epgs
 Depends: 
     R (>= 3.1.0)
 Imports: 
+    attempt,
     bookdown,
     details,
+    DiagrammeR,
     emo,
     golem,
+    knitr,
+    matlab,
+    nter,
     shiny,
     tidyverse
 Remotes: 
-    hadley/emo
+    hadley/emo,
+    JohnCoene/nter

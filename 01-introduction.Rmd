@@ -1,5 +1,81 @@
 # About Successful {shiny} Apps
 
+**Learning objectives:**
+
+- Intro to shiny
+- Consider application complexity from different viewpoints
+
+## Introduction
+
+### Motivation for the book (& the bookclub)
+
+### Audience for the book
+
+- (experienced) shiny devs
+- managers
+
+### What is "Production"?
+
+- Used
+- Relied upon
+- Real life impact
+
+## Intro to {shiny}
+
+- Building apps in R
+- .. without necessarily needing HTML, CSS, JS training
+
+Need {shiny} apps always be a proof-of-concept?
+
+## What is a complex {shiny} application?
+
+Complexity:
+
+    [a complex system] defies any single person's ability to see [and understand] the system as a
+    whole
+
+Consequences:
+
+- Bug chasing
+- Steep learning curve
+
+## Types of complexity
+
+- Developer complexity
+  - Implementation
+  - Development
+  - Deployment
+
+- Customer / User complexity
+  - Interface
+
+## Code complexity
+
+- Lines of code
+- Number of files
+- Cyclomatic complexity
+
+Other sources:
+
+- Inconsistency
+- Indentation
+- Untested code
+- Dependency-bloat
+- Maintenance and Use
+- Merge-conflicts per week ...
+
+## App complexity?
+
+- External dependencies: databases, APIs etc
+- Number of contributors
+
+## What is a successful {shiny} app?
+
+- Existence
+- Accuracy
+- Usability
+- Immortality
+
 ## Meeting Videos
 
 ### Cohort 1
