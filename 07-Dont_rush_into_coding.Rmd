@@ -1,6 +1,5 @@
 # Developer patience - Don't rush into coding
 
-
 **Learning objectives:**
 
 - thinking about the Big Picture
