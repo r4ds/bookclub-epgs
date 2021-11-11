@@ -1,9 +1,3 @@
----
-title: "08-Setting_up_for_Success_with_golem"
-author: "Ryan L. Metcalf"
-date: "10/6/2021"
-output: ioslides_presentation
----
 # Setting Up for Success with {golem}
 
 - **Learning Objectives**

@@ -1,5 +1,0 @@
----
-title: "07-Dont_Rush_into_Coding"
-output: ioslides_presentation
----
-# Content needs updated
