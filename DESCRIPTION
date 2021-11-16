@@ -21,4 +21,5 @@ Imports:
     tidyverse,
     usethis
 Remotes: 
-    hadley/emo
+    hadley/emo,
+    JohnCoene/nter
