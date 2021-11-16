@@ -1,0 +1,174 @@
+# Version Control
+
+**Learning Objectives**
+
+-   What version control is
+-   Why is important and how can we use it
+-   Some extra features
+
+## Introduction
+
+In this chapter we will focus on Git and GitHub as tools for version control, in particular while using RStudio for dealing with projects version control.
+
+## Using version control with Git
+
+**Tools**: Git, GitHub or GitLab
+
+These tools let you take control of the versions of you project workflow.
+
+### Why version control?
+
+-   code disappeared
+-   need to integrating changes in my Team's project workflow
+-   several people can synchronize and collaborate on a same project
+-   find something back from far way in time
+-   safely track changes
+
+More info on how to download and install Git and GitHub are located elsewhere: [Happy Git book](%5Bhttps://happygitwithr.com/%5D(https://happygitwithr.com/rstudio-git-github.html))
+
+We assume the following:
+
+1.  You've registered a free GitHub account
+
+2.  You've installed/updated R and RStudio
+
+3.  You've installed Git
+
+4.  You've introduced yourself to Git
+
+5.  You've confirmed that you can push to / pull from GitHub from the command line
+
+6.  You will also need a test repository on GitHub
+
+### Git basics: add - commit - push - pull
+
+New users might be challenged for username and password. Many general Git tools require authentication. The information that is needed is your **PAT**.
+
+You can stored your PAT with `gitcreds::gitcreds_set()` command. Once this is done correctly you don't need to do that again unless you require more strict rules on your VC tool, so that it might require you to regularly update your credentials. [^1]
+
+[^1]: [happygitwithr.com](https://happygitwithr.com/push-pull-github.html)
+
+The basic commands in Git are:
+
+-   add: info or other addition to the project
+
+    (i.e. Add a line to README and verify that Git notices the change)
+
+-   commit: engage the content with the repository
+
+    (i.e. in RStudio click the bottom "commit" in the pane section of GitHub)
+
+    The "commit" button creates a unique commit reference number: sha#
+
+    And allows the user to make a comment about the commit, so to advise the others in the project or to remind the user about it.
+
+-   push: send the content to the server and so to the repository
+
+-   pull: receive the changes/updates from the repository
+
+### About branches
+
+The **"main" branch** is the one that appears at the beginning of the project, but other branches can be created. **Secondary branches** are work areas, usually for the other in the team to have a further layer of security of the "main" content.
+
+When you work on a shared project, your collaborators need to name a new branch to interact with the repository. This imply the creation of mirrored repositories that can be absolutely equal or slightly different, as the requested additions/modifications are accepted.
+
+### Issues
+
+**Issues** are another way to advise the main repository of some modifications that would be needed. They are used to propose changes, to track a bug or to suggest a feature, and can be done directly by the GitHub page of the repository. An issue creates a **"message exchange"** form of communication with the repository owner, for advising about something that can be improved.
+
+## Git integration
+
+### With RStudio
+
+In our case we are interested in how to use GitHub with RStudio, and how to set it up in a new project.
+
+There are two ways for setting up a project which is linked with a version control software support system, such as GitHub.
+
+The experience in using version controls with RStudio would be very beneficial.
+
+### As part of a larger world
+
+### About git-flow
+
+What is a git flow ? It is intended as the Git workflow, and it relates with differentiating the use of the **main branch** with the **developer (dev) branch** which is the "working in progress".
+
+While the team merge/pull requests (MR/PR) to `dev` from a `feature branch`
+
+Branches:
+
+-   main
+
+-   dev
+
+-   feature branch (any given name)
+
+-   hot fix (to correct a critical issue in `main`)
+
+**7 Steps of a software engineer daily work flow**:
+
+1.  Identify an issue to work on
+2.  Fork dev into issue-XXX
+3.  Develop a feature inside the branch.
+4.  Regularly run **git stash**, **git rebase dev**, and **git stash apply** to include the latest changes from dev to stay synchronized with dev.
+5.  Make a pull request to dev so that the feature is included.
+6.  Once the PR is accepted by the project manager, notify the rest of the team that there have been changes to dev, so they can rebase it to the branch they are working on.
+7.  Start working on a new feature.
+
+## Automated testing
+
+The book mention some "health check" repository software integration:
+
+1.  [Travis CI](https://travis-ci.org/) Note that Travis CI can run tests on GNU/Linux or MacOS operating systems
+2.  [Appveyor](https://www.appveyor.com/) It supports Windows, as well
+3.  [GitHub actions](https://github.com/r-lib/actions) It is the most common used
+
+With **Travis**
+
+```{r  eval = F}
+usethis::use_travis()
+```
+
+-   the events described in the **travis** configuration file (`.travis.yml`) are executed (with a binary outcome: 0/1)
+
+-   before merging any pull request, the project manager has access to a series of tests that are automatically launched.
+
+While with **GitHub Action** the command are the following, the first three perform a standard **R CMD check**, while `use_github_action_pr_commands()` sets checks to be performed when a pull request is made to the repository
+
+```{r eval=F}
+usethis::use_github_action_check_release() 
+
+use_github_action_check_standard() 
+use_github_action_check_full()  
+
+use_github_action_pr_commands()
+```
+
+One more feature is:
+
+-   `GitLab CI` service is a Docker-based container
+
+## Conclusions
+
+> Version control tools are useful to secure you work against some annoying inconveniences. Also automated procedures would help maintain resilient applications.
+
+### Resources
+
+-   [Happy Git](https://happygitwithr.com/)
+
+-   [Git Cheat Sheet](https://www.git-tower.com/blog/git-cheat-sheet/)
+
+-   [A git flow](https://nvie.com/posts/a-successful-git-branching-model/)
+
+-   [Understanding a git flow](https://guides.github.com/introduction/flow/)
+
+-   [GitSvnComparison](https://git.wiki.kernel.org/index.php/GitSvnComparsion)
+
+-   [Git Pro Book](https://git-scm.com/book/en/v2)
+
+-   [Git Branching Basic Branching and Merging](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging)
+
+-   [GitHub Actions for the R language](https://github.com/r-lib/actions)
+
+-   [R CMD check](https://github.com/r-Lib/rcmdcheck#readme)
+
+-   [hub.docker](https://hub.docker.com/r/colinfay/r-ci-tidyverse)

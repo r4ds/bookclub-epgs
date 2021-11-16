@@ -18,6 +18,7 @@ Imports:
     matlab,
     nter,
     shiny,
-    tidyverse
+    tidyverse,
+    usethis
 Remotes: 
     hadley/emo
