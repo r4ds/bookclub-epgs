@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.5 Code complexity | Engineering Production-Grade Shiny Apps Book Club</title>
+  <title>6.4 Automated testing | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.5 Code complexity | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta property="og:title" content="6.4 Automated testing | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.5 Code complexity | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta name="twitter:title" content="6.4 Automated testing | Engineering Production-Grade Shiny Apps Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="types-of-complexity.html"/>
-<link rel="next" href="app-complexity.html"/>
+<link rel="prev" href="git-integration.html"/>
+<link rel="next" href="conclusions.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -257,21 +257,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="code-complexity" class="section level2">
-<h2><span class="header-section-number">1.5</span> Code complexity</h2>
+<div id="automated-testing" class="section level2">
+<h2><span class="header-section-number">6.4</span> Automated testing</h2>
+<p>The book mention some “health check” repository software integration:</p>
+<ol style="list-style-type: decimal">
+<li><a href="https://travis-ci.org/">Travis CI</a> Note that Travis CI can run tests on GNU/Linux or MacOS operating systems</li>
+<li><a href="https://www.appveyor.com/">Appveyor</a> It supports Windows, as well</li>
+<li><a href="https://github.com/r-lib/actions">GitHub actions</a> It is the most common used</li>
+</ol>
+<p>With <strong>Travis</strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="automated-testing.html#cb13-1"></a>usethis<span class="op">::</span><span class="kw">use_travis</span>()</span></code></pre></div>
 <ul>
-<li>Lines of code</li>
-<li>Number of files</li>
-<li>Cyclomatic complexity</li>
+<li><p>the events described in the <strong>travis</strong> configuration file (<code>.travis.yml</code>) are executed (with a binary outcome: 0/1)</p></li>
+<li><p>before merging any pull request, the project manager has access to a series of tests that are automatically launched.</p></li>
 </ul>
-<p>Other sources:</p>
+<p>While with <strong>GitHub Action</strong> the command are the following, the first three perform a standard <strong>R CMD check</strong>, while <code>use_github_action_pr_commands()</code> sets checks to be performed when a pull request is made to the repository</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="automated-testing.html#cb14-1"></a>usethis<span class="op">::</span><span class="kw">use_github_action_check_release</span>() </span>
+<span id="cb14-2"><a href="automated-testing.html#cb14-2"></a></span>
+<span id="cb14-3"><a href="automated-testing.html#cb14-3"></a><span class="kw">use_github_action_check_standard</span>() </span>
+<span id="cb14-4"><a href="automated-testing.html#cb14-4"></a><span class="kw">use_github_action_check_full</span>()  </span>
+<span id="cb14-5"><a href="automated-testing.html#cb14-5"></a></span>
+<span id="cb14-6"><a href="automated-testing.html#cb14-6"></a><span class="kw">use_github_action_pr_commands</span>()</span></code></pre></div>
+<p>One more feature is:</p>
 <ul>
-<li>Inconsistency</li>
-<li>Indentation</li>
-<li>Untested code</li>
-<li>Dependency-bloat</li>
-<li>Maintenance and Use</li>
-<li>Merge-conflicts per week …</li>
+<li><code>GitLab CI</code> service is a Docker-based container</li>
 </ul>
 </div>
             </section>
@@ -279,8 +288,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="types-of-complexity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="app-complexity.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="git-integration.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conclusions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -311,7 +320,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-epgs/edit/main/01-introduction.Rmd",
+"link": "https://github.com/r4ds/bookclub-epgs/edit/main/12-Version_Control.Rmd",
 "text": "Edit"
 },
 "history": {

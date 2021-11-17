@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.5 Code complexity | Engineering Production-Grade Shiny Apps Book Club</title>
+  <title>6.3 Git integration | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.5 Code complexity | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta property="og:title" content="6.3 Git integration | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.5 Code complexity | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta name="twitter:title" content="6.3 Git integration | Engineering Production-Grade Shiny Apps Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="types-of-complexity.html"/>
-<link rel="next" href="app-complexity.html"/>
+<link rel="prev" href="using-version-control-with-git.html"/>
+<link rel="next" href="automated-testing.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -257,30 +257,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="code-complexity" class="section level2">
-<h2><span class="header-section-number">1.5</span> Code complexity</h2>
+<div id="git-integration" class="section level2">
+<h2><span class="header-section-number">6.3</span> Git integration</h2>
+<div id="with-rstudio" class="section level3">
+<h3><span class="header-section-number">6.3.1</span> With RStudio</h3>
+<p>In our case we are interested in how to use GitHub with RStudio, and how to set it up in a new project.</p>
+<p>There are two ways for setting up a project which is linked with a version control software support system, such as GitHub.</p>
+<p>The experience in using version controls with RStudio would be very beneficial.</p>
+</div>
+<div id="as-part-of-a-larger-world" class="section level3">
+<h3><span class="header-section-number">6.3.2</span> As part of a larger world</h3>
+</div>
+<div id="about-git-flow" class="section level3">
+<h3><span class="header-section-number">6.3.3</span> About git-flow</h3>
+<p>What is a git flow ? It is intended as the Git workflow, and it relates with differentiating the use of the <strong>main branch</strong> with the <strong>developer (dev) branch</strong> which is the “working in progress”.</p>
+<p>While the team merge/pull requests (MR/PR) to <code>dev</code> from a <code>feature branch</code></p>
+<p>Branches:</p>
 <ul>
-<li>Lines of code</li>
-<li>Number of files</li>
-<li>Cyclomatic complexity</li>
+<li><p>main</p></li>
+<li><p>dev</p></li>
+<li><p>feature branch (any given name)</p></li>
+<li><p>hot fix (to correct a critical issue in <code>main</code>)</p></li>
 </ul>
-<p>Other sources:</p>
-<ul>
-<li>Inconsistency</li>
-<li>Indentation</li>
-<li>Untested code</li>
-<li>Dependency-bloat</li>
-<li>Maintenance and Use</li>
-<li>Merge-conflicts per week …</li>
-</ul>
+<p><strong>7 Steps of a software engineer daily work flow</strong>:</p>
+<ol style="list-style-type: decimal">
+<li>Identify an issue to work on</li>
+<li>Fork dev into issue-XXX</li>
+<li>Develop a feature inside the branch.</li>
+<li>Regularly run <strong>git stash</strong>, <strong>git rebase dev</strong>, and <strong>git stash apply</strong> to include the latest changes from dev to stay synchronized with dev.</li>
+<li>Make a pull request to dev so that the feature is included.</li>
+<li>Once the PR is accepted by the project manager, notify the rest of the team that there have been changes to dev, so they can rebase it to the branch they are working on.</li>
+<li>Start working on a new feature.</li>
+</ol>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="types-of-complexity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="app-complexity.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="using-version-control-with-git.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="automated-testing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -311,7 +328,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-epgs/edit/main/01-introduction.Rmd",
+"link": "https://github.com/r4ds/bookclub-epgs/edit/main/12-Version_Control.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.5 Code complexity | Engineering Production-Grade Shiny Apps Book Club</title>
+  <title>6.2 Using version control with Git | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.5 Code complexity | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta property="og:title" content="6.2 Using version control with Git | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.5 Code complexity | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta name="twitter:title" content="6.2 Using version control with Git | Engineering Production-Grade Shiny Apps Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="types-of-complexity.html"/>
-<link rel="next" href="app-complexity.html"/>
+<link rel="prev" href="introduction-2.html"/>
+<link rel="next" href="git-integration.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -257,30 +257,69 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="code-complexity" class="section level2">
-<h2><span class="header-section-number">1.5</span> Code complexity</h2>
+<div id="using-version-control-with-git" class="section level2">
+<h2><span class="header-section-number">6.2</span> Using version control with Git</h2>
+<p><strong>Tools</strong>: Git, GitHub or GitLab</p>
+<p>These tools let you take control of the versions of you project workflow.</p>
+<div id="why-version-control" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> Why version control?</h3>
 <ul>
-<li>Lines of code</li>
-<li>Number of files</li>
-<li>Cyclomatic complexity</li>
+<li>code disappeared</li>
+<li>need to integrating changes in my Team’s project workflow</li>
+<li>several people can synchronize and collaborate on a same project</li>
+<li>find something back from far way in time</li>
+<li>safely track changes</li>
 </ul>
-<p>Other sources:</p>
+<p>More info on how to download and install Git and GitHub are located elsewhere: <a href="%5Bhttps://happygitwithr.com/%5D(https://happygitwithr.com/rstudio-git-github.html)">Happy Git book</a></p>
+<p>We assume the following:</p>
+<ol style="list-style-type: decimal">
+<li><p>You’ve registered a free GitHub account</p></li>
+<li><p>You’ve installed/updated R and RStudio</p></li>
+<li><p>You’ve installed Git</p></li>
+<li><p>You’ve introduced yourself to Git</p></li>
+<li><p>You’ve confirmed that you can push to / pull from GitHub from the command line</p></li>
+<li><p>You will also need a test repository on GitHub</p></li>
+</ol>
+</div>
+<div id="git-basics-add---commit---push---pull" class="section level3">
+<h3><span class="header-section-number">6.2.2</span> Git basics: add - commit - push - pull</h3>
+<p>New users might be challenged for username and password. Many general Git tools require authentication. The information that is needed is your <strong>PAT</strong>.</p>
+<p>You can stored your PAT with <code>gitcreds::gitcreds_set()</code> command. Once this is done correctly you don’t need to do that again unless you require more strict rules on your VC tool, so that it might require you to regularly update your credentials.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>The basic commands in Git are:</p>
 <ul>
-<li>Inconsistency</li>
-<li>Indentation</li>
-<li>Untested code</li>
-<li>Dependency-bloat</li>
-<li>Maintenance and Use</li>
-<li>Merge-conflicts per week …</li>
+<li><p>add: info or other addition to the project</p>
+<p>(i.e. Add a line to README and verify that Git notices the change)</p></li>
+<li><p>commit: engage the content with the repository</p>
+<p>(i.e. in RStudio click the bottom “commit” in the pane section of GitHub)</p>
+<p>The “commit” button creates a unique commit reference number: sha#</p>
+<p>And allows the user to make a comment about the commit, so to advise the others in the project or to remind the user about it.</p></li>
+<li><p>push: send the content to the server and so to the repository</p></li>
+<li><p>pull: receive the changes/updates from the repository</p></li>
 </ul>
+</div>
+<div id="about-branches" class="section level3">
+<h3><span class="header-section-number">6.2.3</span> About branches</h3>
+<p>The <strong>“main” branch</strong> is the one that appears at the beginning of the project, but other branches can be created. <strong>Secondary branches</strong> are work areas, usually for the other in the team to have a further layer of security of the “main” content.</p>
+<p>When you work on a shared project, your collaborators need to name a new branch to interact with the repository. This imply the creation of mirrored repositories that can be absolutely equal or slightly different, as the requested additions/modifications are accepted.</p>
+</div>
+<div id="issues" class="section level3">
+<h3><span class="header-section-number">6.2.4</span> Issues</h3>
+<p><strong>Issues</strong> are another way to advise the main repository of some modifications that would be needed. They are used to propose changes, to track a bug or to suggest a feature, and can be done directly by the GitHub page of the repository. An issue creates a <strong>“message exchange”</strong> form of communication with the repository owner, for advising about something that can be improved.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p><a href="https://happygitwithr.com/push-pull-github.html">happygitwithr.com</a><a href="using-version-control-with-git.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="types-of-complexity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="app-complexity.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="git-integration.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -311,7 +350,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-epgs/edit/main/01-introduction.Rmd",
+"link": "https://github.com/r4ds/bookclub-epgs/edit/main/12-Version_Control.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -63,3 +63,17 @@ about-the-end-users
 building-personas
 pre-existing-code-base
 deployment
+version-control
+introduction-2
+using-version-control-with-git
+why-version-control
+git-basics-add---commit---push---pull
+about-branches
+issues
+git-integration
+with-rstudio
+as-part-of-a-larger-world
+about-git-flow
+automated-testing
+conclusions
+resources-1
