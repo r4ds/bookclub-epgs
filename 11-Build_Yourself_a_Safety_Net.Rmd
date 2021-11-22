@@ -1,0 +1,311 @@
+# Build Yourself a Safety Net
+
+## Learning Objectives
+
+## Tools and Resources
+
+- {testthat}
+- shiny::testServer
+- puppeteer
+- Puppeteer Recorder
+- {crrri}
+- {chromote}
+- {crrry}
+- gremlin.js
+- {shinyloadtest} & shinycannon
+- {shinytest}
+- {dockerstats}
+- {renv}
+- Docker
+
+## Testing Your App
+
+What to test:
+
+- business logic
+
+- user interface
+
+- reactive connections
+
+- application load
+
+### Testing the business logic
+
+Good practice:
+
+- business logic (non-reactive) is separated from interactive logic
+
+- application is inside a package
+
+Standard package development tools are available to you
+
+- testthat
+
+- devtools
+
+```{r}
+library(testthat)
+
+meaning_of_life <- function() 42
+
+describe("The meaning of life", {
+  it("is always 42", {
+    expect_equal(meaning_of_life(), 42)
+  })  
+})
+```
+
+### shiny::testServer
+
+For testing reactive updates to server-side values
+
+```{r}
+library(shiny)
+
+# Given the following module
+computation_module_server <- function(id, multiplier = 10) {
+  moduleServer(id, function(input, output, session) {
+    ns <- NS(id)
+    r <- reactiveValues(
+      value = NULL
+    )
+    observeEvent(input$selector, {
+      r$value <- input$selector * multiplier
+    })
+  })
+}
+
+describe("'value'", {
+  it("updates to 'multiplier' * 'selector'", {
+    # with default multiplier
+    testServer(computation_module_server, {
+      session$setInputs(selector = 1)
+      expect_equal(r$value, 10)
+
+      session$setInputs(selector = 2)
+      expect_equal(r$value, 20)
+    })
+    # setting a non-default multiplier
+    testServer(computation_module_server, args = list(multiplier = 15), {
+      session$setInputs(selector = 3)
+      expect_equal(r$value, 45)
+    })
+  })
+})
+```
+
+### Testing the interactive logic
+
+Several options available for testing UI and interactivity
+
+#### Puppeteer
+
+Mimics a session on the app
+
+- [Puppeteer](https://developers.google.com/web/tools/puppeteer)
+- NodeJS module
+- Google Chrome headless session
+- `npm install puppeteer`
+
+Chrome extension
+
+- [Headless recorder](https://chrome.google.com/webstore/detail/headless-recorder/djeegiggegleadkkbgopoonhjimgehda)
+- [Website](https://www.checklyhq.com/docs/headless-recorder/)
+- Creates scripts for puppeteer and playwright
+- This records button clicks and text input
+- Note: you have to hit TAB after text input or it won't be recorded
+
+[Interactive]
+
+- Load [Hexmake website](https://connect.thinkr.fr/hexmake/)
+- Load [Headless Recorder "Basic Usage"](https://www.checklyhq.com/docs/headless-recorder/basic-usage/)
+- Click "Headless Recorder" Icon in Chrome extensions
+- Click the BIG RED BUTTON
+- Click "Manage Name" on hexmake page
+- Change Name to "dupree" then hit TAB
+- Stop the recording
+- Copy the code to the clipboard
+
+```javascript
+const puppeteer = require('puppeteer');
+const browser = await puppeteer.launch()
+const page = await browser.newPage()
+await page.goto('https://connect.thinkr.fr/hexmake/')
+
+await page.setViewport({ width: 898, height: 926 })
+
+await page.waitForSelector('.row > .col > .rounded > details:nth-child(3) > summary')
+await page.click('.row > .col > .rounded > details:nth-child(3) > summary')
+
+await page.waitForSelector('#main_ui_1-left_ui_1-pkg_name_ui_1-package')
+await page.click('#main_ui_1-left_ui_1-pkg_name_ui_1-package')
+
+await page.type('#main_ui_1-left_ui_1-pkg_name_ui_1-package', 'dupree')
+
+await browser.close()
+```
+
+```bash
+# rerun the script
+node ./examples/ch11/my_puppeteer_script.js
+/home/russ/github/bookclub-epgs/examples/ch11/my_puppeteer_script.js:2
+const browser = await puppeteer.launch()
+                ^^^^^
+
+SyntaxError: await is only valid in async functions and the top level bodies of modules
+    at Object.compileFunction (node:vm:353:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1039:15)
+    at Module._compile (node:internal/modules/cjs/loader:1073:27)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1138:10)
+    at Module.load (node:internal/modules/cjs/loader:989:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:829:14)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)
+```
+
+This didn't actually work.
+Comparing to the book example, and some [other puppeteer examples](https://nitayneeman.com/posts/getting-to-know-puppeteer-using-practical-examples/), 
+we see it should probably have looked like this:
+
+```javascript
+const puppeteer = require('puppeteer');
+(async () => {
+const browser = await puppeteer.launch()
+const page = await browser.newPage()
+await page.goto('https://connect.thinkr.fr/hexmake/')
+
+await page.setViewport({ width: 898, height: 926 })
+
+await page.waitForSelector('.row > .col > .rounded > details:nth-child(3) > summary')
+await page.click('.row > .col > .rounded > details:nth-child(3) > summary')
+
+await page.waitForSelector('#main_ui_1-left_ui_1-pkg_name_ui_1-package')
+await page.click('#main_ui_1-left_ui_1-pkg_name_ui_1-package')
+
+await page.type('#main_ui_1-left_ui_1-pkg_name_ui_1-package', 'dupree')
+
+await browser.close()
+})()
+```
+
+```bash
+node ./examples/ch11/my_fixed_puppeteer_script.js
+```
+
+[Interactive]
+
+- Try changing the script:
+  - use a non-existing selector and see the script fails
+  - use `puppeteer.lauch({ headless: false });`
+
+#### {crrri} and {crrry}
+
+That's fine, but do we really want to have a node.js env in all our shiny projects?
+
+- [{crrri}](https://rlesur.github.io/crrri/)
+- [{chromote}](https://github.com/rstudio/chromote)
+- [{crrry}](https://github.com/ColinFay/crrry) - puppeteer like, tailored for {shiny}
+
+Why the strange names?
+
+- they use the "Chrome remote interface"
+
+```r
+# to install {crrry}
+remotes::install_github("ColinFay/crrry")
+```
+
+```{r}
+# Creating a new test instance
+test <- crrry::CrrryOnPage$new(
+  # Using the `find_chrome()` function to guess where the 
+  # Chrome bin is on our machine
+  chrome_bin = pagedown::find_chrome(),
+  # Launching Chrome on a random available port on our machine
+  # Note that you will need httpuv >= 1.5.2 if you want to use 
+  # this function
+  chrome_port = httpuv::randomPort(), 
+  # Specifying the page we want to connect to
+  url = "https://connect.thinkr.fr/hexmake/",
+  # Do everything on the terminal, with no window open
+  headless = TRUE
+)
+```
+
+```{r}
+# We'll wait for the application to be ready to accept inputs
+test$wait_for_shiny_ready()
+```
+
+A simple test:
+
+- we input a package name
+- then check that the updated package name matches our input name
+
+```{r}
+new_pkg <- "dupree"
+pkg_name_selector <- "main_ui_1-left_ui_1-pkg_name_ui_1-package"
+js_get_pkg <- glue::glue("$('#{pkg_name_selector}').attr('value')")
+
+test$shiny_set_input(pkg_name_selector, new_pkg)
+test$wait_for_shiny_ready()
+
+# This (seemingly trivial) test fails:
+# - test$shiny_set_input doesn't change the 'visible' input
+# - but, it triggers reactive changes on the server side
+expect_equal(
+  test$call_js(js_get_pkg)[["result"]][["value"]],
+  expected = new_pkg
+)
+```
+
+That test failed (`test$set_shiny_input` sets the inputs that are passed to the server).
+We can use javascript / jquery syntax to set the UI-attached values.
+
+```{r}
+new_pkg <- "dupree"
+pkg_name_selector <- "main_ui_1-left_ui_1-pkg_name_ui_1-package"
+js_get_pkg <- glue::glue("$('#{pkg_name_selector}').attr('value')")
+js_set_pkg <- glue::glue("$('#{pkg_name_selector}').attr('value', '{new_pkg}')")
+
+test$call_js(js_set_pkg)
+test$wait_for_shiny_ready()
+
+expect_equal(
+  test$call_js(js_get_pkg)[["result"]][["value"]],
+  expected = new_pkg
+)
+```
+
+```{r}
+test$stop()
+```
+
+Available methods:
+
+- call_js()
+- shiny_set_input()
+- wait_for()
+- click_on_id
+
+#### gremlin
+
+#### {shinytest}
+
+Similar to {puppeteer}-based tests
+
+Uses snapshots (browser images) to compare before/after source code changes
+
+[Interactive]
+
+- open hexmake repo
+
+## Further sections
+
+Did not present on:
+
+- Testing the app load
+
+- A reproducible environment and {renv}
+
+-  Docker
