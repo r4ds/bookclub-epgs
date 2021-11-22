@@ -1,0 +1,163 @@
+# The Need for Optimization
+
+** Learning Objectives **
+
+You can optimise for:
+
+- speed
+
+- memory
+
+- maintainability / readability
+
+- ... but not all three
+
+When optimising, make sure you have a basis for comparison (of alternative implementations)
+
+## Build first, then optimize
+
+### Identifying bottlenecks
+
+"""Focusing on optimizing small portions of your app before making it work fully is the best way to
+lose time along the way, even more in the context of a production application, where there are
+deadlines and a limited amount of time to build the application."""
+
+When your furniture takes 2 months to cross the ocean, it doesn't matter whether you have an
+electric screwdriver
+
+It's hard to know _where_ the bottlenecks will be until your app is working
+
+And there's no point optimising until you know where the bottlenecks are...
+
+### Do you need faster functions?
+
+"""Of course a function running twice as fast is a good thing, but think about it in context: for
+example, how many times is this function called? We can safely bet that if your function is only
+called once, working on making it twice as fast might not be the one function you would want to
+focus on"""
+
+But, what if your single-call function holds everything else up?
+
+### Don't sacrifice readability
+
+Possible restructurings:
+
+- high-level language (R/python) to low-level language (C++/rust)
+
+- one package to another
+
+- single to parallel implementation
+
+Optimisation trade-off against:
+
+- maintain-, read-, searchability
+
+Example: compare C++ code for computing mean with R code for the same
+
+## Tools for profiling
+
+### Profiling R code
+
+{profvis} and the "flame graph"
+
+```r
+library(profvis)
+top <- function(){
+  # We use profvis::pause() because Sys.sleep() doesn't 
+  # show in the flame graph
+  pause(0.1)
+  # Running a series of function with lapply()
+  lapply(1:10, function(x){
+    x * 10
+  })
+  # Calling a lower level function
+  middle()
+}
+
+middle <- function(){
+  # Pausing before computing, and calling other functions
+  pause(0.2)
+  1e4 * 9
+  bottom_a()
+  bottom_b()
+}
+
+# Both will pause and print, _a for 0.5 seconds, 
+# _b for 2 seconds
+bottom_a <- function(){
+  pause(0.5)
+  print("hey")
+}
+bottom_b <- function(){
+  pause(2)
+  print("hey")
+}
+profvis({
+  top()
+})
+```
+
+Memory:
+
+- profvis does indicate memory used, but ...
+
+- {profmem}
+
+#### Identifying bottlenecks
+
+#### Benchmarking R code
+
+"""never start optimizing if you cannot benchmark this optimization"""
+
+Recommend
+
+- keep a notebook of different implementations that were attempted (for the bottlenecks in your app)
+
+- {bench}
+  - for comparing different implementations
+  - checks that outputs are the same
+
+```r
+# Multiplying each element of a vector going from 1 to size
+# with a for loop 
+for_loop <- function(size){
+  res <- numeric(size)
+  for (i in 1:size){
+    res[i] <- i * 10
+  }
+  return(res)
+}
+# Doing the same thing using a vectorized function
+vectorized <- function(size){
+  (1:size) * 10
+}
+res <- bench::mark(
+  for_loop = for_loop(1000), 
+  vectorized = vectorized(1000), 
+  iterations = 1000
+)
+```
+
+### Profiling {shiny}
+
+#### Shiny back-end
+
+Can use `profvis(print(run_app()))`
+
+#### Shiny front-end
+
+TODO: https://engineering-shiny.org/need-for-optimization.html#b.-shiny-front-end
+
+### Profiling web pages
+
+## Resources
+
+- {bench} [http://bench.r-lib.org/reference/mark.html]()
+
+- {profvis} [https://rstudio.github.io/profvis/]()
+
+- {profmem} [https://github.com/HenrikBengtsson/profmem]()
+
+- "Mastering Shiny :: Performance" [https://mastering-shiny.org/performance.html]()
+
+- ["Shiny in Production" talk (Joe Cheng)](https://rstudio.com/resources/rstudioconf-2019/shiny-in-production-principles-practices-and-tools/)
