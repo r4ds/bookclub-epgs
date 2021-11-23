@@ -6,3 +6,118 @@ output: html_document
 ---
 
 # Building the App with {golem}
+
+## Learning Outcomes
+
+- Organise and state your dependencies
+
+- Split up your code into (sub)modules
+
+- Organise your functions
+
+- Test everything
+
+- Automate CI / CD services
+
+[Golem Example](https://github.com/ColinFay/golemexample)
+
+## Tools / Packages Used
+
+- {attachment}
+
+- `golem::add_[fct|utils|module]`
+
+- `usethis::use_[package|test|vignette|coverage|...]`
+
+- `devtools::build_vignettes`
+
+- {covr}, {covrpage}, CodeCov and Coveralls
+
+- CI providers: Travis, GitHub Actions, GitLab CI
+
+- `golem::[cat|make]_dev`
+
+## Add dependencies
+
+### Package dependencies
+
+- Use `DESCRIPTION` and `NAMESPACE` to state / organise the package-dependencies
+
+- `golem::use_recommended_deps()`
+
+### Importing packages and functions
+
+- `DESCRIPTION`: which packages are installed when your app is installed
+
+- `NAMESPACE`: which functions / packages are imported when app is running
+
+- Specifying namespace:
+
+  - Manage namespace conflicts (`jsonlite::flatten` vs `purrr::flatten`)
+
+  - Use {roxygen2} to import specific functions
+
+  - or use explicit functions `package::function()` in `R/`
+
+## Submodules and utility functions
+
+- Split your codebase into smaller pieces
+
+- `golem::add_fct("helpers", module = NULL)` adds `R/fct_helpers.R`
+
+- Organisation:
+
+  - `R/utils_ABC.R` - small functions used throughout the app (Purpose-centered; eg, formatting)
+  
+  - `R/fct_DEF.R` - larger functions that aren't module-specific (Topic-centered; eg, db access)
+  
+  - `R/mod_XXX_[fct|utils]_YYY.R` - functions relevant to a specific module
+
+- `golem::add_module(name = "xxx", fct = "yyy", utils = "zzz")`
+
+## Add tests
+
+- `usethis::use_test("topic")`
+
+  - `tests/testthat/test-topic.R`
+
+## Documentation and code coverage
+
+### Vignette
+
+- Long format documentation
+
+- Rmd-first prototyping method
+
+- Either in `inst/` or `vignettes/`
+
+- `devtools::build_vignettes()`
+
+### Code coverage and Continuous Integration
+
+- Code coverage
+
+  - Assess which lines in your code are covered by the tests in `tests/`
+  - `usethis::use_coverage()` ({covr})
+  - Test coverage may be greater, if you have puppeteer / selenium tests
+  - `covr::package_coverage()`
+  
+- Test the important stuff, and test it well
+- Coverage metrics are easily gamed
+
+- Think about:
+  - branch-coverage, not lines-covered
+  - will the tests be affected by internal restructuring
+  - would restructuring make it easier to test something that currently isn't covered?
+
+- Continuous Integration
+
+  - eg, for running tests every time you check in code to GitHub
+  - Providers: GitHub Actions, GitLab CI, Circle CI, Jenkins, Travis CI
+  - `usethis::use_github_action`
+    - prewritten actions for tests, linting, pkgdown ...
+
+## Using {golem} dev functions
+
+- `golem::cat_dev("Only prints when options(golem.app.prod = FALSE)")`
+- `golem::make_dev(some_function)`

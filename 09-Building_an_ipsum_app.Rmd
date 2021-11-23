@@ -1,7 +1,101 @@
 ---
 title: "09-Building-an-ipsum-app"
-author: "Ryan Metcalf"
+author: "Russ Hyde"
+date: "13/10/2021"
 output: html_document
 ---
 
 # Building an Ipsum App
+
+## Learning Outcomes
+
+- Importance of Prototyping
+
+- Guide the client's focus
+
+- Use different tools for prototyping different parts of an app
+
+- Decouple UI, reactivity, and back-end
+
+## Tools
+
+- {shinipsum}
+
+- {fakir}
+
+- `usethis::use_vignette`
+
+## Prototyping is crucial
+
+### Prototype, then polish
+
+- Make things work before working on low-level optimization
+
+  - This makes the engineering process easier
+  
+- Abstraction is hard, and makes the codebase harder to work with
+
+- It's hard to identify bottlenecks up front
+
+- It's easier to spot mistakes when you have something that can run
+
+### The "UI first" approach
+
+- helps when clarifying:
+  
+  - what the app is supposed to do
+  
+  - how the app is to work
+  
+  - what each team-member is to work on
+  
+- use "the least possible computation"
+
+- focus on appearance and interactions
+
+## Prototyping {shiny}
+
+### Fast UI prototyping with {shinipsum}
+
+{shinipsum}
+
+- generates random shiny elements
+
+- example apps:
+  - [https://engineering-shiny.org/shinipsum/]()
+  - [https://engineering-shiny.org/golemhtmltemplate/]()
+
+- `shinipsum::random_ggplot() + labs(title = "Random plot")`
+
+- See example app in the book
+
+- Also suggest {fakir} as source of example / fake datasets for use while building app
+
+## Building with RMarkdown
+
+- Build the back-end without any reactive context
+
+- Provides some documentation
+
+- `usethis::use_vignette("vignetteName")`
+
+### Define the content of the application
+
+- Rendered .Rmd is shareable content
+
+- Lets you focus on the core algorithm
+
+- Obliges you to make back-end "application independent" (write well-documented, non-reactive
+functions etc)
+
+### Using the Rmd files as a laboratory notebook
+
+- keep track of your ideas
+
+- separation of work across multiple vignettes
+
+### Rmd, Vignettes, and documentation first
+
+- Vignettes are first-class part of package infrastructure
+
+- They are built during package check; so you have automated check that vignettes continue to work
