@@ -1,7 +1,2 @@
----
-title: "04-Introduction-to-Golem"
-author: "Russ Hyde"
-output: html_document
----
-
 # Introduction to Golem
+

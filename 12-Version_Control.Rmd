@@ -124,7 +124,7 @@ The book mention some "health check" repository software integration:
 
 With **Travis**
 
-```{r  eval = F}
+```{r 12-01, eval = F}
 usethis::use_travis()
 ```
 
@@ -134,7 +134,7 @@ usethis::use_travis()
 
 While with **GitHub Action** the command are the following, the first three perform a standard **R CMD check**, while `use_github_action_pr_commands()` sets checks to be performed when a pull request is made to the repository
 
-```{r eval=F}
+```{r 12-02, eval=F}
 usethis::use_github_action_check_release() 
 
 use_github_action_check_standard() 
