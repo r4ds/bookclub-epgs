@@ -8,7 +8,7 @@ name: pr_check
 jobs:
   bookdown:
     name: pr_check_book
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     env:
       GITHUB_PAT: ${{ secrets.GH_PAT }}
     steps:
