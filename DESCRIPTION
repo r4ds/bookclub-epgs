@@ -10,6 +10,7 @@ Depends:
 Imports: 
     attempt,
     bookdown,
+    crrry (>= 0.0.0.9001),
     details,
     DiagrammeR,
     emo,
@@ -17,9 +18,12 @@ Imports:
     knitr,
     matlab,
     nter,
+    pagedown
+    testthat,
     shiny,
     tidyverse,
     usethis
-Remotes: 
+Remotes:  
     hadley/emo,
-    JohnCoene/nter
+    JohnCoene/nter,
+    ColinFay/crrry
