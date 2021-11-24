@@ -215,7 +215,7 @@ Why the strange names?
 remotes::install_github("ColinFay/crrry")
 ```
 
-```{r 11-03}
+```r
 # Creating a new test instance
 test <- crrry::CrrryOnPage$new(
   # Using the `find_chrome()` function to guess where the 
@@ -232,7 +232,7 @@ test <- crrry::CrrryOnPage$new(
 )
 ```
 
-```{r 11-04}
+```r
 # We'll wait for the application to be ready to accept inputs
 test$wait_for_shiny_ready()
 ```
@@ -242,7 +242,7 @@ A simple test:
 - we input a package name
 - then check that the updated package name matches our input name
 
-```{r 11-05, eval = F}
+```r
 new_pkg <- "dupree"
 pkg_name_selector <- "main_ui_1-left_ui_1-pkg_name_ui_1-package"
 js_get_pkg <- glue::glue("$('#{pkg_name_selector}').attr('value')")
@@ -262,7 +262,7 @@ expect_equal(
 That test failed (`test$set_shiny_input` sets the inputs that are passed to the server).
 We can use javascript / jquery syntax to set the UI-attached values.
 
-```{r 11-06}
+```r
 new_pkg <- "dupree"
 pkg_name_selector <- "main_ui_1-left_ui_1-pkg_name_ui_1-package"
 js_get_pkg <- glue::glue("$('#{pkg_name_selector}').attr('value')")
@@ -277,7 +277,7 @@ expect_equal(
 )
 ```
 
-```{r 11-07}
+```r
 test$stop()
 ```
 
