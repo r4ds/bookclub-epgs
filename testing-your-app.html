@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.3 Working as a team: Tools and structure | Engineering Production-Grade Shiny Apps Book Club</title>
+  <title>11.3 Testing Your App | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.3 Working as a team: Tools and structure | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta property="og:title" content="11.3 Testing Your App | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.3 Working as a team: Tools and structure | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta name="twitter:title" content="11.3 Testing Your App | Engineering Production-Grade Shiny Apps Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="develop-with-the-kiss-principle.html"/>
-<link rel="next" href="structuring-your-project.html"/>
+<link rel="prev" href="tools-and-resources.html"/>
+<link rel="next" href="further-sections.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -303,63 +303,260 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="working-as-a-team-tools-and-structure" class="section level2">
-<h2><span class="header-section-number">2.3</span> Working as a team: Tools and structure</h2>
+<div id="testing-your-app" class="section level2">
+<h2><span class="header-section-number">11.3</span> Testing Your App</h2>
+<p>What to test:</p>
 <ul>
-<li>The choice of tools and how the team is structured is crucial for a successful application.
-<ul>
-<li>Not entirely like <em>KISS</em>, but close too it. GitHub versus GitLab. Barebones hardware or Containerization.</li>
-</ul></li>
+<li><p>business logic</p></li>
+<li><p>user interface</p></li>
+<li><p>reactive connections</p></li>
+<li><p>application load</p></li>
 </ul>
-<div id="from-the-tools-point-of-view" class="section level3">
-<h3><span class="header-section-number">2.3.1</span> From the tools point of view</h3>
-<ol style="list-style-type: decimal">
-<li>Version control and test all things</li>
-</ol>
+<div id="testing-the-business-logic" class="section level3">
+<h3><span class="header-section-number">11.3.1</span> Testing the business logic</h3>
+<p>Good practice:</p>
 <ul>
-<li>Use Constant Innovation (CI) principles to test all code before committing</li>
-<li>Breaking things is a natural process of software engineering, notably when working on a piece of code during a long period</li>
-<li>Be informed that the codebase is broken</li>
-<li>Be able to identify changes between versions, and potentially, get back in time to a previous codebase
-<ul>
-<li>Github/GitLab diff-docs. Example: Branch -&gt; Change -&gt; Test -&gt; Commit -&gt; Pull Request -&gt; Merge</li>
-</ul></li>
+<li><p>business logic (non-reactive) is separated from interactive logic</p></li>
+<li><p>application is inside a package</p></li>
 </ul>
-<ol start="2" style="list-style-type: decimal">
-<li>Small is beautiful</li>
-</ol>
+<p>Standard package development tools are available to you</p>
 <ul>
-<li>Smaller more managable pieces make it easier to develop</li>
-<li>Teams may even work in parallel (with caution)</li>
-<li>A large codebase implies that the safe way to work is to split the app into pieces</li>
-<li>Extract your core “non-reactive” functions, which we will also call the “business logic”, and include them in external files
+<li><p>testthat</p></li>
+<li><p>devtools</p></li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="testing-your-app.html#cb21-1"></a><span class="kw">library</span>(testthat)</span>
+<span id="cb21-2"><a href="testing-your-app.html#cb21-2"></a></span>
+<span id="cb21-3"><a href="testing-your-app.html#cb21-3"></a>meaning_of_life &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="dv">42</span></span>
+<span id="cb21-4"><a href="testing-your-app.html#cb21-4"></a></span>
+<span id="cb21-5"><a href="testing-your-app.html#cb21-5"></a><span class="kw">describe</span>(<span class="st">&quot;The meaning of life&quot;</span>, {</span>
+<span id="cb21-6"><a href="testing-your-app.html#cb21-6"></a>  <span class="kw">it</span>(<span class="st">&quot;is always 42&quot;</span>, {</span>
+<span id="cb21-7"><a href="testing-your-app.html#cb21-7"></a>    <span class="kw">expect_equal</span>(<span class="kw">meaning_of_life</span>(), <span class="dv">42</span>)</span>
+<span id="cb21-8"><a href="testing-your-app.html#cb21-8"></a>  })  </span>
+<span id="cb21-9"><a href="testing-your-app.html#cb21-9"></a>})</span></code></pre></div>
+<pre><code>## Test passed 🎊</code></pre>
+</div>
+<div id="shinytestserver" class="section level3">
+<h3><span class="header-section-number">11.3.2</span> shiny::testServer</h3>
+<p>For testing reactive updates to server-side values</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="testing-your-app.html#cb23-1"></a><span class="kw">library</span>(shiny)</span>
+<span id="cb23-2"><a href="testing-your-app.html#cb23-2"></a></span>
+<span id="cb23-3"><a href="testing-your-app.html#cb23-3"></a><span class="co"># Given the following module</span></span>
+<span id="cb23-4"><a href="testing-your-app.html#cb23-4"></a>computation_module_server &lt;-<span class="st"> </span><span class="cf">function</span>(id, <span class="dt">multiplier =</span> <span class="dv">10</span>) {</span>
+<span id="cb23-5"><a href="testing-your-app.html#cb23-5"></a>  <span class="kw">moduleServer</span>(id, <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb23-6"><a href="testing-your-app.html#cb23-6"></a>    ns &lt;-<span class="st"> </span><span class="kw">NS</span>(id)</span>
+<span id="cb23-7"><a href="testing-your-app.html#cb23-7"></a>    r &lt;-<span class="st"> </span><span class="kw">reactiveValues</span>(</span>
+<span id="cb23-8"><a href="testing-your-app.html#cb23-8"></a>      <span class="dt">value =</span> <span class="ot">NULL</span></span>
+<span id="cb23-9"><a href="testing-your-app.html#cb23-9"></a>    )</span>
+<span id="cb23-10"><a href="testing-your-app.html#cb23-10"></a>    <span class="kw">observeEvent</span>(input<span class="op">$</span>selector, {</span>
+<span id="cb23-11"><a href="testing-your-app.html#cb23-11"></a>      r<span class="op">$</span>value &lt;-<span class="st"> </span>input<span class="op">$</span>selector <span class="op">*</span><span class="st"> </span>multiplier</span>
+<span id="cb23-12"><a href="testing-your-app.html#cb23-12"></a>    })</span>
+<span id="cb23-13"><a href="testing-your-app.html#cb23-13"></a>  })</span>
+<span id="cb23-14"><a href="testing-your-app.html#cb23-14"></a>}</span>
+<span id="cb23-15"><a href="testing-your-app.html#cb23-15"></a></span>
+<span id="cb23-16"><a href="testing-your-app.html#cb23-16"></a><span class="kw">describe</span>(<span class="st">&quot;&#39;value&#39;&quot;</span>, {</span>
+<span id="cb23-17"><a href="testing-your-app.html#cb23-17"></a>  <span class="kw">it</span>(<span class="st">&quot;updates to &#39;multiplier&#39; * &#39;selector&#39;&quot;</span>, {</span>
+<span id="cb23-18"><a href="testing-your-app.html#cb23-18"></a>    <span class="co"># with default multiplier</span></span>
+<span id="cb23-19"><a href="testing-your-app.html#cb23-19"></a>    <span class="kw">testServer</span>(computation_module_server, {</span>
+<span id="cb23-20"><a href="testing-your-app.html#cb23-20"></a>      session<span class="op">$</span><span class="kw">setInputs</span>(<span class="dt">selector =</span> <span class="dv">1</span>)</span>
+<span id="cb23-21"><a href="testing-your-app.html#cb23-21"></a>      <span class="kw">expect_equal</span>(r<span class="op">$</span>value, <span class="dv">10</span>)</span>
+<span id="cb23-22"><a href="testing-your-app.html#cb23-22"></a></span>
+<span id="cb23-23"><a href="testing-your-app.html#cb23-23"></a>      session<span class="op">$</span><span class="kw">setInputs</span>(<span class="dt">selector =</span> <span class="dv">2</span>)</span>
+<span id="cb23-24"><a href="testing-your-app.html#cb23-24"></a>      <span class="kw">expect_equal</span>(r<span class="op">$</span>value, <span class="dv">20</span>)</span>
+<span id="cb23-25"><a href="testing-your-app.html#cb23-25"></a>    })</span>
+<span id="cb23-26"><a href="testing-your-app.html#cb23-26"></a>    <span class="co"># setting a non-default multiplier</span></span>
+<span id="cb23-27"><a href="testing-your-app.html#cb23-27"></a>    <span class="kw">testServer</span>(computation_module_server, <span class="dt">args =</span> <span class="kw">list</span>(<span class="dt">multiplier =</span> <span class="dv">15</span>), {</span>
+<span id="cb23-28"><a href="testing-your-app.html#cb23-28"></a>      session<span class="op">$</span><span class="kw">setInputs</span>(<span class="dt">selector =</span> <span class="dv">3</span>)</span>
+<span id="cb23-29"><a href="testing-your-app.html#cb23-29"></a>      <span class="kw">expect_equal</span>(r<span class="op">$</span>value, <span class="dv">45</span>)</span>
+<span id="cb23-30"><a href="testing-your-app.html#cb23-30"></a>    })</span>
+<span id="cb23-31"><a href="testing-your-app.html#cb23-31"></a>  })</span>
+<span id="cb23-32"><a href="testing-your-app.html#cb23-32"></a>})</span></code></pre></div>
+<pre><code>## Test passed 😀</code></pre>
+</div>
+<div id="testing-the-interactive-logic" class="section level3">
+<h3><span class="header-section-number">11.3.3</span> Testing the interactive logic</h3>
+<p>Several options available for testing UI and interactivity</p>
+<div id="puppeteer" class="section level4">
+<h4><span class="header-section-number">11.3.3.1</span> Puppeteer</h4>
+<p>Mimics a session on the app</p>
 <ul>
-<li>Non-vital linkages (data ingestion pipelines)</li>
-<li>Page Layout and theming (CSS or branding characteristics)</li>
-<li>Allows for expansion but won’t break the core</li>
+<li><a href="https://developers.google.com/web/tools/puppeteer">Puppeteer</a></li>
+<li>NodeJS module</li>
+<li>Google Chrome headless session</li>
+<li><code>npm install puppeteer</code></li>
+</ul>
+<p>Chrome extension</p>
+<ul>
+<li><a href="https://chrome.google.com/webstore/detail/headless-recorder/djeegiggegleadkkbgopoonhjimgehda">Headless recorder</a></li>
+<li><a href="https://www.checklyhq.com/docs/headless-recorder/">Website</a></li>
+<li>Creates scripts for puppeteer and playwright</li>
+<li>This records button clicks and text input</li>
+<li>Note: you have to hit TAB after text input or it won’t be recorded</li>
+</ul>
+<p>[Interactive]</p>
+<ul>
+<li>Load <a href="https://connect.thinkr.fr/hexmake/">Hexmake website</a></li>
+<li>Load <a href="https://www.checklyhq.com/docs/headless-recorder/basic-usage/">Headless Recorder “Basic Usage”</a></li>
+<li>Click “Headless Recorder” Icon in Chrome extensions</li>
+<li>Click the BIG RED BUTTON</li>
+<li>Click “Manage Name” on hexmake page</li>
+<li>Change Name to “dupree” then hit TAB</li>
+<li>Stop the recording</li>
+<li>Copy the code to the clipboard</li>
+</ul>
+<div class="sourceCode" id="cb25"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb25-1"><a href="testing-your-app.html#cb25-1"></a><span class="kw">const</span> puppeteer <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;puppeteer&#39;</span>)<span class="op">;</span></span>
+<span id="cb25-2"><a href="testing-your-app.html#cb25-2"></a><span class="kw">const</span> browser <span class="op">=</span> <span class="cf">await</span> <span class="va">puppeteer</span>.<span class="at">launch</span>()</span>
+<span id="cb25-3"><a href="testing-your-app.html#cb25-3"></a><span class="kw">const</span> page <span class="op">=</span> <span class="cf">await</span> <span class="va">browser</span>.<span class="at">newPage</span>()</span>
+<span id="cb25-4"><a href="testing-your-app.html#cb25-4"></a><span class="cf">await</span> <span class="va">page</span>.<span class="at">goto</span>(<span class="st">&#39;https://connect.thinkr.fr/hexmake/&#39;</span>)</span>
+<span id="cb25-5"><a href="testing-your-app.html#cb25-5"></a></span>
+<span id="cb25-6"><a href="testing-your-app.html#cb25-6"></a><span class="cf">await</span> <span class="va">page</span>.<span class="at">setViewport</span>(<span class="op">{</span> <span class="dt">width</span><span class="op">:</span> <span class="dv">898</span><span class="op">,</span> <span class="dt">height</span><span class="op">:</span> <span class="dv">926</span> <span class="op">}</span>)</span>
+<span id="cb25-7"><a href="testing-your-app.html#cb25-7"></a></span>
+<span id="cb25-8"><a href="testing-your-app.html#cb25-8"></a><span class="cf">await</span> <span class="va">page</span>.<span class="at">waitForSelector</span>(<span class="st">&#39;.row &gt; .col &gt; .rounded &gt; details:nth-child(3) &gt; summary&#39;</span>)</span>
+<span id="cb25-9"><a href="testing-your-app.html#cb25-9"></a><span class="cf">await</span> <span class="va">page</span>.<span class="at">click</span>(<span class="st">&#39;.row &gt; .col &gt; .rounded &gt; details:nth-child(3) &gt; summary&#39;</span>)</span>
+<span id="cb25-10"><a href="testing-your-app.html#cb25-10"></a></span>
+<span id="cb25-11"><a href="testing-your-app.html#cb25-11"></a><span class="cf">await</span> <span class="va">page</span>.<span class="at">waitForSelector</span>(<span class="st">&#39;#main_ui_1-left_ui_1-pkg_name_ui_1-package&#39;</span>)</span>
+<span id="cb25-12"><a href="testing-your-app.html#cb25-12"></a><span class="cf">await</span> <span class="va">page</span>.<span class="at">click</span>(<span class="st">&#39;#main_ui_1-left_ui_1-pkg_name_ui_1-package&#39;</span>)</span>
+<span id="cb25-13"><a href="testing-your-app.html#cb25-13"></a></span>
+<span id="cb25-14"><a href="testing-your-app.html#cb25-14"></a><span class="cf">await</span> <span class="va">page</span>.<span class="at">type</span>(<span class="st">&#39;#main_ui_1-left_ui_1-pkg_name_ui_1-package&#39;</span><span class="op">,</span> <span class="st">&#39;dupree&#39;</span>)</span>
+<span id="cb25-15"><a href="testing-your-app.html#cb25-15"></a></span>
+<span id="cb25-16"><a href="testing-your-app.html#cb25-16"></a><span class="cf">await</span> <span class="va">browser</span>.<span class="at">close</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="testing-your-app.html#cb26-1"></a><span class="co"># rerun the script</span></span>
+<span id="cb26-2"><a href="testing-your-app.html#cb26-2"></a><span class="ex">node</span> ./examples/ch11/my_puppeteer_script.js</span>
+<span id="cb26-3"><a href="testing-your-app.html#cb26-3"></a><span class="ex">/home/russ/github/bookclub-epgs/examples/ch11</span>/my_puppeteer_script.js:<span class="ex">2</span></span>
+<span id="cb26-4"><a href="testing-your-app.html#cb26-4"></a><span class="ex">const</span> browser = await puppeteer.launch()</span>
+<span id="cb26-5"><a href="testing-your-app.html#cb26-5"></a>                ^^^^^</span>
+<span id="cb26-6"><a href="testing-your-app.html#cb26-6"></a></span>
+<span id="cb26-7"><a href="testing-your-app.html#cb26-7"></a><span class="ex">SyntaxError</span>: await is only valid in async functions and the top level bodies of modules</span>
+<span id="cb26-8"><a href="testing-your-app.html#cb26-8"></a>    <span class="ex">at</span> Object.compileFunction (node:vm:353:18)</span>
+<span id="cb26-9"><a href="testing-your-app.html#cb26-9"></a>    <span class="ex">at</span> wrapSafe (node:internal/modules/cjs/loader:1039:15)</span>
+<span id="cb26-10"><a href="testing-your-app.html#cb26-10"></a>    <span class="ex">at</span> Module._compile (node:internal/modules/cjs/loader:1073:27)</span>
+<span id="cb26-11"><a href="testing-your-app.html#cb26-11"></a>    <span class="ex">at</span> Object.Module._extensions..js (node:internal/modules/cjs/loader:1138:10)</span>
+<span id="cb26-12"><a href="testing-your-app.html#cb26-12"></a>    <span class="ex">at</span> Module.load (node:internal/modules/cjs/loader:989:32)</span>
+<span id="cb26-13"><a href="testing-your-app.html#cb26-13"></a>    <span class="ex">at</span> Function.Module._load (node:internal/modules/cjs/loader:829:14)</span>
+<span id="cb26-14"><a href="testing-your-app.html#cb26-14"></a>    <span class="ex">at</span> Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)</span></code></pre></div>
+<p>This didn’t actually work.
+Comparing to the book example, and some <a href="https://nitayneeman.com/posts/getting-to-know-puppeteer-using-practical-examples/">other puppeteer examples</a>,
+we see it should probably have looked like this:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb27-1"><a href="testing-your-app.html#cb27-1"></a><span class="kw">const</span> puppeteer <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;puppeteer&#39;</span>)<span class="op">;</span></span>
+<span id="cb27-2"><a href="testing-your-app.html#cb27-2"></a>(<span class="kw">async</span> () <span class="kw">=&gt;</span> <span class="op">{</span></span>
+<span id="cb27-3"><a href="testing-your-app.html#cb27-3"></a><span class="kw">const</span> browser <span class="op">=</span> <span class="cf">await</span> <span class="va">puppeteer</span>.<span class="at">launch</span>()</span>
+<span id="cb27-4"><a href="testing-your-app.html#cb27-4"></a><span class="kw">const</span> page <span class="op">=</span> <span class="cf">await</span> <span class="va">browser</span>.<span class="at">newPage</span>()</span>
+<span id="cb27-5"><a href="testing-your-app.html#cb27-5"></a><span class="cf">await</span> <span class="va">page</span>.<span class="at">goto</span>(<span class="st">&#39;https://connect.thinkr.fr/hexmake/&#39;</span>)</span>
+<span id="cb27-6"><a href="testing-your-app.html#cb27-6"></a></span>
+<span id="cb27-7"><a href="testing-your-app.html#cb27-7"></a><span class="cf">await</span> <span class="va">page</span>.<span class="at">setViewport</span>(<span class="op">{</span> <span class="dt">width</span><span class="op">:</span> <span class="dv">898</span><span class="op">,</span> <span class="dt">height</span><span class="op">:</span> <span class="dv">926</span> <span class="op">}</span>)</span>
+<span id="cb27-8"><a href="testing-your-app.html#cb27-8"></a></span>
+<span id="cb27-9"><a href="testing-your-app.html#cb27-9"></a><span class="cf">await</span> <span class="va">page</span>.<span class="at">waitForSelector</span>(<span class="st">&#39;.row &gt; .col &gt; .rounded &gt; details:nth-child(3) &gt; summary&#39;</span>)</span>
+<span id="cb27-10"><a href="testing-your-app.html#cb27-10"></a><span class="cf">await</span> <span class="va">page</span>.<span class="at">click</span>(<span class="st">&#39;.row &gt; .col &gt; .rounded &gt; details:nth-child(3) &gt; summary&#39;</span>)</span>
+<span id="cb27-11"><a href="testing-your-app.html#cb27-11"></a></span>
+<span id="cb27-12"><a href="testing-your-app.html#cb27-12"></a><span class="cf">await</span> <span class="va">page</span>.<span class="at">waitForSelector</span>(<span class="st">&#39;#main_ui_1-left_ui_1-pkg_name_ui_1-package&#39;</span>)</span>
+<span id="cb27-13"><a href="testing-your-app.html#cb27-13"></a><span class="cf">await</span> <span class="va">page</span>.<span class="at">click</span>(<span class="st">&#39;#main_ui_1-left_ui_1-pkg_name_ui_1-package&#39;</span>)</span>
+<span id="cb27-14"><a href="testing-your-app.html#cb27-14"></a></span>
+<span id="cb27-15"><a href="testing-your-app.html#cb27-15"></a><span class="cf">await</span> <span class="va">page</span>.<span class="at">type</span>(<span class="st">&#39;#main_ui_1-left_ui_1-pkg_name_ui_1-package&#39;</span><span class="op">,</span> <span class="st">&#39;dupree&#39;</span>)</span>
+<span id="cb27-16"><a href="testing-your-app.html#cb27-16"></a></span>
+<span id="cb27-17"><a href="testing-your-app.html#cb27-17"></a><span class="cf">await</span> <span class="va">browser</span>.<span class="at">close</span>()</span>
+<span id="cb27-18"><a href="testing-your-app.html#cb27-18"></a><span class="op">}</span>)()</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="testing-your-app.html#cb28-1"></a><span class="ex">node</span> ./examples/ch11/my_fixed_puppeteer_script.js</span></code></pre></div>
+<p>[Interactive]</p>
+<ul>
+<li>Try changing the script:
+<ul>
+<li>use a non-existing selector and see the script fails</li>
+<li>use <code>puppeteer.lauch({ headless: false });</code></li>
 </ul></li>
 </ul>
 </div>
-<div id="from-the-team-point-of-view" class="section level3">
-<h3><span class="header-section-number">2.3.2</span> From the team point of view</h3>
+<div id="crrri-and-crrry" class="section level4">
+<h4><span class="header-section-number">11.3.3.2</span> {crrri} and {crrry}</h4>
+<p>That’s fine, but do we really want to have a node.js env in all our shiny projects?</p>
 <ul>
-<li>Select a Manager, maybe a stakeholder or project manager. Someone who may or may not work on the codebase but is aware and knowledgeable</li>
-<li>Select one or more core developers skilled but specific in their field of study</li>
-<li>Follow <em>git workflow</em> with issue tracking and managing pull requests</li>
+<li><a href="https://rlesur.github.io/crrri/">{crrri}</a></li>
+<li><a href="https://github.com/rstudio/chromote">{chromote}</a></li>
+<li><a href="https://github.com/ColinFay/crrry">{crrry}</a> - puppeteer like, tailored for {shiny}</li>
 </ul>
-<p>## Reference
-<a href="https://www.oreilly.com/library/view/refactoring-at-scale/9781492075523/">Lemaire, Maude. 2020. Refactoring at Scale. Henry Holt.</a> <strong>NOTE: Payed Service</strong></p>
-
+<p>Why the strange names?</p>
+<ul>
+<li>they use the “Chrome remote interface”</li>
+</ul>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="testing-your-app.html#cb29-1"></a><span class="co"># to install {crrry}</span></span>
+<span id="cb29-2"><a href="testing-your-app.html#cb29-2"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;ColinFay/crrry&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="testing-your-app.html#cb30-1"></a><span class="co"># Creating a new test instance</span></span>
+<span id="cb30-2"><a href="testing-your-app.html#cb30-2"></a>test &lt;-<span class="st"> </span>crrry<span class="op">::</span>CrrryOnPage<span class="op">$</span><span class="kw">new</span>(</span>
+<span id="cb30-3"><a href="testing-your-app.html#cb30-3"></a>  <span class="co"># Using the `find_chrome()` function to guess where the </span></span>
+<span id="cb30-4"><a href="testing-your-app.html#cb30-4"></a>  <span class="co"># Chrome bin is on our machine</span></span>
+<span id="cb30-5"><a href="testing-your-app.html#cb30-5"></a>  <span class="dt">chrome_bin =</span> pagedown<span class="op">::</span><span class="kw">find_chrome</span>(),</span>
+<span id="cb30-6"><a href="testing-your-app.html#cb30-6"></a>  <span class="co"># Launching Chrome on a random available port on our machine</span></span>
+<span id="cb30-7"><a href="testing-your-app.html#cb30-7"></a>  <span class="co"># Note that you will need httpuv &gt;= 1.5.2 if you want to use </span></span>
+<span id="cb30-8"><a href="testing-your-app.html#cb30-8"></a>  <span class="co"># this function</span></span>
+<span id="cb30-9"><a href="testing-your-app.html#cb30-9"></a>  <span class="dt">chrome_port =</span> httpuv<span class="op">::</span><span class="kw">randomPort</span>(), </span>
+<span id="cb30-10"><a href="testing-your-app.html#cb30-10"></a>  <span class="co"># Specifying the page we want to connect to</span></span>
+<span id="cb30-11"><a href="testing-your-app.html#cb30-11"></a>  <span class="dt">url =</span> <span class="st">&quot;https://connect.thinkr.fr/hexmake/&quot;</span>,</span>
+<span id="cb30-12"><a href="testing-your-app.html#cb30-12"></a>  <span class="co"># Do everything on the terminal, with no window open</span></span>
+<span id="cb30-13"><a href="testing-your-app.html#cb30-13"></a>  <span class="dt">headless =</span> <span class="ot">TRUE</span></span>
+<span id="cb30-14"><a href="testing-your-app.html#cb30-14"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="testing-your-app.html#cb31-1"></a><span class="co"># We&#39;ll wait for the application to be ready to accept inputs</span></span>
+<span id="cb31-2"><a href="testing-your-app.html#cb31-2"></a>test<span class="op">$</span><span class="kw">wait_for_shiny_ready</span>()</span></code></pre></div>
+<p>A simple test:</p>
+<ul>
+<li>we input a package name</li>
+<li>then check that the updated package name matches our input name</li>
+</ul>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="testing-your-app.html#cb32-1"></a>new_pkg &lt;-<span class="st"> &quot;dupree&quot;</span></span>
+<span id="cb32-2"><a href="testing-your-app.html#cb32-2"></a>pkg_name_selector &lt;-<span class="st"> &quot;main_ui_1-left_ui_1-pkg_name_ui_1-package&quot;</span></span>
+<span id="cb32-3"><a href="testing-your-app.html#cb32-3"></a>js_get_pkg &lt;-<span class="st"> </span>glue<span class="op">::</span><span class="kw">glue</span>(<span class="st">&quot;$(&#39;#{pkg_name_selector}&#39;).attr(&#39;value&#39;)&quot;</span>)</span>
+<span id="cb32-4"><a href="testing-your-app.html#cb32-4"></a></span>
+<span id="cb32-5"><a href="testing-your-app.html#cb32-5"></a>test<span class="op">$</span><span class="kw">shiny_set_input</span>(pkg_name_selector, new_pkg)</span>
+<span id="cb32-6"><a href="testing-your-app.html#cb32-6"></a>test<span class="op">$</span><span class="kw">wait_for_shiny_ready</span>()</span>
+<span id="cb32-7"><a href="testing-your-app.html#cb32-7"></a></span>
+<span id="cb32-8"><a href="testing-your-app.html#cb32-8"></a><span class="co"># This (seemingly trivial) test fails:</span></span>
+<span id="cb32-9"><a href="testing-your-app.html#cb32-9"></a><span class="co"># - test$shiny_set_input doesn&#39;t change the &#39;visible&#39; input</span></span>
+<span id="cb32-10"><a href="testing-your-app.html#cb32-10"></a><span class="co"># - but, it triggers reactive changes on the server side</span></span>
+<span id="cb32-11"><a href="testing-your-app.html#cb32-11"></a><span class="kw">expect_equal</span>(</span>
+<span id="cb32-12"><a href="testing-your-app.html#cb32-12"></a>  test<span class="op">$</span><span class="kw">call_js</span>(js_get_pkg)[[<span class="st">&quot;result&quot;</span>]][[<span class="st">&quot;value&quot;</span>]],</span>
+<span id="cb32-13"><a href="testing-your-app.html#cb32-13"></a>  <span class="dt">expected =</span> new_pkg</span>
+<span id="cb32-14"><a href="testing-your-app.html#cb32-14"></a>)</span></code></pre></div>
+<p>That test failed (<code>test$set_shiny_input</code> sets the inputs that are passed to the server).
+We can use javascript / jquery syntax to set the UI-attached values.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="testing-your-app.html#cb33-1"></a>new_pkg &lt;-<span class="st"> &quot;dupree&quot;</span></span>
+<span id="cb33-2"><a href="testing-your-app.html#cb33-2"></a>pkg_name_selector &lt;-<span class="st"> &quot;main_ui_1-left_ui_1-pkg_name_ui_1-package&quot;</span></span>
+<span id="cb33-3"><a href="testing-your-app.html#cb33-3"></a>js_get_pkg &lt;-<span class="st"> </span>glue<span class="op">::</span><span class="kw">glue</span>(<span class="st">&quot;$(&#39;#{pkg_name_selector}&#39;).attr(&#39;value&#39;)&quot;</span>)</span>
+<span id="cb33-4"><a href="testing-your-app.html#cb33-4"></a>js_set_pkg &lt;-<span class="st"> </span>glue<span class="op">::</span><span class="kw">glue</span>(<span class="st">&quot;$(&#39;#{pkg_name_selector}&#39;).attr(&#39;value&#39;, &#39;{new_pkg}&#39;)&quot;</span>)</span>
+<span id="cb33-5"><a href="testing-your-app.html#cb33-5"></a></span>
+<span id="cb33-6"><a href="testing-your-app.html#cb33-6"></a>test<span class="op">$</span><span class="kw">call_js</span>(js_set_pkg)</span>
+<span id="cb33-7"><a href="testing-your-app.html#cb33-7"></a>test<span class="op">$</span><span class="kw">wait_for_shiny_ready</span>()</span>
+<span id="cb33-8"><a href="testing-your-app.html#cb33-8"></a></span>
+<span id="cb33-9"><a href="testing-your-app.html#cb33-9"></a><span class="kw">expect_equal</span>(</span>
+<span id="cb33-10"><a href="testing-your-app.html#cb33-10"></a>  test<span class="op">$</span><span class="kw">call_js</span>(js_get_pkg)[[<span class="st">&quot;result&quot;</span>]][[<span class="st">&quot;value&quot;</span>]],</span>
+<span id="cb33-11"><a href="testing-your-app.html#cb33-11"></a>  <span class="dt">expected =</span> new_pkg</span>
+<span id="cb33-12"><a href="testing-your-app.html#cb33-12"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="testing-your-app.html#cb34-1"></a>test<span class="op">$</span><span class="kw">stop</span>()</span></code></pre></div>
+<p>Available methods:</p>
+<ul>
+<li>call_js()</li>
+<li>shiny_set_input()</li>
+<li>wait_for()</li>
+<li>click_on_id</li>
+</ul>
+</div>
+<div id="gremlin" class="section level4">
+<h4><span class="header-section-number">11.3.3.3</span> gremlin</h4>
+</div>
+<div id="shinytest" class="section level4">
+<h4><span class="header-section-number">11.3.3.4</span> {shinytest}</h4>
+<p>Similar to {puppeteer}-based tests</p>
+<p>Uses snapshots (browser images) to compare before/after source code changes</p>
+<p>[Interactive]</p>
+<ul>
+<li>open hexmake repo</li>
+</ul>
 </div>
 </div>
-<!-- </div> -->
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="develop-with-the-kiss-principle.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="structuring-your-project.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tools-and-resources.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="further-sections.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -390,7 +587,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-epgs/edit/main/02-Planning_Ahead.Rmd",
+"link": "https://github.com/r4ds/bookclub-epgs/edit/main/11-Build_Yourself_a_Safety_Net.Rmd",
 "text": "Edit"
 },
 "history": {

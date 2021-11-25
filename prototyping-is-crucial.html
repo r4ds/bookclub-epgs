@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.3 Working as a team: Tools and structure | Engineering Production-Grade Shiny Apps Book Club</title>
+  <title>9.3 Prototyping is crucial | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.3 Working as a team: Tools and structure | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta property="og:title" content="9.3 Prototyping is crucial | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.3 Working as a team: Tools and structure | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta name="twitter:title" content="9.3 Prototyping is crucial | Engineering Production-Grade Shiny Apps Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="develop-with-the-kiss-principle.html"/>
-<link rel="next" href="structuring-your-project.html"/>
+<link rel="prev" href="tools.html"/>
+<link rel="next" href="prototyping-shiny.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -303,63 +303,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="working-as-a-team-tools-and-structure" class="section level2">
-<h2><span class="header-section-number">2.3</span> Working as a team: Tools and structure</h2>
+<div id="prototyping-is-crucial" class="section level2">
+<h2><span class="header-section-number">9.3</span> Prototyping is crucial</h2>
+<div id="prototype-then-polish" class="section level3">
+<h3><span class="header-section-number">9.3.1</span> Prototype, then polish</h3>
 <ul>
-<li>The choice of tools and how the team is structured is crucial for a successful application.
+<li><p>Make things work before working on low-level optimization</p>
 <ul>
-<li>Not entirely like <em>KISS</em>, but close too it. GitHub versus GitLab. Barebones hardware or Containerization.</li>
+<li>This makes the engineering process easier</li>
 </ul></li>
-</ul>
-<div id="from-the-tools-point-of-view" class="section level3">
-<h3><span class="header-section-number">2.3.1</span> From the tools point of view</h3>
-<ol style="list-style-type: decimal">
-<li>Version control and test all things</li>
-</ol>
-<ul>
-<li>Use Constant Innovation (CI) principles to test all code before committing</li>
-<li>Breaking things is a natural process of software engineering, notably when working on a piece of code during a long period</li>
-<li>Be informed that the codebase is broken</li>
-<li>Be able to identify changes between versions, and potentially, get back in time to a previous codebase
-<ul>
-<li>Github/GitLab diff-docs. Example: Branch -&gt; Change -&gt; Test -&gt; Commit -&gt; Pull Request -&gt; Merge</li>
-</ul></li>
-</ul>
-<ol start="2" style="list-style-type: decimal">
-<li>Small is beautiful</li>
-</ol>
-<ul>
-<li>Smaller more managable pieces make it easier to develop</li>
-<li>Teams may even work in parallel (with caution)</li>
-<li>A large codebase implies that the safe way to work is to split the app into pieces</li>
-<li>Extract your core “non-reactive” functions, which we will also call the “business logic”, and include them in external files
-<ul>
-<li>Non-vital linkages (data ingestion pipelines)</li>
-<li>Page Layout and theming (CSS or branding characteristics)</li>
-<li>Allows for expansion but won’t break the core</li>
-</ul></li>
+<li><p>Abstraction is hard, and makes the codebase harder to work with</p></li>
+<li><p>It’s hard to identify bottlenecks up front</p></li>
+<li><p>It’s easier to spot mistakes when you have something that can run</p></li>
 </ul>
 </div>
-<div id="from-the-team-point-of-view" class="section level3">
-<h3><span class="header-section-number">2.3.2</span> From the team point of view</h3>
+<div id="the-ui-first-approach" class="section level3">
+<h3><span class="header-section-number">9.3.2</span> The “UI first” approach</h3>
 <ul>
-<li>Select a Manager, maybe a stakeholder or project manager. Someone who may or may not work on the codebase but is aware and knowledgeable</li>
-<li>Select one or more core developers skilled but specific in their field of study</li>
-<li>Follow <em>git workflow</em> with issue tracking and managing pull requests</li>
+<li><p>helps when clarifying:</p>
+<ul>
+<li><p>what the app is supposed to do</p></li>
+<li><p>how the app is to work</p></li>
+<li><p>what each team-member is to work on</p></li>
+</ul></li>
+<li><p>use “the least possible computation”</p></li>
+<li><p>focus on appearance and interactions</p></li>
 </ul>
-<p>## Reference
-<a href="https://www.oreilly.com/library/view/refactoring-at-scale/9781492075523/">Lemaire, Maude. 2020. Refactoring at Scale. Henry Holt.</a> <strong>NOTE: Payed Service</strong></p>
-
 </div>
 </div>
-<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="develop-with-the-kiss-principle.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="structuring-your-project.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tools.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="prototyping-shiny.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -390,7 +368,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-epgs/edit/main/02-Planning_Ahead.Rmd",
+"link": "https://github.com/r4ds/bookclub-epgs/edit/main/09-Building_an_ipsum_app.Rmd",
 "text": "Edit"
 },
 "history": {
