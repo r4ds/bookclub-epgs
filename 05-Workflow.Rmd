@@ -1,7 +1,1 @@
----
-title: "05-Golem-Workflow"
-author: "Russ Hyde"
-output: html_document
----
-
 # The Workflow

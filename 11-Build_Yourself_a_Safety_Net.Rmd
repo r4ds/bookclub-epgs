@@ -44,7 +44,7 @@ Standard package development tools are available to you
 
 - devtools
 
-```{r}
+```{r 11-01}
 library(testthat)
 
 meaning_of_life <- function() 42
@@ -60,7 +60,7 @@ describe("The meaning of life", {
 
 For testing reactive updates to server-side values
 
-```{r}
+```{r 11-02}
 library(shiny)
 
 # Given the following module
@@ -215,7 +215,7 @@ Why the strange names?
 remotes::install_github("ColinFay/crrry")
 ```
 
-```{r}
+```r
 # Creating a new test instance
 test <- crrry::CrrryOnPage$new(
   # Using the `find_chrome()` function to guess where the 
@@ -232,7 +232,7 @@ test <- crrry::CrrryOnPage$new(
 )
 ```
 
-```{r}
+```r
 # We'll wait for the application to be ready to accept inputs
 test$wait_for_shiny_ready()
 ```
@@ -242,7 +242,7 @@ A simple test:
 - we input a package name
 - then check that the updated package name matches our input name
 
-```{r}
+```r
 new_pkg <- "dupree"
 pkg_name_selector <- "main_ui_1-left_ui_1-pkg_name_ui_1-package"
 js_get_pkg <- glue::glue("$('#{pkg_name_selector}').attr('value')")
@@ -262,7 +262,7 @@ expect_equal(
 That test failed (`test$set_shiny_input` sets the inputs that are passed to the server).
 We can use javascript / jquery syntax to set the UI-attached values.
 
-```{r}
+```r
 new_pkg <- "dupree"
 pkg_name_selector <- "main_ui_1-left_ui_1-pkg_name_ui_1-package"
 js_get_pkg <- glue::glue("$('#{pkg_name_selector}').attr('value')")
@@ -277,7 +277,7 @@ expect_equal(
 )
 ```
 
-```{r}
+```r
 test$stop()
 ```
 
