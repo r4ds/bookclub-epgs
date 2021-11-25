@@ -21,8 +21,7 @@ Imports:
     testthat,
     shiny,
     tidyverse,
-    usethis,
-    xfun
+    usethis
 Remotes:  
     hadley/emo,
     JohnCoene/nter
