@@ -47,9 +47,10 @@ If you would like to present, please add your name next to a chapter using the [
 
 ### Section VII: Optimise
 
-- 2021-11-24: Ch14: The need for optimization: Presenter TBD
-- 2021-12-01: Ch15+16: Optimising shiny: Presenter TBD
-- 2021-12-08: Ch17+18 Front end shenanigans: Presenter TBD
+- 2021-11-24: Ch14: The need for optimization: Russ Hyde
+- 2021-12-01: Ch15: Optimizing {shiny} first part: Federica Gazzelloni 
+- 2021-12-08: Ch16: Optimizing {shiny} second part: Presenter TBD
+- 2021-12-15: Ch17+18 Front end shenanigans: Presenter TBD
 
 ### Wrap-Up
 
