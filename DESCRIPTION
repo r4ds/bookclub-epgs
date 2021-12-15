@@ -20,12 +20,15 @@ Imports:
     knitr,
     matlab,
     nter,
+    pagedown,
     R6,
     shiny,
     stringi,
+    testthat,
     tidyverse,
     usethis,
     whereami
 Remotes: 
+=======
     hadley/emo,
     JohnCoene/nter
