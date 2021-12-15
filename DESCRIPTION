@@ -10,7 +10,7 @@ Depends:
 Imports: 
     attempt,
     bookdown,
-    cli
+    cli,
     details,
     DiagrammeR,
     emo,

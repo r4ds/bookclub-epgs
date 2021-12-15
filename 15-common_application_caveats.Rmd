@@ -2,13 +2,13 @@
 
 **Learning Objectives**
 
-- What to be optimized
-- Compare app versions
-- Read data
+- Decide what should be optimized.
+- Compare app versions to optimize an app.
+- Read data into your Shiny application.
 
 ## Introduction
 
-This chapter focuses on how to optimizing common applications when using Shiny.
+This chapter focuses on how to optimize common applications when using Shiny.
 
 Several versions of the same app are compared to achieve shorter and more understandable structures as well as more stable renderings.
 
@@ -19,7 +19,7 @@ Several versions of the same app are compared to achieve shorter and more unders
 
 > A invalidates B which invalidates C which invalidates A which invalidates B which invalidates C, and so on...
 
-```{r reactivity,echo=FALSE, fig.align='center', fig.cap='[Reactivity an overview](https://shiny.rstudio.com/articles/reactivity-overview.html)', out.width='80%'}
+```{r 15-reactivity,echo=FALSE, fig.align='center', fig.cap='[Reactivity an overview](https://shiny.rstudio.com/articles/reactivity-overview.html)', out.width='80%'}
 knitr::include_graphics("images/15-reactivity.png")
 ```
 
@@ -49,7 +49,7 @@ Looking at the steps taken for building this first example app, we see that chan
 
 In this example we use `obeserve()`: (cac_3)
 
-```{r recursive,echo=FALSE, fig.align='center', fig.cap='Recursivity', out.width='80%'}
+```{r 15-recursive,echo=FALSE, fig.align='center', fig.cap='Recursivity', out.width='80%'}
 knitr::include_graphics("images/15-recursive.png")
 ```
 
@@ -62,7 +62,7 @@ How many potential invalidation points we have here?
 
 It is safer to go with `observeEvent()`, as it allows you to see at a glance the condition under which the content is invalidated and re-evaluated.
 
-```{r observe,echo=FALSE, fig.align='center', fig.cap='Recursivity', out.width='80%'}
+```{r 15-observe,echo=FALSE, fig.align='center', fig.cap='Recursivity', out.width='80%'}
 knitr::include_graphics("images/15-obs_obsev.png")
 ```
 
@@ -115,7 +115,7 @@ R6 is an encapsulated object-oriented programming (OOP) framework, a programming
 
  (cac_5)
  
-```{r MyData}
+```{r 15-MyData}
 MyData <- R6::R6Class(
   "MyData", 
   # Defining our public methods, that will be 
@@ -133,12 +133,12 @@ MyData <- R6::R6Class(
 ```
 
 
-```{r}
+```{r 15-testthat}
 library(testthat, warn.conflicts = FALSE)
 ```
 
 
-```{r}
+```{r 15-testing}
 test_that("R6 Class works", {
   # We define a new instance of this class, that will contain 
   # the mtcars data.frame
@@ -177,7 +177,7 @@ There are several packages in R that provide useful functions for **logging**, h
 
 [{whereami}](https://rdrr.io/pkg/whereami/man/whereami.html) return where the script is run from
 
-```{r whereami,echo=FALSE, fig.align='center', fig.cap='{whereami} package', fig.alt="{whereami}",out.width='30%'}
+```{r 15-whereami,echo=FALSE, fig.align='center', fig.cap='{whereami} package', fig.alt="{whereami}",out.width='30%'}
 knitr::include_graphics("images/15-whereami_small.png")
 ```
 
@@ -187,7 +187,7 @@ knitr::include_graphics("images/15-whereami_small.png")
    
 
 For example, `whereami()` function let's you locate the name of the file you are working on:
-```{r}
+```{r 15-library-whereami}
 library(whereami)
 whereami::whereami()
 ```
@@ -200,12 +200,12 @@ Then, as classical procedure, with the use of the `base::cat()` function within 
 If it is added to the `app_server()`, it will print the location of the function call to the logs.      
 
 The combination with `cat_where()` will implement a reactive logging to the console while developing or debugging an app.
-```{r eval=FALSE, message=FALSE, warning=FALSE, include=T, paged.print=FALSE}
+```{r 15-cat_where, eval=FALSE, message=FALSE, warning=FALSE, include=T, paged.print=FALSE}
 whereami::cat_where( whereami::whereami() )
 ```
 
 
-```{r cat_where, eval=FALSE, include=T}
+```{r 15-cat_where2, eval=FALSE, include=T}
 cat_where(where, 
           type = c("rule", "boxx", "bullet", "line", "print"),
           color = "some_colors", 
@@ -214,19 +214,19 @@ cat_where(where,
 
 Another feature is to get a list of all the *counters*: the numbers of time each of the located *cat* functions have been called and plot the statistics of the usage.
 
-```{r cat_where_counter_plot, eval=FALSE, include=T}
+```{r 15-cat_where_counter_plot, eval=FALSE, include=T}
 whereami::counter_get()
 plot(whereami::counter_get())
 ```
       
-```{r counterplot,echo=FALSE, fig.align='center', fig.cap='{whereami} package', fig.alt="plot of whereami counters",out.width='80%'}
+```{r 15-counterplot,echo=FALSE, fig.align='center', fig.cap='{whereami} package', fig.alt="plot of whereami counters",out.width='80%'}
 knitr::include_graphics("images/15-counter_plot.png")
 ```     
       
       
 **As an example:**
 
-```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r 15-another-plot, message=FALSE, warning=FALSE, paged.print=FALSE}
 library(whereami)
 require(ggplot2)
 ggplot(iris) + 
@@ -303,7 +303,7 @@ Example of an app that uses on an external database is `{databasedemo}`, availab
 
 ### Data-source checklist
 
-```{r sources,echo=FALSE, fig.align='center', fig.cap='Data-source checklist', out.width='80%'}
+```{r 15-sources,echo=FALSE, fig.align='center', fig.cap='Data-source checklist', out.width='80%'}
 knitr::include_graphics("images/15-sources.png")
 ```
 
