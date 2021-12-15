@@ -10,18 +10,24 @@ Depends:
 Imports: 
     attempt,
     bookdown,
+    cli,
     details,
     DiagrammeR,
     emo,
+    gargoyle,
+    ggplot2,
     golem,
     knitr,
     matlab,
     nter,
     pagedown,
-    testthat,
+    R6,
     shiny,
+    stringi,
+    testthat,
     tidyverse,
-    usethis
-Remotes:  
+    usethis,
+    whereami
+Remotes: 
     hadley/emo,
     JohnCoene/nter
