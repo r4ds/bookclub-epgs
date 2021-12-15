@@ -29,6 +29,5 @@ Imports:
     usethis,
     whereami
 Remotes: 
-=======
     hadley/emo,
     JohnCoene/nter
