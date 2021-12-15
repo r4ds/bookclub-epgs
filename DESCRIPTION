@@ -10,16 +10,22 @@ Depends:
 Imports: 
     attempt,
     bookdown,
+    cli
     details,
     DiagrammeR,
     emo,
+    gargoyle,
+    ggplot2,
     golem,
     knitr,
     matlab,
     nter,
+    R6,
     shiny,
+    stringi,
     tidyverse,
-    usethis
+    usethis,
+    whereami
 Remotes: 
     hadley/emo,
     JohnCoene/nter
