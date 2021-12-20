@@ -1,0 +1,43 @@
+# Optimizing {shiny} code
+
+**Learning Objectives**
+
+- Major routes for optimising R/shiny code
+
+- Cacheing
+
+- Asynchronous code
+
+## Resources
+
+- Efficient R programming [https://csgillespie.github.io/efficientR/]()
+
+- Advanced R [https://adv-r.hadley.nz/perf-improve.html]()
+
+- Mastering Shiny [https://mastering-shiny.org/performance.html]()
+
+## Caching Elements
+
+### What is Caching
+
+### Native caching in R
+
+### Caching in {shiny}
+
+## Asynchronous in {shiny}
+
+### How to
+
+## Meeting Videos
+
+### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+CHAT LOG HERE
+```
+</details>
