@@ -63,7 +63,7 @@ Example: compare C++ code for computing mean with R code for the same
 ```r
 library(profvis)
 top <- function(){
-  # We use profvis::pause() because Sys.sleep() doesn't 
+  # We use profvis::pause() because Sys.sleep() doesn't
   # show in the flame graph
   pause(0.1)
   # Running a series of function with lapply()
@@ -82,7 +82,7 @@ middle <- function(){
   bottom_b()
 }
 
-# Both will pause and print, _a for 0.5 seconds, 
+# Both will pause and print, _a for 0.5 seconds,
 # _b for 2 seconds
 bottom_a <- function(){
   pause(0.5)
@@ -119,7 +119,7 @@ Recommend
 
 ```r
 # Multiplying each element of a vector going from 1 to size
-# with a for loop 
+# with a for loop
 for_loop <- function(size){
   res <- numeric(size)
   for (i in 1:size){
@@ -132,8 +132,8 @@ vectorized <- function(size){
   (1:size) * 10
 }
 res <- bench::mark(
-  for_loop = for_loop(1000), 
-  vectorized = vectorized(1000), 
+  for_loop = for_loop(1000),
+  vectorized = vectorized(1000),
   iterations = 1000
 )
 ```
@@ -146,7 +146,7 @@ Can use `profvis(print(run_app()))`
 
 #### Shiny front-end
 
-TODO: https://engineering-shiny.org/need-for-optimization.html#b.-shiny-front-end
+See: [https://engineering-shiny.org/need-for-optimization.html#b.-shiny-front-end]()
 
 ### Profiling web pages
 
