@@ -161,3 +161,9 @@ See: [https://engineering-shiny.org/need-for-optimization.html#b.-shiny-front-en
 - "Mastering Shiny :: Performance" [https://mastering-shiny.org/performance.html]()
 
 - ["Shiny in Production" talk (Joe Cheng)](https://rstudio.com/resources/rstudioconf-2019/shiny-in-production-principles-practices-and-tools/)
+
+## Meeting Videos
+
+### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/p5IXw-AlBK4")`
