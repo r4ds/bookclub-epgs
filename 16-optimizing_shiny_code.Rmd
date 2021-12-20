@@ -16,15 +16,232 @@
 
 - Mastering Shiny [https://mastering-shiny.org/performance.html]()
 
+- RStudio caching blogposts:
+  - [https://shiny.rstudio.com/articles/plot-caching.html]() - the old way
+  - [https://shiny.rstudio.com/articles/caching.html]() - the new way
+
+Packages
+
+- {R.cache} [https://github.com/HenrikBengtsson/R.cache]()
+
+- {memoise} [https://github.com/r-lib/memoise]()
+
 ## Caching Elements
 
 ### What is Caching
 
+- Store resource-intensive results
+
+- So they can be reused without recomputation
+
+- Downside: you can't cache 'em all
+
+Only cache if the thing:
+
+- would be identical each time it is made (for a given input)
+
+Good things to cache:
+
+- Plots
+
+- Database queries
+
 ### Native caching in R
+
+{R.cache} and {memoise} work in a similar way:
+
+- Wrap a function with a higher-order function (`new_func <- memoise::memoise(initial_func)`)
+
+- Call the new function with some arguments (`new_func(x = 1, y = 2)`)
+  - it does the expensive computation
+  - then stores the result
+
+- Call the new function again
+  - if you've used the args before, it will return immediately with the stored result
+
+- The arguments are converted to a look-up key
+
+```{r memoise_your_first_fn, eval = FALSE}
+library(memoise)
+
+# tic/toc are used for timing
+library(tictoc)
+
+sleep_and_return_time <- function(seconds = 1) {
+  Sys.sleep(seconds)
+  return(Sys.time())
+}
+
+msleep_and_return_time <- memoise(sleep_and_return_time)
+
+# first call is sloooooooow
+tic()
+msleep_and_return_time(10)
+toc()
+
+# second call is fast
+tic()
+msleep_and_return_time(10)
+toc()
+```
+
+But .... why is `sleep_and_return_time` a bad example for a cacheable function?
+
+The book has a more reproducible example using database queries (there's a db-in-shiny example
+below, so we don't cover this example)
+
+{memoise} stores the cache on disk, you can set where on the file-system it is stored
 
 ### Caching in {shiny}
 
+An app:
+
+```r
+library(shiny)
+
+ui <- function(){
+  tagList(
+    # The user can select one of the cut from ggplot2::diamonds,
+    # {shiny} will then query the SQL database to retrieve the
+    # first rows of the result
+    selectInput("cut", "cut", unique(ggplot2::diamonds$cut)),
+    tableOutput("tbl")
+  )
+}
+
+srv_builder <- function(con) {
+  server <- function(
+    input,
+    output,
+    session
+  ){
+    # Rendering the table of the SQL call
+    output$tbl <- renderTable({
+      # Using a memoised function allows to prevent from 
+      # calling the SQL database every time the user inputs
+      # a change
+      memoised_fct_sql(input$cut, con)
+    })
+  }
+
+  server
+}
+
+# We create an in-memory database using SQLite
+con <- DBI::dbConnect(
+  RSQLite::SQLite(),
+  dbname = ":memory:"
+)
+
+# Writing a large dataset to the db
+DBI::dbWriteTable(
+  con,
+  "diams",
+  # This table will have 539400 rows
+  dplyr::bind_rows(
+    purrr::rerun(10, ggplot2::diamonds)
+  )
+)
+
+shinyApp(ui, server = srv_builder(con))
+```
+
+What haven't we defined here?
+
+```r
+library(memoise)
+
+fct_sql <- function(cut, con){
+  # NEVER EVER SPRINTF AN SQL CODE LIKE THAT
+  # IT'S SENSITIVE TO SQL INJECTIONS, WE'RE
+  # DOING IT FOR THE EXAMPLE
+  cli::cat_rule("Calling the SQL db")
+  results <- DBI::dbGetQuery(
+    con, sprintf(
+      "SELECT * FROM diams WHERE cut = '%s'",
+      cut
+    )
+  )
+  head(results)
+}
+
+# Using a local cache
+cache_dir <- cache_filesystem("cache")
+memoised_fct_sql <- memoise(fct_sql, cache = cache_dir)
+```
+
+App workflow:
+
+- Start the app
+- set input$cut to a new value
+- time how long it takes to render the new table
+- set input$cut to an unused value
+- note that it takes the same length of time
+- set input$cut to the first selected value
+- note that it is way faster than the original call
+
+{shiny} already has caching functionality:
+
+- `shiny::bindCache()`
+- [older] `shiny::renderCachedPlot()`
+
+Note from the RStudio shiny [blog](https://shiny.rstudio.com/articles/plot-caching.html):
+
+"""As of Shiny 1.6.0, we recommend using renderPlot() with bindCache() instead"""
+
+Example shiny app
+
+- taken from the book
+- but rewritten to use `renderPlot() %>% bindCache()` rather than `renderCachedPlot()`
+
+```{r shiny_cacheing, eval = FALSE}
+library(shiny)
+
+ui <- function() {
+  tagList(
+    # We select a data.frame to plot
+    selectInput(
+      "tbl",
+      "Table",
+      c("iris", "mtcars", "airquality")
+    ),
+    # This plotOutput will be cached
+    plotOutput("plot")
+  )
+}
+
+server <- function(
+  input,
+  output,
+  session
+) {
+  # The cache mechanism is made available by 'bindCache'
+  output$plot <- renderPlot({
+    # Plotting the selected data.frame
+    plot(get(input$tbl))
+  }) %>%
+    bindCache(
+    # List here all the reactive expression that will
+    # be used as cache key when running the app,
+    # you will see that the first time you plot one
+    # graph, it takes a couple of seconds,
+    # but the second time, it's almost
+    # instantaneous
+    input$tbl
+  )
+}
+
+shinyApp(ui, server)
+```
+
+Notes:
+
+- you can also cache on remote storage (e.g., S3)
+- you only have limited space - old cached values will be dropped
+
 ## Asynchronous in {shiny}
+
+R is single threaded but the world isn't
 
 ### How to
 
@@ -36,7 +253,7 @@
 
 <details>
   <summary> Meeting chat log </summary>
-  
+
 ```
 CHAT LOG HERE
 ```
