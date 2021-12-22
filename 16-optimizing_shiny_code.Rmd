@@ -26,6 +26,10 @@ Packages
 
 - {memoise} [https://github.com/r-lib/memoise]()
 
+- {future} [https://github.com/HenrikBengtsson/future]()
+
+- {promises} [https://rstudio.github.io/promises]()
+
 ## Caching Elements
 
 ### What is Caching
@@ -117,7 +121,7 @@ srv_builder <- function(con) {
   ){
     # Rendering the table of the SQL call
     output$tbl <- renderTable({
-      # Using a memoised function allows to prevent from 
+      # Using a memoised function allows to prevent from
       # calling the SQL database every time the user inputs
       # a change
       memoised_fct_sql(input$cut, con)
@@ -243,7 +247,103 @@ Notes:
 
 R is single threaded but the world isn't
 
-### How to
+- B and C depend on A
+- D depends on B and C
+
+Synchronous code:
+
+- either A -> B -> C -> D
+- or A -> C -> B -> D
+
+If B runs on another computer and takes a long time
+
+```
+Synchronous version:
+
+A -> start-B             retrieve-B -> C -> D
+            \           /     (My-server)
+             \         /      ---------------
+              - run-B -       (Remote-server)
+```
+
+```
+Asynchronous version:
+
+A -> start-B -> C -> retrieve-B -> D
+       \              /    (My-server)
+        \            /     ---------------
+         - run B ----      (Remote-server)
+```
+
+Packages:
+
+- {future}: send computation elsewhere
+- {promises}: objects for handling async computation
+
+### Asynchronously ease cross-session issues
+
+- One R/shiny session
+- Multiple users
+- A few, specific, long-running operations
+
+"Promise" = A stand-in for the eventual result of an operation
+  - [https://rstudio.github.io/promises/articles/intro.html]()
+  - `%...>%`
+    - Promise-compatible pipe
+    - What happens on success
+  - `%...!%`
+    - What happens on failure
+
+```r
+library(shiny)
+library(future)
+library(promises)
+plan(multisession)
+
+ui <- function(){
+  tagList(
+    # This will receive the output of the future
+    verbatimTextOutput("rnorm")
+  )
+}
+
+server <- function(
+  input,
+  output,
+  session
+){
+  output$rnorm <- renderPrint({
+    # Sending the rnorm to be run in another session
+    future({
+      Sys.sleep(20)
+      return(rnorm(5))
+    }) %...>%
+      print(.) %...!%
+      stop(.)
+  })
+}
+
+s <- shinyApp(ui, server)
+```
+
+```r
+runApp(s, launch.browser = FALSE)
+```
+
+Plan:
+
+- run the above
+- launch the app in two separate browser windows (X and Y)
+- wait 20 seconds
+- If one session blocked the other:
+  - X results would show at ~ 20secs
+  - Y results at ~ 40secs
+- If there is no cross-session blocking
+  - Both X and Y results would show at ~ 20secs
+
+### Asynchronously ease within-session issues
+
+(TODO)
 
 ## Meeting Videos
 
