@@ -343,7 +343,62 @@ Plan:
 
 ### Asynchronously ease within-session issues
 
-(TODO)
+Compare this (which blocks):
+
+```r
+...
+output$rnorm <- renderPrint({
+  # Sending the rnorm to be run in another session
+  # At this point, {shiny} is waiting for the future
+  # to be solved before doing anything else
+  future({
+    Sys.sleep(3)
+    return(rnorm(5))
+  }) %...>%
+    print(.) %...!%
+    stop(.)
+  })
+...
+```
+
+with this (which doesn't block):
+
+```r
+rv <- reactiveValues(
+    output = NULL
+  )
+
+future({
+  Sys.sleep(5)
+  rnorm(5)
+}) %...>%
+  # When the future is resolved, we assign the
+  # output to rv$output
+  (function(result){
+    rv$output <- result
+  }) %...!%
+  # If ever the future outputs an error, we switch
+  # back to NULL for rv$output, and throw a warning
+  # with the error
+  (function(error){
+    rv$output <- NULL
+    warning(error)
+  })
+
+# output$rnorm will be printed whenever rv$output
+# is available (i.e. after around 5 seconds)
+output$rnorm <- renderPrint({
+  req(rv$output)
+})
+```
+
+### Common Pitfalls
+
+The first future sent needn't be the first to return
+
+- bookkeeping: check whether the future that returns is the one you need
+  - do you need the final future? (use an identifier)
+  - do you need the futures in sequence? (use a queue)
 
 ## Meeting Videos
 
