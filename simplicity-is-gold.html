@@ -329,6 +329,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.7.1" data-path="conclusions-1.html"><a href="conclusions-1.html#resources-3"><i class="fa fa-check"></i><b>15.7.1</b> Resources</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="16" data-path="optimizing-shiny-code.html"><a href="optimizing-shiny-code.html"><i class="fa fa-check"></i><b>16</b> Optimizing {shiny} code</a><ul>
+<li class="chapter" data-level="16.1" data-path="resources-4.html"><a href="resources-4.html"><i class="fa fa-check"></i><b>16.1</b> Resources</a></li>
+<li class="chapter" data-level="16.2" data-path="caching-elements.html"><a href="caching-elements.html"><i class="fa fa-check"></i><b>16.2</b> Caching Elements</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="caching-elements.html"><a href="caching-elements.html#what-is-caching"><i class="fa fa-check"></i><b>16.2.1</b> What is Caching</a></li>
+<li class="chapter" data-level="16.2.2" data-path="caching-elements.html"><a href="caching-elements.html#native-caching-in-r"><i class="fa fa-check"></i><b>16.2.2</b> Native caching in R</a></li>
+<li class="chapter" data-level="16.2.3" data-path="caching-elements.html"><a href="caching-elements.html#caching-in-shiny"><i class="fa fa-check"></i><b>16.2.3</b> Caching in {shiny}</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="asynchronous-in-shiny.html"><a href="asynchronous-in-shiny.html"><i class="fa fa-check"></i><b>16.3</b> Asynchronous in {shiny}</a><ul>
+<li class="chapter" data-level="16.3.1" data-path="asynchronous-in-shiny.html"><a href="asynchronous-in-shiny.html#asynchronously-ease-cross-session-issues"><i class="fa fa-check"></i><b>16.3.1</b> Asynchronously ease cross-session issues</a></li>
+<li class="chapter" data-level="16.3.2" data-path="asynchronous-in-shiny.html"><a href="asynchronous-in-shiny.html#asynchronously-ease-within-session-issues"><i class="fa fa-check"></i><b>16.3.2</b> Asynchronously ease within-session issues</a></li>
+<li class="chapter" data-level="16.3.3" data-path="asynchronous-in-shiny.html"><a href="asynchronous-in-shiny.html#common-pitfalls"><i class="fa fa-check"></i><b>16.3.3</b> Common Pitfalls</a></li>
+</ul></li>
+<li class="chapter" data-level="16.4" data-path="meeting-videos-3.html"><a href="meeting-videos-3.html"><i class="fa fa-check"></i><b>16.4</b> Meeting Videos</a><ul>
+<li class="chapter" data-level="16.4.1" data-path="meeting-videos-3.html"><a href="meeting-videos-3.html#cohort-1-3"><i class="fa fa-check"></i><b>16.4.1</b> Cohort 1</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -368,8 +384,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Don’t fight against the app but enjoy it (for <strong>fun</strong>)</p>
 </blockquote>
 <div class="figure"><span style="display:block;" id="fig:yesno"></span>
-<div id="htmlwidget-f91f842cc8eab9053be0" style="width:100%;height:100%;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f91f842cc8eab9053be0">{"x":{"diagram":"\ngraph LR\nA((YES))-. Yes and No of your app .-B((NO))\n  \n  style A fill:#f9f\n  style B fill:#bbf\n  \n "},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-ae06d575110021240949" style="width:100%;height:100%;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ae06d575110021240949">{"x":{"diagram":"\ngraph LR\nA((YES))-. Yes and No of your app .-B((NO))\n  \n  style A fill:#f9f\n  style B fill:#bbf\n  \n "},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 6.2: Yes and No of your app
 </p>
@@ -397,8 +413,8 @@ Figure 6.2: Yes and No of your app
 <p>The user of your app doesn’t read everything, but will be searching for <strong>“How to”?</strong></p>
 </blockquote>
 <div class="figure"><span style="display:block;" id="fig:howto"></span>
-<div id="htmlwidget-5263272402a8864fb7b4" style="width:100%;height:100%;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5263272402a8864fb7b4">{"x":{"diagram":"\ngraph LR\nA((scan))-->B>satisfice - satisfy and suffice]\n  \n  style A fill:#bbf\n  style B fill:#f96, stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5\n  \n  #style P fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5\n\n "},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-29a88beb94c75ad99cbc" style="width:100%;height:100%;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-29a88beb94c75ad99cbc">{"x":{"diagram":"\ngraph LR\nA((scan))-->B>satisfice - satisfy and suffice]\n  \n  style A fill:#bbf\n  style B fill:#f96, stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5\n  \n  #style P fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5\n\n "},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 6.3: <strong>“How to”?</strong>
 </p>

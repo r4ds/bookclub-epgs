@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>11.4 Further sections | Engineering Production-Grade Shiny Apps Book Club</title>
+  <title>16.3 Asynchronous in {shiny} | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="11.4 Further sections | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta property="og:title" content="16.3 Asynchronous in {shiny} | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="11.4 Further sections | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta name="twitter:title" content="16.3 Asynchronous in {shiny} | Engineering Production-Grade Shiny Apps Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="testing-your-app.html"/>
-<link rel="next" href="version-control.html"/>
+<link rel="prev" href="caching-elements.html"/>
+<link rel="next" href="meeting-videos-3.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -365,24 +365,159 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="further-sections" class="section level2">
-<h2><span class="header-section-number">11.4</span> Further sections</h2>
-<p>Did not present on:</p>
+<div id="asynchronous-in-shiny" class="section level2">
+<h2><span class="header-section-number">16.3</span> Asynchronous in {shiny}</h2>
+<p>R is single threaded but the world isn’t</p>
 <ul>
-<li><p>Testing the app load</p></li>
-<li><p>A reproducible environment and {renv}</p></li>
-<li><p>Docker</p></li>
+<li>B and C depend on A</li>
+<li>D depends on B and C</li>
 </ul>
+<p>Synchronous code:</p>
+<ul>
+<li>either A -&gt; B -&gt; C -&gt; D</li>
+<li>or A -&gt; C -&gt; B -&gt; D</li>
+</ul>
+<p>If B runs on another computer and takes a long time</p>
+<pre><code>Synchronous version:
 
+A -&gt; start-B             retrieve-B -&gt; C -&gt; D
+            \           /     (My-server)
+             \         /      ---------------
+              - run-B -       (Remote-server)</code></pre>
+<pre><code>Asynchronous version:
+
+A -&gt; start-B -&gt; C -&gt; retrieve-B -&gt; D
+       \              /    (My-server)
+        \            /     ---------------
+         - run B ----      (Remote-server)</code></pre>
+<p>Packages:</p>
+<ul>
+<li>{future}: send computation elsewhere</li>
+<li>{promises}: objects for handling async computation</li>
+</ul>
+<div id="asynchronously-ease-cross-session-issues" class="section level3">
+<h3><span class="header-section-number">16.3.1</span> Asynchronously ease cross-session issues</h3>
+<ul>
+<li>One R/shiny session</li>
+<li>Multiple users</li>
+<li>A few, specific, long-running operations</li>
+</ul>
+<p>“Promise” = A stand-in for the eventual result of an operation
+- <a href="">https://rstudio.github.io/promises/articles/intro.html</a>
+- <code>%...&gt;%</code>
+- Promise-compatible pipe
+- What happens on success
+- <code>%...!%</code>
+- What happens on failure</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="asynchronous-in-shiny.html#cb60-1"></a><span class="kw">library</span>(shiny)</span>
+<span id="cb60-2"><a href="asynchronous-in-shiny.html#cb60-2"></a><span class="kw">library</span>(future)</span>
+<span id="cb60-3"><a href="asynchronous-in-shiny.html#cb60-3"></a><span class="kw">library</span>(promises)</span>
+<span id="cb60-4"><a href="asynchronous-in-shiny.html#cb60-4"></a><span class="kw">plan</span>(multisession)</span>
+<span id="cb60-5"><a href="asynchronous-in-shiny.html#cb60-5"></a></span>
+<span id="cb60-6"><a href="asynchronous-in-shiny.html#cb60-6"></a>ui &lt;-<span class="st"> </span><span class="cf">function</span>(){</span>
+<span id="cb60-7"><a href="asynchronous-in-shiny.html#cb60-7"></a>  <span class="kw">tagList</span>(</span>
+<span id="cb60-8"><a href="asynchronous-in-shiny.html#cb60-8"></a>    <span class="co"># This will receive the output of the future</span></span>
+<span id="cb60-9"><a href="asynchronous-in-shiny.html#cb60-9"></a>    <span class="kw">verbatimTextOutput</span>(<span class="st">&quot;rnorm&quot;</span>)</span>
+<span id="cb60-10"><a href="asynchronous-in-shiny.html#cb60-10"></a>  )</span>
+<span id="cb60-11"><a href="asynchronous-in-shiny.html#cb60-11"></a>}</span>
+<span id="cb60-12"><a href="asynchronous-in-shiny.html#cb60-12"></a></span>
+<span id="cb60-13"><a href="asynchronous-in-shiny.html#cb60-13"></a>server &lt;-<span class="st"> </span><span class="cf">function</span>(</span>
+<span id="cb60-14"><a href="asynchronous-in-shiny.html#cb60-14"></a>  input,</span>
+<span id="cb60-15"><a href="asynchronous-in-shiny.html#cb60-15"></a>  output,</span>
+<span id="cb60-16"><a href="asynchronous-in-shiny.html#cb60-16"></a>  session</span>
+<span id="cb60-17"><a href="asynchronous-in-shiny.html#cb60-17"></a>){</span>
+<span id="cb60-18"><a href="asynchronous-in-shiny.html#cb60-18"></a>  output<span class="op">$</span>rnorm &lt;-<span class="st"> </span><span class="kw">renderPrint</span>({</span>
+<span id="cb60-19"><a href="asynchronous-in-shiny.html#cb60-19"></a>    <span class="co"># Sending the rnorm to be run in another session</span></span>
+<span id="cb60-20"><a href="asynchronous-in-shiny.html#cb60-20"></a>    <span class="kw">future</span>({</span>
+<span id="cb60-21"><a href="asynchronous-in-shiny.html#cb60-21"></a>      <span class="kw">Sys.sleep</span>(<span class="dv">20</span>)</span>
+<span id="cb60-22"><a href="asynchronous-in-shiny.html#cb60-22"></a>      <span class="kw">return</span>(<span class="kw">rnorm</span>(<span class="dv">5</span>))</span>
+<span id="cb60-23"><a href="asynchronous-in-shiny.html#cb60-23"></a>    }) <span class="op">%...&gt;%</span></span>
+<span id="cb60-24"><a href="asynchronous-in-shiny.html#cb60-24"></a><span class="st">      </span><span class="kw">print</span>(.) <span class="op">%...!%</span></span>
+<span id="cb60-25"><a href="asynchronous-in-shiny.html#cb60-25"></a><span class="st">      </span><span class="kw">stop</span>(.)</span>
+<span id="cb60-26"><a href="asynchronous-in-shiny.html#cb60-26"></a>  })</span>
+<span id="cb60-27"><a href="asynchronous-in-shiny.html#cb60-27"></a>}</span>
+<span id="cb60-28"><a href="asynchronous-in-shiny.html#cb60-28"></a></span>
+<span id="cb60-29"><a href="asynchronous-in-shiny.html#cb60-29"></a>s &lt;-<span class="st"> </span><span class="kw">shinyApp</span>(ui, server)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="asynchronous-in-shiny.html#cb61-1"></a><span class="kw">runApp</span>(s, <span class="dt">launch.browser =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<p>Plan:</p>
+<ul>
+<li>run the above</li>
+<li>launch the app in two separate browser windows (X and Y)</li>
+<li>wait 20 seconds</li>
+<li>If one session blocked the other:
+<ul>
+<li>X results would show at ~ 20secs</li>
+<li>Y results at ~ 40secs</li>
+</ul></li>
+<li>If there is no cross-session blocking
+<ul>
+<li>Both X and Y results would show at ~ 20secs</li>
+</ul></li>
+</ul>
 </div>
-<!-- </div> -->
+<div id="asynchronously-ease-within-session-issues" class="section level3">
+<h3><span class="header-section-number">16.3.2</span> Asynchronously ease within-session issues</h3>
+<p>Compare this (which blocks):</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="asynchronous-in-shiny.html#cb62-1"></a>...</span>
+<span id="cb62-2"><a href="asynchronous-in-shiny.html#cb62-2"></a>output<span class="op">$</span>rnorm &lt;-<span class="st"> </span><span class="kw">renderPrint</span>({</span>
+<span id="cb62-3"><a href="asynchronous-in-shiny.html#cb62-3"></a>  <span class="co"># Sending the rnorm to be run in another session</span></span>
+<span id="cb62-4"><a href="asynchronous-in-shiny.html#cb62-4"></a>  <span class="co"># At this point, {shiny} is waiting for the future</span></span>
+<span id="cb62-5"><a href="asynchronous-in-shiny.html#cb62-5"></a>  <span class="co"># to be solved before doing anything else</span></span>
+<span id="cb62-6"><a href="asynchronous-in-shiny.html#cb62-6"></a>  <span class="kw">future</span>({</span>
+<span id="cb62-7"><a href="asynchronous-in-shiny.html#cb62-7"></a>    <span class="kw">Sys.sleep</span>(<span class="dv">3</span>)</span>
+<span id="cb62-8"><a href="asynchronous-in-shiny.html#cb62-8"></a>    <span class="kw">return</span>(<span class="kw">rnorm</span>(<span class="dv">5</span>))</span>
+<span id="cb62-9"><a href="asynchronous-in-shiny.html#cb62-9"></a>  }) <span class="op">%...&gt;%</span></span>
+<span id="cb62-10"><a href="asynchronous-in-shiny.html#cb62-10"></a><span class="st">    </span><span class="kw">print</span>(.) <span class="op">%...!%</span></span>
+<span id="cb62-11"><a href="asynchronous-in-shiny.html#cb62-11"></a><span class="st">    </span><span class="kw">stop</span>(.)</span>
+<span id="cb62-12"><a href="asynchronous-in-shiny.html#cb62-12"></a>  })</span>
+<span id="cb62-13"><a href="asynchronous-in-shiny.html#cb62-13"></a>...</span></code></pre></div>
+<p>with this (which doesn’t block):</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="asynchronous-in-shiny.html#cb63-1"></a>rv &lt;-<span class="st"> </span><span class="kw">reactiveValues</span>(</span>
+<span id="cb63-2"><a href="asynchronous-in-shiny.html#cb63-2"></a>    <span class="dt">output =</span> <span class="ot">NULL</span></span>
+<span id="cb63-3"><a href="asynchronous-in-shiny.html#cb63-3"></a>  )</span>
+<span id="cb63-4"><a href="asynchronous-in-shiny.html#cb63-4"></a></span>
+<span id="cb63-5"><a href="asynchronous-in-shiny.html#cb63-5"></a><span class="kw">future</span>({</span>
+<span id="cb63-6"><a href="asynchronous-in-shiny.html#cb63-6"></a>  <span class="kw">Sys.sleep</span>(<span class="dv">5</span>)</span>
+<span id="cb63-7"><a href="asynchronous-in-shiny.html#cb63-7"></a>  <span class="kw">rnorm</span>(<span class="dv">5</span>)</span>
+<span id="cb63-8"><a href="asynchronous-in-shiny.html#cb63-8"></a>}) <span class="op">%...&gt;%</span></span>
+<span id="cb63-9"><a href="asynchronous-in-shiny.html#cb63-9"></a><span class="st">  </span><span class="co"># When the future is resolved, we assign the</span></span>
+<span id="cb63-10"><a href="asynchronous-in-shiny.html#cb63-10"></a><span class="st">  </span><span class="co"># output to rv$output</span></span>
+<span id="cb63-11"><a href="asynchronous-in-shiny.html#cb63-11"></a><span class="st">  </span>(<span class="cf">function</span>(result){</span>
+<span id="cb63-12"><a href="asynchronous-in-shiny.html#cb63-12"></a>    rv<span class="op">$</span>output &lt;-<span class="st"> </span>result</span>
+<span id="cb63-13"><a href="asynchronous-in-shiny.html#cb63-13"></a>  }) <span class="op">%...!%</span></span>
+<span id="cb63-14"><a href="asynchronous-in-shiny.html#cb63-14"></a><span class="st">  </span><span class="co"># If ever the future outputs an error, we switch</span></span>
+<span id="cb63-15"><a href="asynchronous-in-shiny.html#cb63-15"></a><span class="st">  </span><span class="co"># back to NULL for rv$output, and throw a warning</span></span>
+<span id="cb63-16"><a href="asynchronous-in-shiny.html#cb63-16"></a><span class="st">  </span><span class="co"># with the error</span></span>
+<span id="cb63-17"><a href="asynchronous-in-shiny.html#cb63-17"></a><span class="st">  </span>(<span class="cf">function</span>(error){</span>
+<span id="cb63-18"><a href="asynchronous-in-shiny.html#cb63-18"></a>    rv<span class="op">$</span>output &lt;-<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb63-19"><a href="asynchronous-in-shiny.html#cb63-19"></a>    <span class="kw">warning</span>(error)</span>
+<span id="cb63-20"><a href="asynchronous-in-shiny.html#cb63-20"></a>  })</span>
+<span id="cb63-21"><a href="asynchronous-in-shiny.html#cb63-21"></a></span>
+<span id="cb63-22"><a href="asynchronous-in-shiny.html#cb63-22"></a><span class="co"># output$rnorm will be printed whenever rv$output</span></span>
+<span id="cb63-23"><a href="asynchronous-in-shiny.html#cb63-23"></a><span class="co"># is available (i.e. after around 5 seconds)</span></span>
+<span id="cb63-24"><a href="asynchronous-in-shiny.html#cb63-24"></a>output<span class="op">$</span>rnorm &lt;-<span class="st"> </span><span class="kw">renderPrint</span>({</span>
+<span id="cb63-25"><a href="asynchronous-in-shiny.html#cb63-25"></a>  <span class="kw">req</span>(rv<span class="op">$</span>output)</span>
+<span id="cb63-26"><a href="asynchronous-in-shiny.html#cb63-26"></a>})</span></code></pre></div>
+</div>
+<div id="common-pitfalls" class="section level3">
+<h3><span class="header-section-number">16.3.3</span> Common Pitfalls</h3>
+<p>The first future sent needn’t be the first to return</p>
+<ul>
+<li>bookkeeping: check whether the future that returns is the one you need
+<ul>
+<li>do you need the final future? (use an identifier)</li>
+<li>do you need the futures in sequence? (use a queue)</li>
+</ul></li>
+</ul>
+</div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="testing-your-app.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="version-control.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="caching-elements.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="meeting-videos-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -413,7 +548,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-epgs/edit/main/11-Build_Yourself_a_Safety_Net.Rmd",
+"link": "https://github.com/r4ds/bookclub-epgs/edit/main/16-optimizing_shiny_code.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>11.4 Further sections | Engineering Production-Grade Shiny Apps Book Club</title>
+  <title>16.2 Caching Elements | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="11.4 Further sections | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta property="og:title" content="16.2 Caching Elements | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="11.4 Further sections | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta name="twitter:title" content="16.2 Caching Elements | Engineering Production-Grade Shiny Apps Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="testing-your-app.html"/>
-<link rel="next" href="version-control.html"/>
+<link rel="prev" href="resources-4.html"/>
+<link rel="next" href="asynchronous-in-shiny.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -365,24 +365,210 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="further-sections" class="section level2">
-<h2><span class="header-section-number">11.4</span> Further sections</h2>
-<p>Did not present on:</p>
+<div id="caching-elements" class="section level2">
+<h2><span class="header-section-number">16.2</span> Caching Elements</h2>
+<div id="what-is-caching" class="section level3">
+<h3><span class="header-section-number">16.2.1</span> What is Caching</h3>
 <ul>
-<li><p>Testing the app load</p></li>
-<li><p>A reproducible environment and {renv}</p></li>
-<li><p>Docker</p></li>
+<li><p>Store resource-intensive results</p></li>
+<li><p>So they can be reused without recomputation</p></li>
+<li><p>Downside: you can’t cache ’em all</p></li>
 </ul>
-
+<p>Only cache if the thing:</p>
+<ul>
+<li>would be identical each time it is made (for a given input)</li>
+</ul>
+<p>Good things to cache:</p>
+<ul>
+<li><p>Plots</p></li>
+<li><p>Database queries</p></li>
+</ul>
 </div>
-<!-- </div> -->
+<div id="native-caching-in-r" class="section level3">
+<h3><span class="header-section-number">16.2.2</span> Native caching in R</h3>
+<p>{R.cache} and {memoise} work in a similar way:</p>
+<ul>
+<li><p>Wrap a function with a higher-order function (<code>new_func &lt;- memoise::memoise(initial_func)</code>)</p></li>
+<li><p>Call the new function with some arguments (<code>new_func(x = 1, y = 2)</code>)</p>
+<ul>
+<li>it does the expensive computation</li>
+<li>then stores the result</li>
+</ul></li>
+<li><p>Call the new function again</p>
+<ul>
+<li>if you’ve used the args before, it will return immediately with the stored result</li>
+</ul></li>
+<li><p>The arguments are converted to a look-up key</p></li>
+</ul>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="caching-elements.html#cb54-1"></a><span class="kw">library</span>(memoise)</span>
+<span id="cb54-2"><a href="caching-elements.html#cb54-2"></a></span>
+<span id="cb54-3"><a href="caching-elements.html#cb54-3"></a><span class="co"># tic/toc are used for timing</span></span>
+<span id="cb54-4"><a href="caching-elements.html#cb54-4"></a><span class="kw">library</span>(tictoc)</span>
+<span id="cb54-5"><a href="caching-elements.html#cb54-5"></a></span>
+<span id="cb54-6"><a href="caching-elements.html#cb54-6"></a>sleep_and_return_time &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">seconds =</span> <span class="dv">1</span>) {</span>
+<span id="cb54-7"><a href="caching-elements.html#cb54-7"></a>  <span class="kw">Sys.sleep</span>(seconds)</span>
+<span id="cb54-8"><a href="caching-elements.html#cb54-8"></a>  <span class="kw">return</span>(<span class="kw">Sys.time</span>())</span>
+<span id="cb54-9"><a href="caching-elements.html#cb54-9"></a>}</span>
+<span id="cb54-10"><a href="caching-elements.html#cb54-10"></a></span>
+<span id="cb54-11"><a href="caching-elements.html#cb54-11"></a>msleep_and_return_time &lt;-<span class="st"> </span><span class="kw">memoise</span>(sleep_and_return_time)</span>
+<span id="cb54-12"><a href="caching-elements.html#cb54-12"></a></span>
+<span id="cb54-13"><a href="caching-elements.html#cb54-13"></a><span class="co"># first call is sloooooooow</span></span>
+<span id="cb54-14"><a href="caching-elements.html#cb54-14"></a><span class="kw">tic</span>()</span>
+<span id="cb54-15"><a href="caching-elements.html#cb54-15"></a><span class="kw">msleep_and_return_time</span>(<span class="dv">10</span>)</span>
+<span id="cb54-16"><a href="caching-elements.html#cb54-16"></a><span class="kw">toc</span>()</span>
+<span id="cb54-17"><a href="caching-elements.html#cb54-17"></a></span>
+<span id="cb54-18"><a href="caching-elements.html#cb54-18"></a><span class="co"># second call is fast</span></span>
+<span id="cb54-19"><a href="caching-elements.html#cb54-19"></a><span class="kw">tic</span>()</span>
+<span id="cb54-20"><a href="caching-elements.html#cb54-20"></a><span class="kw">msleep_and_return_time</span>(<span class="dv">10</span>)</span>
+<span id="cb54-21"><a href="caching-elements.html#cb54-21"></a><span class="kw">toc</span>()</span></code></pre></div>
+<p>But …. why is <code>sleep_and_return_time</code> a bad example for a cacheable function?</p>
+<p>The book has a more reproducible example using database queries (there’s a db-in-shiny example
+below, so we don’t cover this example)</p>
+<p>{memoise} stores the cache on disk, you can set where on the file-system it is stored</p>
+</div>
+<div id="caching-in-shiny" class="section level3">
+<h3><span class="header-section-number">16.2.3</span> Caching in {shiny}</h3>
+<p>An app:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="caching-elements.html#cb55-1"></a><span class="kw">library</span>(shiny)</span>
+<span id="cb55-2"><a href="caching-elements.html#cb55-2"></a></span>
+<span id="cb55-3"><a href="caching-elements.html#cb55-3"></a>ui &lt;-<span class="st"> </span><span class="cf">function</span>(){</span>
+<span id="cb55-4"><a href="caching-elements.html#cb55-4"></a>  <span class="kw">tagList</span>(</span>
+<span id="cb55-5"><a href="caching-elements.html#cb55-5"></a>    <span class="co"># The user can select one of the cut from ggplot2::diamonds,</span></span>
+<span id="cb55-6"><a href="caching-elements.html#cb55-6"></a>    <span class="co"># {shiny} will then query the SQL database to retrieve the</span></span>
+<span id="cb55-7"><a href="caching-elements.html#cb55-7"></a>    <span class="co"># first rows of the result</span></span>
+<span id="cb55-8"><a href="caching-elements.html#cb55-8"></a>    <span class="kw">selectInput</span>(<span class="st">&quot;cut&quot;</span>, <span class="st">&quot;cut&quot;</span>, <span class="kw">unique</span>(ggplot2<span class="op">::</span>diamonds<span class="op">$</span>cut)),</span>
+<span id="cb55-9"><a href="caching-elements.html#cb55-9"></a>    <span class="kw">tableOutput</span>(<span class="st">&quot;tbl&quot;</span>)</span>
+<span id="cb55-10"><a href="caching-elements.html#cb55-10"></a>  )</span>
+<span id="cb55-11"><a href="caching-elements.html#cb55-11"></a>}</span>
+<span id="cb55-12"><a href="caching-elements.html#cb55-12"></a></span>
+<span id="cb55-13"><a href="caching-elements.html#cb55-13"></a>srv_builder &lt;-<span class="st"> </span><span class="cf">function</span>(con) {</span>
+<span id="cb55-14"><a href="caching-elements.html#cb55-14"></a>  server &lt;-<span class="st"> </span><span class="cf">function</span>(</span>
+<span id="cb55-15"><a href="caching-elements.html#cb55-15"></a>    input,</span>
+<span id="cb55-16"><a href="caching-elements.html#cb55-16"></a>    output,</span>
+<span id="cb55-17"><a href="caching-elements.html#cb55-17"></a>    session</span>
+<span id="cb55-18"><a href="caching-elements.html#cb55-18"></a>  ){</span>
+<span id="cb55-19"><a href="caching-elements.html#cb55-19"></a>    <span class="co"># Rendering the table of the SQL call</span></span>
+<span id="cb55-20"><a href="caching-elements.html#cb55-20"></a>    output<span class="op">$</span>tbl &lt;-<span class="st"> </span><span class="kw">renderTable</span>({</span>
+<span id="cb55-21"><a href="caching-elements.html#cb55-21"></a>      <span class="co"># Using a memoised function allows to prevent from</span></span>
+<span id="cb55-22"><a href="caching-elements.html#cb55-22"></a>      <span class="co"># calling the SQL database every time the user inputs</span></span>
+<span id="cb55-23"><a href="caching-elements.html#cb55-23"></a>      <span class="co"># a change</span></span>
+<span id="cb55-24"><a href="caching-elements.html#cb55-24"></a>      <span class="kw">memoised_fct_sql</span>(input<span class="op">$</span>cut, con)</span>
+<span id="cb55-25"><a href="caching-elements.html#cb55-25"></a>    })</span>
+<span id="cb55-26"><a href="caching-elements.html#cb55-26"></a>  }</span>
+<span id="cb55-27"><a href="caching-elements.html#cb55-27"></a></span>
+<span id="cb55-28"><a href="caching-elements.html#cb55-28"></a>  server</span>
+<span id="cb55-29"><a href="caching-elements.html#cb55-29"></a>}</span>
+<span id="cb55-30"><a href="caching-elements.html#cb55-30"></a></span>
+<span id="cb55-31"><a href="caching-elements.html#cb55-31"></a><span class="co"># We create an in-memory database using SQLite</span></span>
+<span id="cb55-32"><a href="caching-elements.html#cb55-32"></a>con &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(</span>
+<span id="cb55-33"><a href="caching-elements.html#cb55-33"></a>  RSQLite<span class="op">::</span><span class="kw">SQLite</span>(),</span>
+<span id="cb55-34"><a href="caching-elements.html#cb55-34"></a>  <span class="dt">dbname =</span> <span class="st">&quot;:memory:&quot;</span></span>
+<span id="cb55-35"><a href="caching-elements.html#cb55-35"></a>)</span>
+<span id="cb55-36"><a href="caching-elements.html#cb55-36"></a></span>
+<span id="cb55-37"><a href="caching-elements.html#cb55-37"></a><span class="co"># Writing a large dataset to the db</span></span>
+<span id="cb55-38"><a href="caching-elements.html#cb55-38"></a>DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(</span>
+<span id="cb55-39"><a href="caching-elements.html#cb55-39"></a>  con,</span>
+<span id="cb55-40"><a href="caching-elements.html#cb55-40"></a>  <span class="st">&quot;diams&quot;</span>,</span>
+<span id="cb55-41"><a href="caching-elements.html#cb55-41"></a>  <span class="co"># This table will have 539400 rows</span></span>
+<span id="cb55-42"><a href="caching-elements.html#cb55-42"></a>  dplyr<span class="op">::</span><span class="kw">bind_rows</span>(</span>
+<span id="cb55-43"><a href="caching-elements.html#cb55-43"></a>    purrr<span class="op">::</span><span class="kw">rerun</span>(<span class="dv">10</span>, ggplot2<span class="op">::</span>diamonds)</span>
+<span id="cb55-44"><a href="caching-elements.html#cb55-44"></a>  )</span>
+<span id="cb55-45"><a href="caching-elements.html#cb55-45"></a>)</span>
+<span id="cb55-46"><a href="caching-elements.html#cb55-46"></a></span>
+<span id="cb55-47"><a href="caching-elements.html#cb55-47"></a><span class="kw">shinyApp</span>(ui, <span class="dt">server =</span> <span class="kw">srv_builder</span>(con))</span></code></pre></div>
+<p>What haven’t we defined here?</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="caching-elements.html#cb56-1"></a><span class="kw">library</span>(memoise)</span>
+<span id="cb56-2"><a href="caching-elements.html#cb56-2"></a></span>
+<span id="cb56-3"><a href="caching-elements.html#cb56-3"></a>fct_sql &lt;-<span class="st"> </span><span class="cf">function</span>(cut, con){</span>
+<span id="cb56-4"><a href="caching-elements.html#cb56-4"></a>  <span class="co"># NEVER EVER SPRINTF AN SQL CODE LIKE THAT</span></span>
+<span id="cb56-5"><a href="caching-elements.html#cb56-5"></a>  <span class="co"># IT&#39;S SENSITIVE TO SQL INJECTIONS, WE&#39;RE</span></span>
+<span id="cb56-6"><a href="caching-elements.html#cb56-6"></a>  <span class="co"># DOING IT FOR THE EXAMPLE</span></span>
+<span id="cb56-7"><a href="caching-elements.html#cb56-7"></a>  cli<span class="op">::</span><span class="kw">cat_rule</span>(<span class="st">&quot;Calling the SQL db&quot;</span>)</span>
+<span id="cb56-8"><a href="caching-elements.html#cb56-8"></a>  results &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(</span>
+<span id="cb56-9"><a href="caching-elements.html#cb56-9"></a>    con, <span class="kw">sprintf</span>(</span>
+<span id="cb56-10"><a href="caching-elements.html#cb56-10"></a>      <span class="st">&quot;SELECT * FROM diams WHERE cut = &#39;%s&#39;&quot;</span>,</span>
+<span id="cb56-11"><a href="caching-elements.html#cb56-11"></a>      cut</span>
+<span id="cb56-12"><a href="caching-elements.html#cb56-12"></a>    )</span>
+<span id="cb56-13"><a href="caching-elements.html#cb56-13"></a>  )</span>
+<span id="cb56-14"><a href="caching-elements.html#cb56-14"></a>  <span class="kw">head</span>(results)</span>
+<span id="cb56-15"><a href="caching-elements.html#cb56-15"></a>}</span>
+<span id="cb56-16"><a href="caching-elements.html#cb56-16"></a></span>
+<span id="cb56-17"><a href="caching-elements.html#cb56-17"></a><span class="co"># Using a local cache</span></span>
+<span id="cb56-18"><a href="caching-elements.html#cb56-18"></a>cache_dir &lt;-<span class="st"> </span><span class="kw">cache_filesystem</span>(<span class="st">&quot;cache&quot;</span>)</span>
+<span id="cb56-19"><a href="caching-elements.html#cb56-19"></a>memoised_fct_sql &lt;-<span class="st"> </span><span class="kw">memoise</span>(fct_sql, <span class="dt">cache =</span> cache_dir)</span></code></pre></div>
+<p>App workflow:</p>
+<ul>
+<li>Start the app</li>
+<li>set input$cut to a new value</li>
+<li>time how long it takes to render the new table</li>
+<li>set input$cut to an unused value</li>
+<li>note that it takes the same length of time</li>
+<li>set input$cut to the first selected value</li>
+<li>note that it is way faster than the original call</li>
+</ul>
+<p>{shiny} already has caching functionality:</p>
+<ul>
+<li><code>shiny::bindCache()</code></li>
+<li>[older] <code>shiny::renderCachedPlot()</code></li>
+</ul>
+<p>Note from the RStudio shiny <a href="https://shiny.rstudio.com/articles/plot-caching.html">blog</a>:</p>
+<p>""“As of Shiny 1.6.0, we recommend using renderPlot() with bindCache() instead”""</p>
+<p>Example shiny app</p>
+<ul>
+<li>taken from the book</li>
+<li>but rewritten to use <code>renderPlot() %&gt;% bindCache()</code> rather than <code>renderCachedPlot()</code></li>
+</ul>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="caching-elements.html#cb57-1"></a><span class="kw">library</span>(shiny)</span>
+<span id="cb57-2"><a href="caching-elements.html#cb57-2"></a></span>
+<span id="cb57-3"><a href="caching-elements.html#cb57-3"></a>ui &lt;-<span class="st"> </span><span class="cf">function</span>() {</span>
+<span id="cb57-4"><a href="caching-elements.html#cb57-4"></a>  <span class="kw">tagList</span>(</span>
+<span id="cb57-5"><a href="caching-elements.html#cb57-5"></a>    <span class="co"># We select a data.frame to plot</span></span>
+<span id="cb57-6"><a href="caching-elements.html#cb57-6"></a>    <span class="kw">selectInput</span>(</span>
+<span id="cb57-7"><a href="caching-elements.html#cb57-7"></a>      <span class="st">&quot;tbl&quot;</span>,</span>
+<span id="cb57-8"><a href="caching-elements.html#cb57-8"></a>      <span class="st">&quot;Table&quot;</span>,</span>
+<span id="cb57-9"><a href="caching-elements.html#cb57-9"></a>      <span class="kw">c</span>(<span class="st">&quot;iris&quot;</span>, <span class="st">&quot;mtcars&quot;</span>, <span class="st">&quot;airquality&quot;</span>)</span>
+<span id="cb57-10"><a href="caching-elements.html#cb57-10"></a>    ),</span>
+<span id="cb57-11"><a href="caching-elements.html#cb57-11"></a>    <span class="co"># This plotOutput will be cached</span></span>
+<span id="cb57-12"><a href="caching-elements.html#cb57-12"></a>    <span class="kw">plotOutput</span>(<span class="st">&quot;plot&quot;</span>)</span>
+<span id="cb57-13"><a href="caching-elements.html#cb57-13"></a>  )</span>
+<span id="cb57-14"><a href="caching-elements.html#cb57-14"></a>}</span>
+<span id="cb57-15"><a href="caching-elements.html#cb57-15"></a></span>
+<span id="cb57-16"><a href="caching-elements.html#cb57-16"></a>server &lt;-<span class="st"> </span><span class="cf">function</span>(</span>
+<span id="cb57-17"><a href="caching-elements.html#cb57-17"></a>  input,</span>
+<span id="cb57-18"><a href="caching-elements.html#cb57-18"></a>  output,</span>
+<span id="cb57-19"><a href="caching-elements.html#cb57-19"></a>  session</span>
+<span id="cb57-20"><a href="caching-elements.html#cb57-20"></a>) {</span>
+<span id="cb57-21"><a href="caching-elements.html#cb57-21"></a>  <span class="co"># The cache mechanism is made available by &#39;bindCache&#39;</span></span>
+<span id="cb57-22"><a href="caching-elements.html#cb57-22"></a>  output<span class="op">$</span>plot &lt;-<span class="st"> </span><span class="kw">renderPlot</span>({</span>
+<span id="cb57-23"><a href="caching-elements.html#cb57-23"></a>    <span class="co"># Plotting the selected data.frame</span></span>
+<span id="cb57-24"><a href="caching-elements.html#cb57-24"></a>    <span class="kw">plot</span>(<span class="kw">get</span>(input<span class="op">$</span>tbl))</span>
+<span id="cb57-25"><a href="caching-elements.html#cb57-25"></a>  }) <span class="op">%&gt;%</span></span>
+<span id="cb57-26"><a href="caching-elements.html#cb57-26"></a><span class="st">    </span><span class="kw">bindCache</span>(</span>
+<span id="cb57-27"><a href="caching-elements.html#cb57-27"></a>    <span class="co"># List here all the reactive expression that will</span></span>
+<span id="cb57-28"><a href="caching-elements.html#cb57-28"></a>    <span class="co"># be used as cache key when running the app,</span></span>
+<span id="cb57-29"><a href="caching-elements.html#cb57-29"></a>    <span class="co"># you will see that the first time you plot one</span></span>
+<span id="cb57-30"><a href="caching-elements.html#cb57-30"></a>    <span class="co"># graph, it takes a couple of seconds,</span></span>
+<span id="cb57-31"><a href="caching-elements.html#cb57-31"></a>    <span class="co"># but the second time, it&#39;s almost</span></span>
+<span id="cb57-32"><a href="caching-elements.html#cb57-32"></a>    <span class="co"># instantaneous</span></span>
+<span id="cb57-33"><a href="caching-elements.html#cb57-33"></a>    input<span class="op">$</span>tbl</span>
+<span id="cb57-34"><a href="caching-elements.html#cb57-34"></a>  )</span>
+<span id="cb57-35"><a href="caching-elements.html#cb57-35"></a>}</span>
+<span id="cb57-36"><a href="caching-elements.html#cb57-36"></a></span>
+<span id="cb57-37"><a href="caching-elements.html#cb57-37"></a><span class="kw">shinyApp</span>(ui, server)</span></code></pre></div>
+<p>Notes:</p>
+<ul>
+<li>you can also cache on remote storage (e.g., S3)</li>
+<li>you only have limited space - old cached values will be dropped</li>
+</ul>
+</div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="testing-your-app.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="version-control.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="resources-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="asynchronous-in-shiny.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -413,7 +599,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-epgs/edit/main/11-Build_Yourself_a_Safety_Net.Rmd",
+"link": "https://github.com/r4ds/bookclub-epgs/edit/main/16-optimizing_shiny_code.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -156,3 +156,15 @@ using-external-databases
 data-source-checklist
 conclusions-1
 resources-3
+optimizing-shiny-code
+resources-4
+caching-elements
+what-is-caching
+native-caching-in-r
+caching-in-shiny
+asynchronous-in-shiny
+asynchronously-ease-cross-session-issues
+asynchronously-ease-within-session-issues
+common-pitfalls
+meeting-videos-3
+cohort-1-3
