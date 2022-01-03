@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 14 PLACEHOLDER | Engineering Production-Grade Shiny Apps Book Club</title>
+  <title>Chapter 14 The Need for Optimization | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 14 PLACEHOLDER | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta property="og:title" content="Chapter 14 The Need for Optimization | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 14 PLACEHOLDER | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta name="twitter:title" content="Chapter 14 The Need for Optimization | Engineering Production-Grade Shiny Apps Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2021-12-15" />
+<meta name="date" content="2022-01-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="meeting-videos-1.html"/>
-<link rel="next" href="slide-1-1.html"/>
+<link rel="next" href="build-first-then-optimize.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -289,10 +289,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.2.1" data-path="meeting-videos-1.html"><a href="meeting-videos-1.html#cohort-1-1"><i class="fa fa-check"></i><b>13.2.1</b> Cohort 1</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="placeholder-1.html"><a href="placeholder-1.html"><i class="fa fa-check"></i><b>14</b> PLACEHOLDER</a><ul>
-<li class="chapter" data-level="14.1" data-path="slide-1-1.html"><a href="slide-1-1.html"><i class="fa fa-check"></i><b>14.1</b> Slide 1</a></li>
-<li class="chapter" data-level="14.2" data-path="meeting-videos-2.html"><a href="meeting-videos-2.html"><i class="fa fa-check"></i><b>14.2</b> Meeting Videos</a><ul>
-<li class="chapter" data-level="14.2.1" data-path="meeting-videos-2.html"><a href="meeting-videos-2.html#cohort-1-2"><i class="fa fa-check"></i><b>14.2.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="14" data-path="the-need-for-optimization.html"><a href="the-need-for-optimization.html"><i class="fa fa-check"></i><b>14</b> The Need for Optimization</a><ul>
+<li class="chapter" data-level="14.1" data-path="build-first-then-optimize.html"><a href="build-first-then-optimize.html"><i class="fa fa-check"></i><b>14.1</b> Build first, then optimize</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="build-first-then-optimize.html"><a href="build-first-then-optimize.html#identifying-bottlenecks"><i class="fa fa-check"></i><b>14.1.1</b> Identifying bottlenecks</a></li>
+<li class="chapter" data-level="14.1.2" data-path="build-first-then-optimize.html"><a href="build-first-then-optimize.html#do-you-need-faster-functions"><i class="fa fa-check"></i><b>14.1.2</b> Do you need faster functions?</a></li>
+<li class="chapter" data-level="14.1.3" data-path="build-first-then-optimize.html"><a href="build-first-then-optimize.html#dont-sacrifice-readability"><i class="fa fa-check"></i><b>14.1.3</b> Don’t sacrifice readability</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="tools-for-profiling.html"><a href="tools-for-profiling.html"><i class="fa fa-check"></i><b>14.2</b> Tools for profiling</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="tools-for-profiling.html"><a href="tools-for-profiling.html#profiling-r-code"><i class="fa fa-check"></i><b>14.2.1</b> Profiling R code</a></li>
+<li class="chapter" data-level="14.2.2" data-path="tools-for-profiling.html"><a href="tools-for-profiling.html#profiling-shiny"><i class="fa fa-check"></i><b>14.2.2</b> Profiling {shiny}</a></li>
+<li class="chapter" data-level="14.2.3" data-path="tools-for-profiling.html"><a href="tools-for-profiling.html#profiling-web-pages"><i class="fa fa-check"></i><b>14.2.3</b> Profiling web pages</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="resources-2.html"><a href="resources-2.html"><i class="fa fa-check"></i><b>14.3</b> Resources</a></li>
+<li class="chapter" data-level="14.4" data-path="meeting-videos-2.html"><a href="meeting-videos-2.html"><i class="fa fa-check"></i><b>14.4</b> Meeting Videos</a><ul>
+<li class="chapter" data-level="14.4.1" data-path="meeting-videos-2.html"><a href="meeting-videos-2.html#cohort-1-2"><i class="fa fa-check"></i><b>14.4.1</b> Cohort 1</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="optimazing-shiny---common-application-caveats.html"><a href="optimazing-shiny---common-application-caveats.html"><i class="fa fa-check"></i><b>15</b> Optimazing Shiny - Common Application Caveats</a><ul>
@@ -316,7 +326,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.6.4" data-path="reading-data.html"><a href="reading-data.html#data-source-checklist"><i class="fa fa-check"></i><b>15.6.4</b> Data-source checklist</a></li>
 </ul></li>
 <li class="chapter" data-level="15.7" data-path="conclusions-1.html"><a href="conclusions-1.html"><i class="fa fa-check"></i><b>15.7</b> Conclusions</a><ul>
-<li class="chapter" data-level="15.7.1" data-path="conclusions-1.html"><a href="conclusions-1.html#resources-2"><i class="fa fa-check"></i><b>15.7.1</b> Resources</a></li>
+<li class="chapter" data-level="15.7.1" data-path="conclusions-1.html"><a href="conclusions-1.html#resources-3"><i class="fa fa-check"></i><b>15.7.1</b> Resources</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -339,12 +349,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="placeholder-1" class="section level1">
-<h1><span class="header-section-number">Chapter 14</span> PLACEHOLDER</h1>
-<p><strong>Learning Objectives</strong></p>
+<div id="the-need-for-optimization" class="section level1">
+<h1><span class="header-section-number">Chapter 14</span> The Need for Optimization</h1>
+<p>** Learning Objectives **</p>
+<p>You can optimise for:</p>
 <ul>
-<li>FILL THESE IN</li>
+<li><p>speed</p></li>
+<li><p>memory</p></li>
+<li><p>maintainability / readability</p></li>
+<li><p>… but not all three</p></li>
 </ul>
+<p>When optimising, make sure you have a basis for comparison (of alternative implementations)</p>
 </div>
             </section>
 
@@ -352,7 +367,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="meeting-videos-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="slide-1-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="build-first-then-optimize.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -383,7 +398,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-epgs/edit/main/14.Rmd",
+"link": "https://github.com/r4ds/bookclub-epgs/edit/main/14-the_need_for_optimization.Rmd",
 "text": "Edit"
 },
 "history": {

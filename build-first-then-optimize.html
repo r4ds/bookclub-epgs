@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 11 Build Yourself a Safety Net | Engineering Production-Grade Shiny Apps Book Club</title>
+  <title>14.1 Build first, then optimize | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 11 Build Yourself a Safety Net | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta property="og:title" content="14.1 Build first, then optimize | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 11 Build Yourself a Safety Net | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta name="twitter:title" content="14.1 Build first, then optimize | Engineering Production-Grade Shiny Apps Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="using-golem-dev-functions.html"/>
-<link rel="next" href="learning-objectives.html"/>
+<link rel="prev" href="the-need-for-optimization.html"/>
+<link rel="next" href="tools-for-profiling.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -349,16 +349,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="build-yourself-a-safety-net" class="section level1">
-<h1><span class="header-section-number">Chapter 11</span> Build Yourself a Safety Net</h1>
+<div id="build-first-then-optimize" class="section level2">
+<h2><span class="header-section-number">14.1</span> Build first, then optimize</h2>
+<div id="identifying-bottlenecks" class="section level3">
+<h3><span class="header-section-number">14.1.1</span> Identifying bottlenecks</h3>
+<p>""“Focusing on optimizing small portions of your app before making it work fully is the best way to
+lose time along the way, even more in the context of a production application, where there are
+deadlines and a limited amount of time to build the application.”""</p>
+<p>When your furniture takes 2 months to cross the ocean, it doesn’t matter whether you have an
+electric screwdriver</p>
+<p>It’s hard to know <em>where</em> the bottlenecks will be until your app is working</p>
+<p>And there’s no point optimising until you know where the bottlenecks are…</p>
+</div>
+<div id="do-you-need-faster-functions" class="section level3">
+<h3><span class="header-section-number">14.1.2</span> Do you need faster functions?</h3>
+<p>""“Of course a function running twice as fast is a good thing, but think about it in context: for
+example, how many times is this function called? We can safely bet that if your function is only
+called once, working on making it twice as fast might not be the one function you would want to
+focus on”""</p>
+<p>But, what if your single-call function holds everything else up?</p>
+</div>
+<div id="dont-sacrifice-readability" class="section level3">
+<h3><span class="header-section-number">14.1.3</span> Don’t sacrifice readability</h3>
+<p>Possible restructurings:</p>
+<ul>
+<li><p>high-level language (R/python) to low-level language (C++/rust)</p></li>
+<li><p>one package to another</p></li>
+<li><p>single to parallel implementation</p></li>
+</ul>
+<p>Optimisation trade-off against:</p>
+<ul>
+<li>maintain-, read-, searchability</li>
+</ul>
+<p>Example: compare C++ code for computing mean with R code for the same</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="using-golem-dev-functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="learning-objectives.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="the-need-for-optimization.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tools-for-profiling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -389,7 +421,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-epgs/edit/main/11-Build_Yourself_a_Safety_Net.Rmd",
+"link": "https://github.com/r4ds/bookclub-epgs/edit/main/14-the_need_for_optimization.Rmd",
 "text": "Edit"
 },
 "history": {

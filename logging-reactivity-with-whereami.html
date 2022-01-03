@@ -24,7 +24,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2021-12-15" />
+<meta name="date" content="2022-01-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -289,10 +289,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.2.1" data-path="meeting-videos-1.html"><a href="meeting-videos-1.html#cohort-1-1"><i class="fa fa-check"></i><b>13.2.1</b> Cohort 1</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="placeholder-1.html"><a href="placeholder-1.html"><i class="fa fa-check"></i><b>14</b> PLACEHOLDER</a><ul>
-<li class="chapter" data-level="14.1" data-path="slide-1-1.html"><a href="slide-1-1.html"><i class="fa fa-check"></i><b>14.1</b> Slide 1</a></li>
-<li class="chapter" data-level="14.2" data-path="meeting-videos-2.html"><a href="meeting-videos-2.html"><i class="fa fa-check"></i><b>14.2</b> Meeting Videos</a><ul>
-<li class="chapter" data-level="14.2.1" data-path="meeting-videos-2.html"><a href="meeting-videos-2.html#cohort-1-2"><i class="fa fa-check"></i><b>14.2.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="14" data-path="the-need-for-optimization.html"><a href="the-need-for-optimization.html"><i class="fa fa-check"></i><b>14</b> The Need for Optimization</a><ul>
+<li class="chapter" data-level="14.1" data-path="build-first-then-optimize.html"><a href="build-first-then-optimize.html"><i class="fa fa-check"></i><b>14.1</b> Build first, then optimize</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="build-first-then-optimize.html"><a href="build-first-then-optimize.html#identifying-bottlenecks"><i class="fa fa-check"></i><b>14.1.1</b> Identifying bottlenecks</a></li>
+<li class="chapter" data-level="14.1.2" data-path="build-first-then-optimize.html"><a href="build-first-then-optimize.html#do-you-need-faster-functions"><i class="fa fa-check"></i><b>14.1.2</b> Do you need faster functions?</a></li>
+<li class="chapter" data-level="14.1.3" data-path="build-first-then-optimize.html"><a href="build-first-then-optimize.html#dont-sacrifice-readability"><i class="fa fa-check"></i><b>14.1.3</b> Don’t sacrifice readability</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="tools-for-profiling.html"><a href="tools-for-profiling.html"><i class="fa fa-check"></i><b>14.2</b> Tools for profiling</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="tools-for-profiling.html"><a href="tools-for-profiling.html#profiling-r-code"><i class="fa fa-check"></i><b>14.2.1</b> Profiling R code</a></li>
+<li class="chapter" data-level="14.2.2" data-path="tools-for-profiling.html"><a href="tools-for-profiling.html#profiling-shiny"><i class="fa fa-check"></i><b>14.2.2</b> Profiling {shiny}</a></li>
+<li class="chapter" data-level="14.2.3" data-path="tools-for-profiling.html"><a href="tools-for-profiling.html#profiling-web-pages"><i class="fa fa-check"></i><b>14.2.3</b> Profiling web pages</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="resources-2.html"><a href="resources-2.html"><i class="fa fa-check"></i><b>14.3</b> Resources</a></li>
+<li class="chapter" data-level="14.4" data-path="meeting-videos-2.html"><a href="meeting-videos-2.html"><i class="fa fa-check"></i><b>14.4</b> Meeting Videos</a><ul>
+<li class="chapter" data-level="14.4.1" data-path="meeting-videos-2.html"><a href="meeting-videos-2.html#cohort-1-2"><i class="fa fa-check"></i><b>14.4.1</b> Cohort 1</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="optimazing-shiny---common-application-caveats.html"><a href="optimazing-shiny---common-application-caveats.html"><i class="fa fa-check"></i><b>15</b> Optimazing Shiny - Common Application Caveats</a><ul>
@@ -316,7 +326,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.6.4" data-path="reading-data.html"><a href="reading-data.html#data-source-checklist"><i class="fa fa-check"></i><b>15.6.4</b> Data-source checklist</a></li>
 </ul></li>
 <li class="chapter" data-level="15.7" data-path="conclusions-1.html"><a href="conclusions-1.html"><i class="fa fa-check"></i><b>15.7</b> Conclusions</a><ul>
-<li class="chapter" data-level="15.7.1" data-path="conclusions-1.html"><a href="conclusions-1.html#resources-2"><i class="fa fa-check"></i><b>15.7.1</b> Resources</a></li>
+<li class="chapter" data-level="15.7.1" data-path="conclusions-1.html"><a href="conclusions-1.html#resources-3"><i class="fa fa-check"></i><b>15.7.1</b> Resources</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -361,21 +371,21 @@ Figure 15.4: {whereami} package
   </code></pre>
 <p>(Sidi and Müller 2019 - <a href="https://github.com/yonicd/whereami">github</a> )</p>
 <p>For example, <code>whereami()</code> function let’s you locate the name of the file you are working on:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="logging-reactivity-with-whereami.html#cb45-1"></a><span class="kw">library</span>(whereami)</span>
-<span id="cb45-2"><a href="logging-reactivity-with-whereami.html#cb45-2"></a>whereami<span class="op">::</span><span class="kw">whereami</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="logging-reactivity-with-whereami.html#cb46-1"></a><span class="kw">library</span>(whereami)</span>
+<span id="cb46-2"><a href="logging-reactivity-with-whereami.html#cb46-2"></a>whereami<span class="op">::</span><span class="kw">whereami</span>()</span></code></pre></div>
 <pre><code>## ── Running From: ./bookclub-epgs.Rmd ───────────────────────────────────────────</code></pre>
 <p>Then, as classical procedure, with the use of the <code>base::cat()</code> function within the <strong>logging</strong> procedure, the <code>cat_where()</code> function in <strong>{whereami}</strong> package, helps you to producing an output in a user-defined function. It converts arguments to character vectors and, concatenates them to a single character vector, in the locate file.</p>
 <p><strong>Where should it be located?</strong></p>
 <p>If it is added to the <code>app_server()</code>, it will print the location of the function call to the logs.</p>
 <p>The combination with <code>cat_where()</code> will implement a reactive logging to the console while developing or debugging an app.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="logging-reactivity-with-whereami.html#cb47-1"></a>whereami<span class="op">::</span><span class="kw">cat_where</span>( whereami<span class="op">::</span><span class="kw">whereami</span>() )</span></code></pre></div>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="logging-reactivity-with-whereami.html#cb48-1"></a><span class="kw">cat_where</span>(where, </span>
-<span id="cb48-2"><a href="logging-reactivity-with-whereami.html#cb48-2"></a>          <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;rule&quot;</span>, <span class="st">&quot;boxx&quot;</span>, <span class="st">&quot;bullet&quot;</span>, <span class="st">&quot;line&quot;</span>, <span class="st">&quot;print&quot;</span>),</span>
-<span id="cb48-3"><a href="logging-reactivity-with-whereami.html#cb48-3"></a>          <span class="dt">color =</span> <span class="st">&quot;some_colors&quot;</span>, </span>
-<span id="cb48-4"><a href="logging-reactivity-with-whereami.html#cb48-4"></a>          ...)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="logging-reactivity-with-whereami.html#cb48-1"></a>whereami<span class="op">::</span><span class="kw">cat_where</span>( whereami<span class="op">::</span><span class="kw">whereami</span>() )</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="logging-reactivity-with-whereami.html#cb49-1"></a><span class="kw">cat_where</span>(where, </span>
+<span id="cb49-2"><a href="logging-reactivity-with-whereami.html#cb49-2"></a>          <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;rule&quot;</span>, <span class="st">&quot;boxx&quot;</span>, <span class="st">&quot;bullet&quot;</span>, <span class="st">&quot;line&quot;</span>, <span class="st">&quot;print&quot;</span>),</span>
+<span id="cb49-3"><a href="logging-reactivity-with-whereami.html#cb49-3"></a>          <span class="dt">color =</span> <span class="st">&quot;some_colors&quot;</span>, </span>
+<span id="cb49-4"><a href="logging-reactivity-with-whereami.html#cb49-4"></a>          ...)</span></code></pre></div>
 <p>Another feature is to get a list of all the <em>counters</em>: the numbers of time each of the located <em>cat</em> functions have been called and plot the statistics of the usage.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="logging-reactivity-with-whereami.html#cb49-1"></a>whereami<span class="op">::</span><span class="kw">counter_get</span>()</span>
-<span id="cb49-2"><a href="logging-reactivity-with-whereami.html#cb49-2"></a><span class="kw">plot</span>(whereami<span class="op">::</span><span class="kw">counter_get</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="logging-reactivity-with-whereami.html#cb50-1"></a>whereami<span class="op">::</span><span class="kw">counter_get</span>()</span>
+<span id="cb50-2"><a href="logging-reactivity-with-whereami.html#cb50-2"></a><span class="kw">plot</span>(whereami<span class="op">::</span><span class="kw">counter_get</span>())</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:15-counterplot"></span>
 <img src="images/15-counter_plot.png" alt="plot of whereami counters" width="80%" />
 <p class="caption">
@@ -383,12 +393,12 @@ Figure 15.5: {whereami} package
 </p>
 </div>
 <p><strong>As an example:</strong></p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="logging-reactivity-with-whereami.html#cb50-1"></a><span class="kw">library</span>(whereami)</span>
-<span id="cb50-2"><a href="logging-reactivity-with-whereami.html#cb50-2"></a><span class="kw">require</span>(ggplot2)</span>
-<span id="cb50-3"><a href="logging-reactivity-with-whereami.html#cb50-3"></a><span class="kw">ggplot</span>(iris) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb50-4"><a href="logging-reactivity-with-whereami.html#cb50-4"></a><span class="st">  </span><span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length,<span class="dt">y=</span>Sepal.Width) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb50-5"><a href="logging-reactivity-with-whereami.html#cb50-5"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb50-6"><a href="logging-reactivity-with-whereami.html#cb50-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">caption =</span> <span class="kw">sprintf</span>(<span class="st">&#39;sourced from: %s&#39;</span>,<span class="kw">whereami</span>()))</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="logging-reactivity-with-whereami.html#cb51-1"></a><span class="kw">library</span>(whereami)</span>
+<span id="cb51-2"><a href="logging-reactivity-with-whereami.html#cb51-2"></a><span class="kw">require</span>(ggplot2)</span>
+<span id="cb51-3"><a href="logging-reactivity-with-whereami.html#cb51-3"></a><span class="kw">ggplot</span>(iris) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb51-4"><a href="logging-reactivity-with-whereami.html#cb51-4"></a><span class="st">  </span><span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length,<span class="dt">y=</span>Sepal.Width) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb51-5"><a href="logging-reactivity-with-whereami.html#cb51-5"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb51-6"><a href="logging-reactivity-with-whereami.html#cb51-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">caption =</span> <span class="kw">sprintf</span>(<span class="st">&#39;sourced from: %s&#39;</span>,<span class="kw">whereami</span>()))</span></code></pre></div>
 <p><img src="bookclub-epgs_files/figure-html/15-another-plot-1.png" width="672" /></p>
 <p>In this context, it is everything we need to know about <strong>logging</strong> with <strong>whereami</strong>.</p>
 <p>More information about in general <em>logging</em> a shiny app can be found here: <a href="https://blog.sellorm.com/2021/06/16/getting-started-with-logging-in-r/">blog.sellorm.com</a></p>

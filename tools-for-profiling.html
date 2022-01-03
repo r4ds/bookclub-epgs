@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 11 Build Yourself a Safety Net | Engineering Production-Grade Shiny Apps Book Club</title>
+  <title>14.2 Tools for profiling | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 11 Build Yourself a Safety Net | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta property="og:title" content="14.2 Tools for profiling | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 11 Build Yourself a Safety Net | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta name="twitter:title" content="14.2 Tools for profiling | Engineering Production-Grade Shiny Apps Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="using-golem-dev-functions.html"/>
-<link rel="next" href="learning-objectives.html"/>
+<link rel="prev" href="build-first-then-optimize.html"/>
+<link rel="next" href="resources-2.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -349,16 +349,107 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="build-yourself-a-safety-net" class="section level1">
-<h1><span class="header-section-number">Chapter 11</span> Build Yourself a Safety Net</h1>
+<div id="tools-for-profiling" class="section level2">
+<h2><span class="header-section-number">14.2</span> Tools for profiling</h2>
+<div id="profiling-r-code" class="section level3">
+<h3><span class="header-section-number">14.2.1</span> Profiling R code</h3>
+<p>{profvis} and the “flame graph”</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="tools-for-profiling.html#cb38-1"></a><span class="kw">library</span>(profvis)</span>
+<span id="cb38-2"><a href="tools-for-profiling.html#cb38-2"></a>top &lt;-<span class="st"> </span><span class="cf">function</span>(){</span>
+<span id="cb38-3"><a href="tools-for-profiling.html#cb38-3"></a>  <span class="co"># We use profvis::pause() because Sys.sleep() doesn&#39;t</span></span>
+<span id="cb38-4"><a href="tools-for-profiling.html#cb38-4"></a>  <span class="co"># show in the flame graph</span></span>
+<span id="cb38-5"><a href="tools-for-profiling.html#cb38-5"></a>  <span class="kw">pause</span>(<span class="fl">0.1</span>)</span>
+<span id="cb38-6"><a href="tools-for-profiling.html#cb38-6"></a>  <span class="co"># Running a series of function with lapply()</span></span>
+<span id="cb38-7"><a href="tools-for-profiling.html#cb38-7"></a>  <span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="cf">function</span>(x){</span>
+<span id="cb38-8"><a href="tools-for-profiling.html#cb38-8"></a>    x <span class="op">*</span><span class="st"> </span><span class="dv">10</span></span>
+<span id="cb38-9"><a href="tools-for-profiling.html#cb38-9"></a>  })</span>
+<span id="cb38-10"><a href="tools-for-profiling.html#cb38-10"></a>  <span class="co"># Calling a lower level function</span></span>
+<span id="cb38-11"><a href="tools-for-profiling.html#cb38-11"></a>  <span class="kw">middle</span>()</span>
+<span id="cb38-12"><a href="tools-for-profiling.html#cb38-12"></a>}</span>
+<span id="cb38-13"><a href="tools-for-profiling.html#cb38-13"></a></span>
+<span id="cb38-14"><a href="tools-for-profiling.html#cb38-14"></a>middle &lt;-<span class="st"> </span><span class="cf">function</span>(){</span>
+<span id="cb38-15"><a href="tools-for-profiling.html#cb38-15"></a>  <span class="co"># Pausing before computing, and calling other functions</span></span>
+<span id="cb38-16"><a href="tools-for-profiling.html#cb38-16"></a>  <span class="kw">pause</span>(<span class="fl">0.2</span>)</span>
+<span id="cb38-17"><a href="tools-for-profiling.html#cb38-17"></a>  <span class="fl">1e4</span> <span class="op">*</span><span class="st"> </span><span class="dv">9</span></span>
+<span id="cb38-18"><a href="tools-for-profiling.html#cb38-18"></a>  <span class="kw">bottom_a</span>()</span>
+<span id="cb38-19"><a href="tools-for-profiling.html#cb38-19"></a>  <span class="kw">bottom_b</span>()</span>
+<span id="cb38-20"><a href="tools-for-profiling.html#cb38-20"></a>}</span>
+<span id="cb38-21"><a href="tools-for-profiling.html#cb38-21"></a></span>
+<span id="cb38-22"><a href="tools-for-profiling.html#cb38-22"></a><span class="co"># Both will pause and print, _a for 0.5 seconds,</span></span>
+<span id="cb38-23"><a href="tools-for-profiling.html#cb38-23"></a><span class="co"># _b for 2 seconds</span></span>
+<span id="cb38-24"><a href="tools-for-profiling.html#cb38-24"></a>bottom_a &lt;-<span class="st"> </span><span class="cf">function</span>(){</span>
+<span id="cb38-25"><a href="tools-for-profiling.html#cb38-25"></a>  <span class="kw">pause</span>(<span class="fl">0.5</span>)</span>
+<span id="cb38-26"><a href="tools-for-profiling.html#cb38-26"></a>  <span class="kw">print</span>(<span class="st">&quot;hey&quot;</span>)</span>
+<span id="cb38-27"><a href="tools-for-profiling.html#cb38-27"></a>}</span>
+<span id="cb38-28"><a href="tools-for-profiling.html#cb38-28"></a>bottom_b &lt;-<span class="st"> </span><span class="cf">function</span>(){</span>
+<span id="cb38-29"><a href="tools-for-profiling.html#cb38-29"></a>  <span class="kw">pause</span>(<span class="dv">2</span>)</span>
+<span id="cb38-30"><a href="tools-for-profiling.html#cb38-30"></a>  <span class="kw">print</span>(<span class="st">&quot;hey&quot;</span>)</span>
+<span id="cb38-31"><a href="tools-for-profiling.html#cb38-31"></a>}</span>
+<span id="cb38-32"><a href="tools-for-profiling.html#cb38-32"></a><span class="kw">profvis</span>({</span>
+<span id="cb38-33"><a href="tools-for-profiling.html#cb38-33"></a>  <span class="kw">top</span>()</span>
+<span id="cb38-34"><a href="tools-for-profiling.html#cb38-34"></a>})</span></code></pre></div>
+<p>Memory:</p>
+<ul>
+<li><p>profvis does indicate memory used, but …</p></li>
+<li><p>{profmem}</p></li>
+</ul>
+<div id="identifying-bottlenecks-1" class="section level4">
+<h4><span class="header-section-number">14.2.1.1</span> Identifying bottlenecks</h4>
+</div>
+<div id="benchmarking-r-code" class="section level4">
+<h4><span class="header-section-number">14.2.1.2</span> Benchmarking R code</h4>
+<p>""“never start optimizing if you cannot benchmark this optimization”""</p>
+<p>Recommend</p>
+<ul>
+<li><p>keep a notebook of different implementations that were attempted (for the bottlenecks in your app)</p></li>
+<li><p>{bench}</p>
+<ul>
+<li>for comparing different implementations</li>
+<li>checks that outputs are the same</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="tools-for-profiling.html#cb39-1"></a><span class="co"># Multiplying each element of a vector going from 1 to size</span></span>
+<span id="cb39-2"><a href="tools-for-profiling.html#cb39-2"></a><span class="co"># with a for loop</span></span>
+<span id="cb39-3"><a href="tools-for-profiling.html#cb39-3"></a>for_loop &lt;-<span class="st"> </span><span class="cf">function</span>(size){</span>
+<span id="cb39-4"><a href="tools-for-profiling.html#cb39-4"></a>  res &lt;-<span class="st"> </span><span class="kw">numeric</span>(size)</span>
+<span id="cb39-5"><a href="tools-for-profiling.html#cb39-5"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>size){</span>
+<span id="cb39-6"><a href="tools-for-profiling.html#cb39-6"></a>    res[i] &lt;-<span class="st"> </span>i <span class="op">*</span><span class="st"> </span><span class="dv">10</span></span>
+<span id="cb39-7"><a href="tools-for-profiling.html#cb39-7"></a>  }</span>
+<span id="cb39-8"><a href="tools-for-profiling.html#cb39-8"></a>  <span class="kw">return</span>(res)</span>
+<span id="cb39-9"><a href="tools-for-profiling.html#cb39-9"></a>}</span>
+<span id="cb39-10"><a href="tools-for-profiling.html#cb39-10"></a><span class="co"># Doing the same thing using a vectorized function</span></span>
+<span id="cb39-11"><a href="tools-for-profiling.html#cb39-11"></a>vectorized &lt;-<span class="st"> </span><span class="cf">function</span>(size){</span>
+<span id="cb39-12"><a href="tools-for-profiling.html#cb39-12"></a>  (<span class="dv">1</span><span class="op">:</span>size) <span class="op">*</span><span class="st"> </span><span class="dv">10</span></span>
+<span id="cb39-13"><a href="tools-for-profiling.html#cb39-13"></a>}</span>
+<span id="cb39-14"><a href="tools-for-profiling.html#cb39-14"></a>res &lt;-<span class="st"> </span>bench<span class="op">::</span><span class="kw">mark</span>(</span>
+<span id="cb39-15"><a href="tools-for-profiling.html#cb39-15"></a>  <span class="dt">for_loop =</span> <span class="kw">for_loop</span>(<span class="dv">1000</span>),</span>
+<span id="cb39-16"><a href="tools-for-profiling.html#cb39-16"></a>  <span class="dt">vectorized =</span> <span class="kw">vectorized</span>(<span class="dv">1000</span>),</span>
+<span id="cb39-17"><a href="tools-for-profiling.html#cb39-17"></a>  <span class="dt">iterations =</span> <span class="dv">1000</span></span>
+<span id="cb39-18"><a href="tools-for-profiling.html#cb39-18"></a>)</span></code></pre></div>
+</div>
+</div>
+<div id="profiling-shiny" class="section level3">
+<h3><span class="header-section-number">14.2.2</span> Profiling {shiny}</h3>
+<div id="shiny-back-end" class="section level4">
+<h4><span class="header-section-number">14.2.2.1</span> Shiny back-end</h4>
+<p>Can use <code>profvis(print(run_app()))</code></p>
+</div>
+<div id="shiny-front-end" class="section level4">
+<h4><span class="header-section-number">14.2.2.2</span> Shiny front-end</h4>
+<p>See: <a href="">https://engineering-shiny.org/need-for-optimization.html#b.-shiny-front-end</a></p>
+</div>
+</div>
+<div id="profiling-web-pages" class="section level3">
+<h3><span class="header-section-number">14.2.3</span> Profiling web pages</h3>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="using-golem-dev-functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="learning-objectives.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="build-first-then-optimize.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="resources-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -389,7 +480,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-epgs/edit/main/11-Build_Yourself_a_Safety_Net.Rmd",
+"link": "https://github.com/r4ds/bookclub-epgs/edit/main/14-the_need_for_optimization.Rmd",
 "text": "Edit"
 },
 "history": {
