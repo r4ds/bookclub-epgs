@@ -32,10 +32,6 @@ If you would like to present, please add your name next to a chapter using the [
 
 - 2021-10-13: Ch10 Building the app in {golem}: Russ Hyde
 
-### Interlude
-
-- 2021-10-?: TBD (Interview? Show-and-Tell?)
-
 ### Section V: Strengthen
 
 - 2021-10-27: Ch11 Testing, Environments: Russ Hyde
@@ -48,13 +44,15 @@ If you would like to present, please add your name next to a chapter using the [
 ### Section VII: Optimise
 
 - 2021-11-24: Ch14: The need for optimization: Russ Hyde
-- 2021-12-01: Ch15: Optimizing {shiny} first part: Federica Gazzelloni 
-- 2021-12-08: Ch16: Optimizing {shiny} second part: Presenter TBD
-- 2021-12-15: Ch17+18 Front end shenanigans: Presenter TBD
+- 2021-12-01: Ch15: Common Application Caveats: Federica Gazzelloni 
+- 2021-12-15: Ch15 (continued):  Common Application Caveats: Federica Gazzelloni
+- 2022-01-05: Ch16: Optimizing {shiny}: Russ Hyde
+- 2022-01-12: Ch17: Using JavaScript: Ryan Metcalf
+- 2022-01-19: Ch18: A Gentle Introduction to CSS: Presenter TBD
 
 ### Wrap-Up
 
-- 2021-12-15: Wrap up and discussion
+- 2022-01-26: Wrap up and discussion
 
 ## How to Present
 
