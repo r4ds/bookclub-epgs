@@ -1,5 +1,3 @@
-library(emojifonts)
-
 # Using JavaScript
 
 **Learning Objectives**
