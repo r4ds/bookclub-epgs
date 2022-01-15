@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.1 Introduction | Engineering Production-Grade Shiny Apps Book Club</title>
+  <title>17.3 Client-Side JavaScript | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.1 Introduction | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta property="og:title" content="17.3 Client-Side JavaScript | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.1 Introduction | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta name="twitter:title" content="17.3 Client-Side JavaScript | Engineering Production-Grade Shiny Apps Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="about-successful-shiny-apps.html"/>
-<link rel="next" href="intro-to-shiny.html"/>
+<link rel="prev" href="a-quick-introduction-to-javascript.html"/>
+<link rel="next" href="javascript---shiny-communication.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -391,25 +391,109 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction" class="section level2">
-<h2><span class="header-section-number">1.1</span> Introduction</h2>
-<div id="motivation-for-the-book-the-bookclub" class="section level3">
-<h3><span class="header-section-number">1.1.1</span> Motivation for the book (&amp; the bookclub)</h3>
-</div>
-<div id="audience-for-the-book" class="section level3">
-<h3><span class="header-section-number">1.1.2</span> Audience for the book</h3>
+<div id="client-side-javascript" class="section level2">
+<h2><span class="header-section-number">17.3</span> Client-Side JavaScript</h2>
+<p>This whole topic is related to JavaScript, but is stated with relation to R and Shiny. These three are all intertwined with each other. If extend beyond R and <code>{shiny}</code>, you can expand the interaction of your web app. Examples include: Small JavaScript functions that will prevent you from writing complex algorithmic logic in your application server.</p>
 <ul>
-<li>(experienced) shiny devs</li>
-<li>managers</li>
+<li><p><code>alert("message")</code> is a built-in alert-box mechanism. This is built into the user’s browser and can replace a call to the server, like <code>shinyalert</code>.</p></li>
+<li><p><code>var x = prompt("this", "that");</code> is a function that opens a built-in prompt window. We can recieve input and store it in a variable for future use.</p></li>
 </ul>
-</div>
-<div id="what-is-production" class="section level3">
-<h3><span class="header-section-number">1.1.3</span> What is “Production”?</h3>
+<div id="common-patterns" class="section level3">
+<h3><span class="header-section-number">17.3.1</span> Common Patterns</h3>
+<p>Examples of Client-Side use of JavaScript:</p>
 <ul>
-<li>Used</li>
-<li>Relied upon</li>
-<li>Real life impact</li>
+<li><p><code>alert("message")</code> is a built-in alert-box mechanism. This is built into the user’s browser and can replace a call to the server, like <code>shinyalert</code>.</p></li>
+<li><p><code>var x = prompt("this", "that");</code> is a function that opens a built-in prompt window. We can recieve input and store it in a variable for future use.</p></li>
+<li><p><code>$('#id').css('color', 'green');</code>, or in vanilla JavaScript <code>document.getElementById("demo").style.color = "green";</code> changes the CSS attributes of the selected element(s). Here, we are switching to green on the <code>#id</code> element.</p></li>
+<li><p><code>$("#id").text("this")</code>, or in vanilla JavaScript <code>document.getElementById("id").innerText = "this";</code> changes the text content to “this”.</p></li>
+<li><p><code>$("#id").remove();</code>, or in vanilla JavaScript <code>var elem = document.querySelector('#some-element'); elem.parentNode.removeChild(elem);</code> completely removes the element from the DOM. It can be used as a replacement for <code>shiny::removeUI()</code>, or as a conditional UI.</p></li>
 </ul>
+<blockquote>
+<p>Note that this code doesn’t remove the input values on the server side: the elements only disappear from the UI, but nothing is sent to the server side.</p>
+</blockquote>
+</div>
+<div id="where-to-put-them-back-to-javascript-events" class="section level3">
+<h3><span class="header-section-number">17.3.2</span> Where to put them: Back to JavaScript Events</h3>
+<p>It is great we are discussing all levels of JavaScript implementation…but where to put them?</p>
+<p>Here are some examples of adding JavaScript functions to DOM events:</p>
+<ul>
+<li><code>onclick</code></li>
+</ul>
+<p>The <code>onclick</code> attribute can be added straight inside the HTML tag when possible:</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="client-side-javascript.html#cb71-1"></a><span class="co"># Building a button using the native HTML tag </span></span>
+<span id="cb71-2"><a href="client-side-javascript.html#cb71-2"></a><span class="co"># (i.e. not using the actionButton() function)</span></span>
+<span id="cb71-3"><a href="client-side-javascript.html#cb71-3"></a><span class="co"># This button only goal is to launch this JS code</span></span>
+<span id="cb71-4"><a href="client-side-javascript.html#cb71-4"></a><span class="co"># when it is clicked </span></span>
+<span id="cb71-5"><a href="client-side-javascript.html#cb71-5"></a>tags<span class="op">$</span><span class="kw">button</span>(</span>
+<span id="cb71-6"><a href="client-side-javascript.html#cb71-6"></a>  <span class="st">&quot;Show&quot;</span>,</span>
+<span id="cb71-7"><a href="client-side-javascript.html#cb71-7"></a>  <span class="dt">onclick =</span> <span class="st">&quot;$(&#39;#plot&#39;).show()&quot;</span></span>
+<span id="cb71-8"><a href="client-side-javascript.html#cb71-8"></a>)</span></code></pre></div>
+<p>Or with <code>shiny::tagAppendAttributes()</code>:</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="client-side-javascript.html#cb72-1"></a><span class="co"># Using tagAppendAttributes() allows to add attributes to the </span></span>
+<span id="cb72-2"><a href="client-side-javascript.html#cb72-2"></a><span class="co"># outputed UI element</span></span>
+<span id="cb72-3"><a href="client-side-javascript.html#cb72-3"></a><span class="kw">plotOutput</span>(</span>
+<span id="cb72-4"><a href="client-side-javascript.html#cb72-4"></a>  <span class="st">&quot;plot&quot;</span></span>
+<span id="cb72-5"><a href="client-side-javascript.html#cb72-5"></a>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tagAppendAttributes</span>(</span>
+<span id="cb72-6"><a href="client-side-javascript.html#cb72-6"></a>  <span class="dt">onclick =</span> <span class="st">&quot;alert(&#39;hello world&#39;)&quot;</span></span>
+<span id="cb72-7"><a href="client-side-javascript.html#cb72-7"></a>)</span></code></pre></div>
+<p>Here is, for example, a small <code>{shiny}</code> app that implements this behavior:</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="client-side-javascript.html#cb73-1"></a><span class="kw">library</span>(shiny)</span>
+<span id="cb73-2"><a href="client-side-javascript.html#cb73-2"></a><span class="kw">library</span>(magrittr)</span>
+<span id="cb73-3"><a href="client-side-javascript.html#cb73-3"></a>ui &lt;-<span class="st"> </span><span class="cf">function</span>(){</span>
+<span id="cb73-4"><a href="client-side-javascript.html#cb73-4"></a>  <span class="kw">fluidPage</span>(</span>
+<span id="cb73-5"><a href="client-side-javascript.html#cb73-5"></a>    <span class="co"># We create a plotOutput, which will show an alert when </span></span>
+<span id="cb73-6"><a href="client-side-javascript.html#cb73-6"></a>    <span class="co"># it is clicked</span></span>
+<span id="cb73-7"><a href="client-side-javascript.html#cb73-7"></a>    <span class="kw">plotOutput</span>(</span>
+<span id="cb73-8"><a href="client-side-javascript.html#cb73-8"></a>      <span class="st">&quot;plot&quot;</span></span>
+<span id="cb73-9"><a href="client-side-javascript.html#cb73-9"></a>    ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tagAppendAttributes</span>(</span>
+<span id="cb73-10"><a href="client-side-javascript.html#cb73-10"></a>      <span class="dt">onclick =</span> <span class="st">&quot;alert(&#39;iris plot!&#39;)&quot;</span></span>
+<span id="cb73-11"><a href="client-side-javascript.html#cb73-11"></a>    )</span>
+<span id="cb73-12"><a href="client-side-javascript.html#cb73-12"></a>  )</span>
+<span id="cb73-13"><a href="client-side-javascript.html#cb73-13"></a>}</span>
+<span id="cb73-14"><a href="client-side-javascript.html#cb73-14"></a>server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session){</span>
+<span id="cb73-15"><a href="client-side-javascript.html#cb73-15"></a>  output<span class="op">$</span>plot &lt;-<span class="st"> </span><span class="kw">renderPlot</span>({</span>
+<span id="cb73-16"><a href="client-side-javascript.html#cb73-16"></a>    <span class="kw">plot</span>(iris)</span>
+<span id="cb73-17"><a href="client-side-javascript.html#cb73-17"></a>  })</span>
+<span id="cb73-18"><a href="client-side-javascript.html#cb73-18"></a>}</span>
+<span id="cb73-19"><a href="client-side-javascript.html#cb73-19"></a><span class="kw">shinyApp</span>(ui, server)</span></code></pre></div>
+<p><strong>Lets put this into Golem!!!</strong></p>
+<p>Use the <code>add_js_file("name")</code> function in Golem.</p>
+<ul>
+<li>In <code>/inst/app/www/script.js</code></li>
+</ul>
+<div class="sourceCode" id="cb74"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb74-1"><a href="client-side-javascript.html#cb74-1"></a><span class="kw">function</span> <span class="at">alertme</span>(id)<span class="op">{</span></span>
+<span id="cb74-2"><a href="client-side-javascript.html#cb74-2"></a>  <span class="co">// Asking information</span></span>
+<span id="cb74-3"><a href="client-side-javascript.html#cb74-3"></a>  <span class="kw">var</span> name <span class="op">=</span> <span class="at">prompt</span>(<span class="st">&quot;Who are you?&quot;</span>)<span class="op">;</span></span>
+<span id="cb74-4"><a href="client-side-javascript.html#cb74-4"></a>  <span class="co">// Showing an alert</span></span>
+<span id="cb74-5"><a href="client-side-javascript.html#cb74-5"></a>  <span class="at">alert</span>(<span class="st">&quot;Hello &quot;</span> <span class="op">+</span> name <span class="op">+</span> <span class="st">&quot;! You&#39;re seeing &quot;</span> <span class="op">+</span> id)<span class="op">;</span></span>
+<span id="cb74-6"><a href="client-side-javascript.html#cb74-6"></a><span class="op">}</span></span></code></pre></div>
+<ul>
+<li>Then in R</li>
+</ul>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="client-side-javascript.html#cb75-1"></a><span class="kw">plotOutput</span>(</span>
+<span id="cb75-2"><a href="client-side-javascript.html#cb75-2"></a>  <span class="st">&quot;plot&quot;</span></span>
+<span id="cb75-3"><a href="client-side-javascript.html#cb75-3"></a>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tagAppendAttributes</span>(</span>
+<span id="cb75-4"><a href="client-side-javascript.html#cb75-4"></a>  <span class="co"># Calling the function which has been defined in the </span></span>
+<span id="cb75-5"><a href="client-side-javascript.html#cb75-5"></a>  <span class="co"># external script</span></span>
+<span id="cb75-6"><a href="client-side-javascript.html#cb75-6"></a>  <span class="dt">onclick =</span> <span class="st">&quot;alertme(&#39;plot&#39;)&quot;</span></span>
+<span id="cb75-7"><a href="client-side-javascript.html#cb75-7"></a>)</span></code></pre></div>
+<p>Last example, you can also add jQuery calls too! Inside this <code>inst/app/www/script.js</code>, you can also attach a new behavior with <code>jQuery</code> to one or several elements.
+For example, you can add this <code>alertme</code> / <code>onclick</code> behavior to all plots of the app:</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb76-1"><a href="client-side-javascript.html#cb76-1"></a><span class="kw">function</span> <span class="at">alertme</span>(id)<span class="op">{</span></span>
+<span id="cb76-2"><a href="client-side-javascript.html#cb76-2"></a>  <span class="kw">var</span> name <span class="op">=</span> <span class="at">prompt</span>(<span class="st">&quot;Who are you?&quot;</span>)<span class="op">;</span></span>
+<span id="cb76-3"><a href="client-side-javascript.html#cb76-3"></a>  <span class="at">alert</span>(<span class="st">&quot;Hello &quot;</span> <span class="op">+</span> name <span class="op">+</span> <span class="st">&quot;! You&#39;re seeing &quot;</span> <span class="op">+</span> id)<span class="op">;</span></span>
+<span id="cb76-4"><a href="client-side-javascript.html#cb76-4"></a><span class="op">}</span></span>
+<span id="cb76-5"><a href="client-side-javascript.html#cb76-5"></a><span class="co">/* We&#39;re adding this so that the function is launched only</span></span>
+<span id="cb76-6"><a href="client-side-javascript.html#cb76-6"></a><span class="co">when the document is ready */</span></span>
+<span id="cb76-7"><a href="client-side-javascript.html#cb76-7"></a><span class="at">$</span>(<span class="kw">function</span>()<span class="op">{</span> </span>
+<span id="cb76-8"><a href="client-side-javascript.html#cb76-8"></a>  <span class="co">// Selecting all `{shiny}` plots</span></span>
+<span id="cb76-9"><a href="client-side-javascript.html#cb76-9"></a>  <span class="at">$</span>(<span class="st">&quot;.shiny-plot-output&quot;</span>).<span class="at">on</span>(<span class="st">&quot;click&quot;</span><span class="op">,</span> <span class="kw">function</span>()<span class="op">{</span></span>
+<span id="cb76-10"><a href="client-side-javascript.html#cb76-10"></a>    <span class="co">/* Calling the alertme function with the id </span></span>
+<span id="cb76-11"><a href="client-side-javascript.html#cb76-11"></a><span class="co">    of the clicked plot */</span></span>
+<span id="cb76-12"><a href="client-side-javascript.html#cb76-12"></a>    <span class="at">alertme</span>(<span class="kw">this</span>.<span class="at">id</span>)<span class="op">;</span></span>
+<span id="cb76-13"><a href="client-side-javascript.html#cb76-13"></a>  <span class="op">}</span>)<span class="op">;</span></span>
+<span id="cb76-14"><a href="client-side-javascript.html#cb76-14"></a><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
+<p>We’ve unpacked a lot here…but there is more. Check out <a href="https://shiny.rstudio.com/articles/js-events.html">JavaScript Events in <code>{shiny}</code></a> for the full list of JavaScript events available in <code>{shiny}</code>.</p>
 </div>
 </div>
             </section>
@@ -417,8 +501,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="about-successful-shiny-apps.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="intro-to-shiny.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="a-quick-introduction-to-javascript.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="javascript---shiny-communication.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -449,7 +533,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-epgs/edit/main/01-introduction.Rmd",
+"link": "https://github.com/r4ds/bookclub-epgs/edit/main/17-using-javascript.Rmd",
 "text": "Edit"
 },
 "history": {
