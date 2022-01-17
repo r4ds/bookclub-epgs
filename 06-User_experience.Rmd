@@ -369,15 +369,23 @@ How to evaluate accessibility?
 - [Color blindness](https://www.colourblindawareness.org/)
 
 
+## Meeting Videos
 
+### Cohort 1
 
+`r knitr::include_url("https://www.youtube.com/embed/ZvwWVEdT5VI")`
 
-
-
-
-
-
-
-
-
-
+<details>
+  <summary> Meeting chat log </summary>
+```
+00:07:13	Ryan Metcalf:	So sorry for my delay in joining team!
+00:07:25	Federica Gazzelloni:	All good
+00:07:41	Federica Gazzelloni:	Hello
+00:10:03	Russ Hyde:	https://r4ds.github.io/bookclub-epgs/
+00:33:34	Ryan Metcalf:	https://databank.worldbank.org/source/education-statistics-%5e-all-indicators
+00:34:25	Ryan Metcalf:	I’m using education as an example of Dataset. I’m referring to the construction of a query to display. LOTS to choose from. To an unfamiliar user, this site is difficult to navigate and produce meaningful results.
+00:34:59	Russ Hyde:	I think the notifyjs exmaple was moved here; https://github.com/ColinFay/golemexamples/tree/master/golemnotifyjs
+00:49:06	Federica Gazzelloni:	https://connect.thinkr.fr/hexmake/
+01:02:53	Federica Gazzelloni:	thanks Ryan
+```
+</details>

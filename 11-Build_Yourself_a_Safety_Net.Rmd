@@ -309,3 +309,20 @@ Did not present on:
 - A reproducible environment and {renv}
 
 -  Docker
+
+## Meeting Videos
+
+### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/p5IXw-AlBK4")`
+
+<details>
+  <summary> Meeting chat log </summary>
+```
+00:35:42	Federica Gazzelloni:	puppeteer : https://developers.google.com/web/tools/puppeteer
+00:36:17	Federica Gazzelloni:	testthat: https://testthat.r-lib.org/
+00:39:34	Federica Gazzelloni:	hexmake: https://connect.thinkr.fr/hexmake/
+00:40:21	Federica Gazzelloni:	headless-recorder: https://chrome.google.com/webstore/detail/headless-recorder/djeegiggegleadkkbgopoonhjimgehda
+01:07:01	Federica Gazzelloni:	shinytest: https://rstudio.github.io/shinytest/
+```
+</details>

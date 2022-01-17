@@ -1,0 +1,22 @@
+# A Gentle Introduction to CSS
+
+**Learning Objectives**
+
+ - ADD LEARNING OBJECTIVES HERE
+
+## SLIDE 1 TITLE
+
+- SLIDE CONTENTS
+
+## Meeting Videos
+
+### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+  <summary> Meeting chat log </summary>
+```
+LOG
+```
+</details>
