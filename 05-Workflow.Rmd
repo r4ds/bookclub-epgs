@@ -1,1 +1,7 @@
 # The Workflow
+
+## Meeting Videos
+
+### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/qpyYLfmvsvk")`

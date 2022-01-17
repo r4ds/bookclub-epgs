@@ -317,3 +317,18 @@ In conclusion, there are some different ways to optimize an app using extrafeatu
 - [blog.sellorm.com](https://blog.sellorm.com/2021/06/16/getting-started-with-logging-in-r/)
 - [whereami](https://github.com/yonicd/whereami)
 
+
+## Meeting Videos
+
+### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/JkacZOrB1QY")`
+
+<details>
+  <summary> Meeting chat log (2021-12-01) </summary>
+```
+00:06:09	Ryan Metcalf:	https://adventofcode.com/
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/5wL02PXgQiY")`

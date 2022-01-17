@@ -92,3 +92,9 @@ functions etc)
 - Vignettes are first-class part of package infrastructure
 
 - They are built during package check; so you have automated check that vignettes continue to work
+
+## Meeting Videos
+
+### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/nZBHGf8YH_8")`

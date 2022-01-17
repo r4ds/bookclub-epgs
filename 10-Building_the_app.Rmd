@@ -114,3 +114,9 @@
 
 - `golem::cat_dev("Only prints when options(golem.app.prod = FALSE)")`
 - `golem::make_dev(some_function)`
+
+## Meeting Videos
+
+### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/nZBHGf8YH_8")`

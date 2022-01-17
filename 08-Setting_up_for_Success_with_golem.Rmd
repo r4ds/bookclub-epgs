@@ -132,3 +132,17 @@ This is the core of your application and where the development focus begins.
 
 ### Add CSS and JS files
 If you have particular "look and feel" of your app in the form
+
+## Meeting Videos
+
+### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/LXoAH0GQ_qU")`
+
+<details>
+  <summary> Meeting chat log </summary>
+```
+00:30:05	Russ Hyde:	https://www.r-project.org/Licenses/
+00:30:19	Russ Hyde:	https://www.r-project.org/Licenses/MIT
+```
+</details>

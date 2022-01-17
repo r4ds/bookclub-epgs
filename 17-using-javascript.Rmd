@@ -402,3 +402,26 @@ Here is a list of external resources to learn more about JavaScript:
 
 -   [Eloquent JavaScript](https://eloquentjavascript.net/)
 -   [You Don't Know JS Yet](https://github.com/getify/You-Dont-Know-JS)
+
+
+## Meeting Videos
+
+### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/XHz5s_T6MQU")`
+
+<details>
+  <summary> Meeting chat log </summary>
+```
+00:10:56	Ryan Metcalf:	This is a side project I’m working through…..nothing of presentation yet: https://xapi.com/overview/?utm_source=google&utm_medium=natural_search
+00:19:45	Federica Gazzelloni:	@Russ can you put the title of the book?
+00:19:59	russ:	"Javascript for R"
+00:20:08	russ:	John Coene
+00:20:09	Federica Gazzelloni:	is there any pdf or free available resource for that?
+00:21:04	russ:	https://book.javascript-for-r.com/
+00:21:23	Federica Gazzelloni:	thanks!
+00:48:26	russ:	Standard generalized markup language
+01:13:24	Federica Gazzelloni:	https://shiny.rstudio.com/articles/communicating-with-js.html
+01:18:02	Federica Gazzelloni:	little example app that continuously sends rainbow colors from R to JavaScript
+```
+</details>
