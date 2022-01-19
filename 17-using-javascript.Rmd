@@ -362,15 +362,205 @@ observe({
 ```
 
 ### From JavaScript to R
->NOTE: My presentation ends here.....I need to finish the remaining three sections.
+How can you do the opposite (send JavaScript calls to R)?
+
+There is an object called `Shiny` within your browser. This object can be used to send values to R by creating an `InputValue`.
+
+```{js, JavaScript to R, eval = FALSE}
+// This function from the Shiny JavaScript object
+// Allows to register an input name, and a value
+Shiny.setInputValue("rand", Math.random())
+```
+
+You bind an input which can be caut fro the server side using:
+
+```{r, JavaScipt to R Example 2, eval = FALSE}
+# Once the input is set, it can be caught with R using:
+observeEvent( input$rand , {
+  print( input$rand )
+})
+```
+
+`Shiny.setInputValue` cn be used inside any JavaScript function. As an example we use the following code snippet:
+
+- In `inst/app/www/script.js`
+
+```{r, JavaScript Example 3, eval = FALSE}
+function alertme(){
+  var name = prompt("Who are you?");
+  alert("Hello " + name + "! Welcome to my app");
+  Shiny.setInputValue("username", name)
+}
+
+$(function(){ 
+  // Waiting for `{shiny}` to be connected
+  $(document).on('shiny:connected', function(event) {
+    alertme();
+  });
+  
+  $(".shiny-plot-output").on("click", function(){
+    /* Calling the alertme function with the id 
+    of the clicked plot. 
+    The `this` object here refers to the clicked element*/
+    Shiny.setInputValue("last_plot_clicked", this.id);
+  });
+});
+
+```
+
+The above snippet gets the user name and last plot clicked. We can catch the call to the server using the following snippet:
+
+```{r, JavaScript Receipt to Server, eval = FALSE}
+# We wait for the output of alertme(), which will set the
+# "username" input value
+observeEvent( input$username , {
+  cli::cat_rule("User name:")
+  print(input$username)
+})
+
+# This will print the id of the last clicked plot
+observeEvent( input$last_plot_clicked , {
+  cli::cat_rule("Last plot clicked:")
+  print(input$last_plot_clicked)
+})
+```
+
+Which will give:
+
+```{r, Server Output, eval = FALSE}
+> golex::run_app()
+Loading required package: shiny
+
+Listening on http://127.0.0.1:5495
+── User name: ─────────────────────────────────────────────────────
+[1] "Colin"
+── Last plot clicked: ─────────────────────────────────────────────
+[1] "plota"
+── Last plot clicked: ─────────────────────────────────────────────
+[1] "plotb"
+```
+
+
+> NOTE: If you are using modules, you will need to pass the namespacing of the `id` to be able to get it back from the server. This can be accomplished using the `session$ns` function. This comes by default using any golem-generated module.
+
+Example of a `session$ns` call used in Golem Module:
+
+```{js, Golem Session Namespace use, eval = FALSE}
+$( document ).ready(function() {
+  // Setting a custom handler that will
+  // ask the users their name
+  // then set the returned value to a Shiny input
+  Shiny.addCustomMessageHandler('whoareyou', function(arg) {
+    var name = prompt("Who are you?")
+    Shiny.setInputValue(arg.id, name);
+  })
+});
+```
+
+```{r, Golem Session Namespace use 2, eval = FALSE}
+mod_my_first_module_ui <- function(id){
+  ns <- NS(id)
+  tagList(
+    actionButton(
+      ns("showname"), "Enter your name"
+    )
+  )
+}
+
+mod_my_first_module_server <- function(input, output, session){
+  ns <- session$ns
+  # Whenever the button is clicked, 
+  # we call the CustomMessageHandler
+  observeEvent( input$showname , {
+    # Calling the "whoareyou" handler
+    golem::invoke_js(
+      "whoareyou", 
+      # The id is namespaced, 
+      # so that we get it back on the server-side
+      list(
+        id = ns("name")
+      )
+    )
+  })
+  
+  # Waiting for input$name to  be set with JavaScript
+  observeEvent( input$name , {
+    cli::cat_rule("Username is:")
+    print(input$name)
+  })
+}
+```
 
 ## About {shinyjs} JS functions
-PUT SOME TEXT HERE
+As mentioned at the beginning of the chapter, running JavaScript code you don't fully control/understand can be tricky and may open vulnerabilities. It is always safer to use proven packages that have been tested and passed efficiency. For example [`shinyjs`](https://deanattali.com/shinyjs/).
+
+See [deanattali.com/shinyjs/](https://deanattali.com/shinyjs/) for more information.
 
 ## One last thing: API calls
-PUT SOME TEXT HERE
+If you ShinyApp uses API calls, there are good chances you are already doing this from R. However, there may be downsides to this approach. As an example, if you are limited by API calls (Twitter API, Google Map API). Due to these restrictions your end user may be limited in using your app.
+
+A work around is instead of using your Server's IP to make the API call, wrap it in Javascript so you use your user's IP instead! This allows your ShinyApp to scale.
+
+You use the `fetch()` JavaScript function to make API calls. For an example: `tags$button("Get Me One!", onclick = "get_rand_beer()")`.
+
+Below is a general skeleton that works with an API that does not require authentication and returns a JSON object.
+
+- Inside JavaScript (here, we create a function that will be available on an onclick event):
+
+```{js, Get a Beer, eval = FALSE}
+// FUNCTION definition
+const get_rand_beer = () => {
+  // Fetching the data
+  fetch("https://api.punkapi.com/v2/beers/random")
+  // What do we do when we receive the data
+  .then((data) =>{
+  // TTurn the data to JSON
+    data.json().then((res) => {
+    // Send the json to R
+      Shiny.setInputValue("beer", res, {priority: 'event'})
+    })
+  })
+  // Define what happens if we fail to fetch
+  .catch((error) => {
+      alert("Error catching result from API")
+  })
+};
+```
+
+- Observe the event in your server:
+
+```{r}
+observeEvent( input$beer , {
+  # Do things with beer
+})
+```
+
+>NOTE: The data shared between R and JavaScript is serialized to JSON, so you will have to manipulate the format once you recieve it in R.
+
+Learn more about `fetch()` at [Using Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch).
 
 ## Learn more about JavaScript
+
+If you want to interact straight with R using NodeJS, you can use the `{bubble}` package. Obviously, you need to have NodeJS installed on your machine to use this service.
+
+Install `{bubble}` from GitHub:
+
+```{r, Install Bubble, eval = FALSE}
+remotes::install_github("ColinFay/bubble")
+```
+
+You can use it in RMarkdown chunks by setting the `knitr` engine:
+
+```{r, Configure Knitr, eval = FALSE}
+bubble::set_node_engine()
+```
+
+Or straight from command line with:
+
+```{r, Node Commandline, eval = FALSE}
+node_repl()
+```
+
 Here is a list of external resources to learn more about JavaScript:
 
 ### `{shiny}` and JavaScript
