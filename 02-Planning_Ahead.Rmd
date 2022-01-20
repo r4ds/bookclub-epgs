@@ -56,5 +56,12 @@ Expand on this topic for military style of *lowest common denominator*. Simple i
  - Select one or more core developers skilled but specific in their field of study
  - Follow *git workflow* with issue tracking and managing pull requests
  
- ## Reference
- [Lemaire, Maude. 2020. Refactoring at Scale. Henry Holt.](https://www.oreilly.com/library/view/refactoring-at-scale/9781492075523/) **NOTE: Payed Service**
+## Reference
+ [Lemaire, Maude. 2020. Refactoring at Scale. Henry Holt.](https://www.oreilly.com/library/view/refactoring-at-scale/9781492075523/) **NOTE: Paid Service**
+
+
+## Meeting Videos
+
+### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/1zvfa-sORRc")`

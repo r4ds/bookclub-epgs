@@ -166,4 +166,4 @@ See: [https://engineering-shiny.org/need-for-optimization.html#b.-shiny-front-en
 
 ### Cohort 1
 
-`r knitr::include_url("https://www.youtube.com/embed/p5IXw-AlBK4")`
+`r knitr::include_url("https://www.youtube.com/embed/gEaGKdVGaM4")`

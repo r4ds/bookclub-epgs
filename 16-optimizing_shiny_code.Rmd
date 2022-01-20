@@ -400,16 +400,26 @@ The first future sent needn't be the first to return
   - do you need the final future? (use an identifier)
   - do you need the futures in sequence? (use a queue)
 
+
 ## Meeting Videos
 
 ### Cohort 1
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/9rsY29U0218")`
 
 <details>
   <summary> Meeting chat log </summary>
-
 ```
-CHAT LOG HERE
+00:07:38	Ryan Metcalf:	https://www.scootersoftware.com/
+00:13:41	Ryan Metcalf:	http://www.math.rug.nl/~trentelman/jacob/pdflatex/pdflatex.html
+00:15:28	Ryan Metcalf:	One more link for you Federica: https://community.rstudio.com/t/rstudio-cant-find-pdflatex/49790
+00:15:56	Federica Gazzelloni:	this is mine: https://tug.org/mactex/faq/3-4.html
+01:02:16	Federica Gazzelloni:	library(promises) ?”%…>%”
+01:02:38	Federica Gazzelloni:	https://rstudio.github.io/promises/articles/overview.html#using-pipes
+01:08:58	Ryan Metcalf:	Link isn’t related to R necessarily, but does add a comparison or a more general framework towards Asynchronous web services. In the example, use Apache as the back end and Nginx managing the treading to the backend servers (Apache). I entered this world in eLearning and latency in rendering videos and SCORM content. https://www.digitalocean.com/community/tutorials/apache-vs-nginx-practical-considerations
+01:16:16	Dhiraj Khanna:	I did use asynchronous programming in Shiny a while back. Found it to be quite useful while fetching external data using an API that took a long time. The benefit of using async is that multiple users who are trying to make a call at the same time will not have to wait for one another, but it does come at a cost of a fairly large overhead. At least for me
+01:18:55	Dhiraj Khanna:	Adding async will make the call much slower for each person. So the tradeoff is either making the call fast for each single session, but multiple sessions have to queue up, OR making the call a bit slower but multiple sessions can run in parallel.
+01:19:55	Ryan Metcalf:	Good comment Dhiraj. This would make sense for sure!
+01:22:51	Dhiraj Khanna:	I am not too sure but I think shinyproxy kind of helps in parallel processing and multi threading
 ```
 </details>

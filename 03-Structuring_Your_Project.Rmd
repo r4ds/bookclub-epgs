@@ -105,4 +105,34 @@ A shiny app has two main components:
 
 `*_server_*` are files that contain anything related to the application’s back-end. For example, fct_connection_server.R will contain functions that are related to the connection to a database, and are specifically used from the server side.
 
-  
+## Meeting Videos
+
+### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/6Ut8tqHQfJg")`
+
+<details>
+  <summary> Meeting chat log </summary>
+```
+00:06:11	Jumping Rivers:	Sorry signed in with work account. BRB
+00:12:10	Dhiraj Khanna:	Hello, this is Dhiraj, sorry I’m late
+00:12:21	Federica Gazzelloni:	Hello!
+00:12:41	Dhiraj Khanna:	Glad to be here!
+00:12:41	Russ Hyde:	Hi Dhiraj
+00:15:02	Dhiraj Khanna:	NAMESPACE is read only from what I know
+00:18:12	Dhiraj Khanna:	Vee-nee-ets is how I pronounce :)
+00:20:45	Dhiraj Khanna:	Get off TrAVIS!
+00:21:17	Dhiraj Khanna:	GitHub Actions is what he recommends
+00:24:53	Dhiraj Khanna:	Would it be ok for me to share my screen at some point and talk about my experiences with {golem}?
+00:30:08	Dhiraj Khanna:	I am not too sure, but the way I look at it is that every tab in my shiny app is a module
+00:32:43	Federica Gazzelloni:	can we have the link in the chat?
+00:35:00	Dhiraj Khanna:	It’s for a client and not publicly available bit I could share my screen and show you
+00:35:34	Ryan Metcalf:	https://connect.thinkr.fr/tidytuesday201942/
+00:43:34	Federica Gazzelloni:	R6 package: https://r6.r-lib.org/articles/Introduction.html
+00:44:31	Dhiraj Khanna:	Is tidymodules a package? Sorry for the ignorance!
+00:45:15	Russ Hyde:	Yes: https://github.com/Novartis/tidymodules
+00:45:25	Dhiraj Khanna:	Nice!
+00:46:02	Federica Gazzelloni:	R6 package provides a type of class which is similar to R’s standard reference classes
+00:47:19	Dhiraj Khanna:	RPi rocks!
+```
+</details>

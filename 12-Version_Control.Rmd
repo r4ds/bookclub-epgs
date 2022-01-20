@@ -172,3 +172,21 @@ One more feature is:
 -   [R CMD check](https://github.com/r-Lib/rcmdcheck#readme)
 
 -   [hub.docker](https://hub.docker.com/r/colinfay/r-ci-tidyverse)
+
+## Meeting Videos
+
+### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/T-x6XBrauvU")`
+
+<details>
+  <summary> Meeting chat log </summary>
+```
+00:40:00	Russ Hyde:	Here are some git resources that I like: https://www.atlassian.com/git/tutorials/syncing (bitbucket's tutorials on git for teams) https://learngitbranching.js.org/ (a game for learning git branching)
+00:40:18	Russ Hyde:	Semantic versioning: https://semver.org/  (MAJOR.MINOR.PATCH)
+00:50:38	Russ Hyde:	The {usethis} pull-request helpers are quite nice too: https://usethis.r-lib.org/articles/articles/pr-functions.html
+00:56:02	Russ Hyde:	use_github_action_pr_commands() is quite nice. With this in place, you can type `/document` in the discussion on a pull request, and it will run roxygen2 on your package/app; similarly `/style` will run {styler} on your repo
+00:57:42	Ryan Metcalf:	I’ve only used in a “minor” process (Flask deployment) on Gitlab CI/CD. I haven’t used GitHub as frequently therefore a bit naive towards GitHub Actions. To benefit the future viewer, I found this page beneficial: https://about.gitlab.com/devops-tools/github-vs-gitlab/ci-missing-github-capabilities/
+01:08:57	Russ Hyde:	and I always like to push https://www.codetriage.com/ on people. One problem open-source projects have is that there are more issues than time could allow to fix. It's really useful to identify issues that are duplicated, or otherwise closely related, or that have already been fixed. This website gives those who want to help with open-source a chance to help with triaging github issues (determining whether an issue is _important_).
+```
+</details>

@@ -10,7 +10,10 @@ As we read, we are producing [notes about the book](https://r4ds.github.io/bookc
 
 If you would like to present, please add your name next to a chapter using the [GitHub Web Editor](https://youtu.be/d41oc2OMAuI)!
 
-*Cohort 1: (starts 2021-08-25) - Wednesdays, 12pm EST/EDT*
+*Cohort 1: (began 2021-08-25) - Wednesdays, 12pm EST/EDT*
+
+<details>
+  <summary> Past Meetings </summary>
 
 ### Section I: Building successful apps
 
@@ -40,6 +43,8 @@ If you would like to present, please add your name next to a chapter using the [
 ### Section VI: Deploy
 
 - 2021-11-17: Ch13 + Appendix A Deploying an App, and the whole workflow: Ryan Metcalf
+
+</details>
 
 ### Section VII: Optimise
 
