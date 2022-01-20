@@ -24,7 +24,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-01-17" />
+<meta name="date" content="2022-01-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -442,6 +442,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="learn-more-about-javascript" class="section level2">
 <h2><span class="header-section-number">17.7</span> Learn more about JavaScript</h2>
+<p>If you want to interact straight with R using NodeJS, you can use the <code>{bubble}</code> package. Obviously, you need to have NodeJS installed on your machine to use this service.</p>
+<p>Install <code>{bubble}</code> from GitHub:</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="learn-more-about-javascript.html#cb97-1"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;ColinFay/bubble&quot;</span>)</span></code></pre></div>
+<p>You can use it in RMarkdown chunks by setting the <code>knitr</code> engine:</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="learn-more-about-javascript.html#cb98-1"></a>bubble<span class="op">::</span><span class="kw">set_node_engine</span>()</span></code></pre></div>
+<p>Or straight from command line with:</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="learn-more-about-javascript.html#cb99-1"></a><span class="kw">node_repl</span>()</span></code></pre></div>
 <p>Here is a list of external resources to learn more about JavaScript:</p>
 <div id="shiny-and-javascript" class="section level3">
 <h3><span class="header-section-number">17.7.1</span> <code>{shiny}</code> and JavaScript</h3>
