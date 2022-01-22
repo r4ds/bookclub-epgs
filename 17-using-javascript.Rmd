@@ -616,3 +616,16 @@ Here is a list of external resources to learn more about JavaScript:
 01:18:02	Federica Gazzelloni:	little example app that continuously sends rainbow colors from R to JavaScript
 ```
 </details>
+
+`r knitr::include_url("https://www.youtube.com/embed/0PTj3_TUyx4")`
+
+<details>
+  <summary> Meeting chat log </summary>
+```
+00:27:29	Federica Gazzelloni:	the plot was the one with iris facets
+00:44:13	Federica Gazzelloni:	get_rand_beer () => {FETCHING THE API DATA}
+00:57:20	Federica Gazzelloni:	https://www.r-bloggers.com/2020/05/fetch-api-results-from-the-browser-and-send-them-to-shiny/
+01:06:15	Federica Gazzelloni:	that is js language
+01:12:24	Federica Gazzelloni:	apologies but I have another meeting …. thanks for this session @ryan and @russ for facilitating
+```
+</details>
