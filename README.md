@@ -53,11 +53,10 @@ If you would like to present, please add your name next to a chapter using the [
 - 2021-12-15: Ch15 (continued):  Common Application Caveats: Federica Gazzelloni
 - 2022-01-05: Ch16: Optimizing {shiny}: Russ Hyde
 - 2022-01-12: Ch17: Using JavaScript: Ryan Metcalf
-- 2022-01-19: Ch18: A Gentle Introduction to CSS: Presenter TBD
+- 2022-01-19: Ch17 (continued): Using JavaScript: Ryan Metcalf
+- 2022-01-26: Break
+- 2022-02-02: Ch18: A Gentle Introduction to CSS and Wrap-Up: Russ Hyde
 
-### Wrap-Up
-
-- 2022-01-26: Wrap up and discussion
 
 ## How to Present
 
