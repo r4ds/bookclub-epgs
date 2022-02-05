@@ -10,7 +10,7 @@ As we read, we are producing [notes about the book](https://r4ds.github.io/bookc
 
 If you would like to present, please add your name next to a chapter using the [GitHub Web Editor](https://youtu.be/d41oc2OMAuI)!
 
-*Cohort 1: (began 2021-08-25) - Wednesdays, 12pm EST/EDT*
+*Cohort 1: (began 2021-08-25) - FINISHED*
 
 <details>
   <summary> Past Meetings </summary>
@@ -44,8 +44,6 @@ If you would like to present, please add your name next to a chapter using the [
 
 - 2021-11-17: Ch13 + Appendix A Deploying an App, and the whole workflow: Ryan Metcalf
 
-</details>
-
 ### Section VII: Optimise
 
 - 2021-11-24: Ch14: The need for optimization: Russ Hyde
@@ -57,6 +55,7 @@ If you would like to present, please add your name next to a chapter using the [
 - 2022-01-26: Break
 - 2022-02-02: Ch18: A Gentle Introduction to CSS and Wrap-Up: Russ Hyde
 
+</details>
 
 ## How to Present
 
