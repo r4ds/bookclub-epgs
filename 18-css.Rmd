@@ -2,17 +2,219 @@
 
 **Learning Objectives**
 
- - ADD LEARNING OBJECTIVES HERE
+ - What CSS does
+ - CSS is already used by {shiny}
+ - How to write custom CSS
+ - Integration of custom CSS with {shiny}
 
-## SLIDE 1 TITLE
+## What is CSS
 
-- SLIDE CONTENTS
+CSS
+
+- "Cascading style sheets"
+- Encodes webpage design
+  - View a page without CSS ("Web Developer" -> CSS -> Disable All Styles)
+
+### Default CSS for {shiny}
+
+Without fluidPage:
+
+```{r css-1}
+library(shiny)
+
+my_tags <- tagList(
+  h1("Hey"), 
+  h2("You"), 
+  p("You rock!"), 
+  selectInput("what", "Do you", unique(iris$Species))
+)
+
+ui1 <- function(){
+  my_tags
+}
+
+ui2 <- function(){
+  fluidPage(my_tags)
+}
+
+empty_server <- function(input, output, session){}
+```
+
+```r
+shinyApp(ui1, empty_server)
+
+shinyApp(ui2, empty_server)
+```
+
+Show the HTML
+
+```{r css-2}
+print(ui1())
+
+print(ui2())
+```
+
+## Getting started with CSS
+
+- HTML is packed full of tags
+- You use CSS to explain how each HTML element should look
+- If the element has this tag ... it should look like this
+
+```css
+h2 {
+  color: red;
+}
+
+//
+selector {
+  property: value;
+}
+```
+
+Selecting elements based on different types of properties:
+
+```css
+// examples from ui2() above
+
+// eg `h2` or `div`
+the-name {
+  property: value;
+}
+
+// eg, `#what`
+#the-id {
+  property: value;
+}
+
+// eg, `.control-label`
+.the-class {
+  property: value;
+}
+```
+
+You can combine the selectors together:
+
+```
+h1,h2    // either `h1` or `h2`
+div h1   // an `h1` inside a `div`
+div > h1 // an `h1` immediately inside a `div`
+a:hover  // an `a`, but only when the user hovers over it
+```
+
+and so on.
+
+See the wonderful tutorial at MDN for more on the various ways to select elements:
+
+[https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors]()
+
+## Integrate CSS files in your {shiny} app
+
+CSS can be included in shiny apps in a few ways:
+
+- inline
+- in your `ui` definition
+- in an imported file
+
+### Inline
+
+```{r css-3}
+ui3 <- function(){
+  tagList(
+    h2(style = "color:red;", "This is red")
+  )
+}
+```
+
+```r
+shinyApp(ui3, empty_server)
+```
+
+```{r css-4}
+print(ui3())
+```
+
+### Using tags$style()
+
+```{r css-5}
+ui4 <- function(){
+  tagList(
+    tags$style(
+      "h2{
+        color:red;
+      }"
+    ), 
+    h2("This is red")
+  )
+}
+```
+
+```{r css-6}
+print(ui4())
+```
+
+### Using external files
+
+Provided you have this in the path `./www/style.css`
+
+```css
+h2 {
+    color: red;
+}
+```
+
+Then the following will incorporate that css into your vanilla shiny app.
+
+```{r css-7}
+ui5 <- function() {
+  tagList(
+    tags$link(
+      rel = "stylesheet",
+      type = "text/css",
+      href = "www/style.css"
+    ), 
+    h2("This is red")
+  )
+}
+```
+
+A golem-based shiny app has the command `golem_add_external_resources()` in the UI definition. This
+function pulls in any CSS or JS files. But, to add those CSS / JS files you have to use the correct
+golem workflow:
+
+```r
+# For CSS
+golem::add_css_file("style")
+```
+
+This adds the file `inst/app/www/style.css` to your package.
+
+There are alternative ways to include CSS. In "Outstanding User Interfaces with Shiny", the author
+recommends creating a dependency, and then including it as a tag in your UI:
+
+```r
+# R/style.R
+css_dep <- function() {
+  htmlDependency(
+    name = "css dep", version = "1.0", src = path_to_css, stylesheet = filename
+  )
+}
+
+# In ui.R
+... tagList(tag, css_dep)
+```
+
+## External Resources
+
+Tools
+
+- "Web Developer" extension
+  [https://chrome.google.com/webstore/detail/web-developer/bfbameneiokkgbdmiekhjnmfkcnldhhm/related]()
 
 ## Meeting Videos
 
 ### Cohort 1
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/i7utiiM8fr8")`
 
 <details>
   <summary> Meeting chat log </summary>
