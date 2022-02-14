@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>18.1 SLIDE 1 TITLE | Engineering Production-Grade Shiny Apps Book Club</title>
+  <title>18.3 Integrate CSS files in your {shiny} app | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="18.1 SLIDE 1 TITLE | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta property="og:title" content="18.3 Integrate CSS files in your {shiny} app | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="18.1 SLIDE 1 TITLE | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta name="twitter:title" content="18.3 Integrate CSS files in your {shiny} app | Engineering Production-Grade Shiny Apps Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="a-gentle-introduction-to-css.html"/>
-<link rel="next" href="meeting-videos-17.html"/>
+<link rel="prev" href="getting-started-with-css.html"/>
+<link rel="next" href="external-resources.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -415,9 +415,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="a-gentle-introduction-to-css.html"><a href="a-gentle-introduction-to-css.html"><i class="fa fa-check"></i><b>18</b> A Gentle Introduction to CSS</a><ul>
-<li class="chapter" data-level="18.1" data-path="slide-1-title.html"><a href="slide-1-title.html"><i class="fa fa-check"></i><b>18.1</b> SLIDE 1 TITLE</a></li>
-<li class="chapter" data-level="18.2" data-path="meeting-videos-17.html"><a href="meeting-videos-17.html"><i class="fa fa-check"></i><b>18.2</b> Meeting Videos</a><ul>
-<li class="chapter" data-level="18.2.1" data-path="meeting-videos-17.html"><a href="meeting-videos-17.html#cohort-1-17"><i class="fa fa-check"></i><b>18.2.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="18.1" data-path="what-is-css.html"><a href="what-is-css.html"><i class="fa fa-check"></i><b>18.1</b> What is CSS</a><ul>
+<li class="chapter" data-level="18.1.1" data-path="what-is-css.html"><a href="what-is-css.html#default-css-for-shiny"><i class="fa fa-check"></i><b>18.1.1</b> Default CSS for {shiny}</a></li>
+</ul></li>
+<li class="chapter" data-level="18.2" data-path="getting-started-with-css.html"><a href="getting-started-with-css.html"><i class="fa fa-check"></i><b>18.2</b> Getting started with CSS</a></li>
+<li class="chapter" data-level="18.3" data-path="integrate-css-files-in-your-shiny-app.html"><a href="integrate-css-files-in-your-shiny-app.html"><i class="fa fa-check"></i><b>18.3</b> Integrate CSS files in your {shiny} app</a><ul>
+<li class="chapter" data-level="18.3.1" data-path="integrate-css-files-in-your-shiny-app.html"><a href="integrate-css-files-in-your-shiny-app.html#inline"><i class="fa fa-check"></i><b>18.3.1</b> Inline</a></li>
+<li class="chapter" data-level="18.3.2" data-path="integrate-css-files-in-your-shiny-app.html"><a href="integrate-css-files-in-your-shiny-app.html#using-tagsstyle"><i class="fa fa-check"></i><b>18.3.2</b> Using tags$style()</a></li>
+<li class="chapter" data-level="18.3.3" data-path="integrate-css-files-in-your-shiny-app.html"><a href="integrate-css-files-in-your-shiny-app.html#using-external-files"><i class="fa fa-check"></i><b>18.3.3</b> Using external files</a></li>
+</ul></li>
+<li class="chapter" data-level="18.4" data-path="external-resources.html"><a href="external-resources.html"><i class="fa fa-check"></i><b>18.4</b> External Resources</a></li>
+<li class="chapter" data-level="18.5" data-path="meeting-videos-17.html"><a href="meeting-videos-17.html"><i class="fa fa-check"></i><b>18.5</b> Meeting Videos</a><ul>
+<li class="chapter" data-level="18.5.1" data-path="meeting-videos-17.html"><a href="meeting-videos-17.html#cohort-1-17"><i class="fa fa-check"></i><b>18.5.1</b> Cohort 1</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -440,19 +449,86 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="slide-1-title" class="section level2">
-<h2><span class="header-section-number">18.1</span> SLIDE 1 TITLE</h2>
+<div id="integrate-css-files-in-your-shiny-app" class="section level2">
+<h2><span class="header-section-number">18.3</span> Integrate CSS files in your {shiny} app</h2>
+<p>CSS can be included in shiny apps in a few ways:</p>
 <ul>
-<li>SLIDE CONTENTS</li>
+<li>inline</li>
+<li>in your <code>ui</code> definition</li>
+<li>in an imported file</li>
 </ul>
+<div id="inline" class="section level3">
+<h3><span class="header-section-number">18.3.1</span> Inline</h3>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="integrate-css-files-in-your-shiny-app.html#cb111-1"></a>ui3 &lt;-<span class="st"> </span><span class="cf">function</span>(){</span>
+<span id="cb111-2"><a href="integrate-css-files-in-your-shiny-app.html#cb111-2"></a>  <span class="kw">tagList</span>(</span>
+<span id="cb111-3"><a href="integrate-css-files-in-your-shiny-app.html#cb111-3"></a>    <span class="kw">h2</span>(<span class="dt">style =</span> <span class="st">&quot;color:red;&quot;</span>, <span class="st">&quot;This is red&quot;</span>)</span>
+<span id="cb111-4"><a href="integrate-css-files-in-your-shiny-app.html#cb111-4"></a>  )</span>
+<span id="cb111-5"><a href="integrate-css-files-in-your-shiny-app.html#cb111-5"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="integrate-css-files-in-your-shiny-app.html#cb112-1"></a><span class="kw">shinyApp</span>(ui3, empty_server)</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="integrate-css-files-in-your-shiny-app.html#cb113-1"></a><span class="kw">print</span>(<span class="kw">ui3</span>())</span></code></pre></div>
+<pre><code>## &lt;h2 style=&quot;color:red;&quot;&gt;This is red&lt;/h2&gt;</code></pre>
+</div>
+<div id="using-tagsstyle" class="section level3">
+<h3><span class="header-section-number">18.3.2</span> Using tags$style()</h3>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="integrate-css-files-in-your-shiny-app.html#cb115-1"></a>ui4 &lt;-<span class="st"> </span><span class="cf">function</span>(){</span>
+<span id="cb115-2"><a href="integrate-css-files-in-your-shiny-app.html#cb115-2"></a>  <span class="kw">tagList</span>(</span>
+<span id="cb115-3"><a href="integrate-css-files-in-your-shiny-app.html#cb115-3"></a>    tags<span class="op">$</span><span class="kw">style</span>(</span>
+<span id="cb115-4"><a href="integrate-css-files-in-your-shiny-app.html#cb115-4"></a>      <span class="st">&quot;h2{</span></span>
+<span id="cb115-5"><a href="integrate-css-files-in-your-shiny-app.html#cb115-5"></a><span class="st">        color:red;</span></span>
+<span id="cb115-6"><a href="integrate-css-files-in-your-shiny-app.html#cb115-6"></a><span class="st">      }&quot;</span></span>
+<span id="cb115-7"><a href="integrate-css-files-in-your-shiny-app.html#cb115-7"></a>    ), </span>
+<span id="cb115-8"><a href="integrate-css-files-in-your-shiny-app.html#cb115-8"></a>    <span class="kw">h2</span>(<span class="st">&quot;This is red&quot;</span>)</span>
+<span id="cb115-9"><a href="integrate-css-files-in-your-shiny-app.html#cb115-9"></a>  )</span>
+<span id="cb115-10"><a href="integrate-css-files-in-your-shiny-app.html#cb115-10"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="integrate-css-files-in-your-shiny-app.html#cb116-1"></a><span class="kw">print</span>(<span class="kw">ui4</span>())</span></code></pre></div>
+<pre><code>## &lt;style&gt;h2{
+##         color:red;
+##       }&lt;/style&gt;
+## &lt;h2&gt;This is red&lt;/h2&gt;</code></pre>
+</div>
+<div id="using-external-files" class="section level3">
+<h3><span class="header-section-number">18.3.3</span> Using external files</h3>
+<p>Provided you have this in the path <code>./www/style.css</code></p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb118-1"><a href="integrate-css-files-in-your-shiny-app.html#cb118-1"></a>h2 {</span>
+<span id="cb118-2"><a href="integrate-css-files-in-your-shiny-app.html#cb118-2"></a>    <span class="kw">color</span>: <span class="cn">red</span><span class="op">;</span></span>
+<span id="cb118-3"><a href="integrate-css-files-in-your-shiny-app.html#cb118-3"></a>}</span></code></pre></div>
+<p>Then the following will incorporate that css into your vanilla shiny app.</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="integrate-css-files-in-your-shiny-app.html#cb119-1"></a>ui5 &lt;-<span class="st"> </span><span class="cf">function</span>() {</span>
+<span id="cb119-2"><a href="integrate-css-files-in-your-shiny-app.html#cb119-2"></a>  <span class="kw">tagList</span>(</span>
+<span id="cb119-3"><a href="integrate-css-files-in-your-shiny-app.html#cb119-3"></a>    tags<span class="op">$</span><span class="kw">link</span>(</span>
+<span id="cb119-4"><a href="integrate-css-files-in-your-shiny-app.html#cb119-4"></a>      <span class="dt">rel =</span> <span class="st">&quot;stylesheet&quot;</span>,</span>
+<span id="cb119-5"><a href="integrate-css-files-in-your-shiny-app.html#cb119-5"></a>      <span class="dt">type =</span> <span class="st">&quot;text/css&quot;</span>,</span>
+<span id="cb119-6"><a href="integrate-css-files-in-your-shiny-app.html#cb119-6"></a>      <span class="dt">href =</span> <span class="st">&quot;www/style.css&quot;</span></span>
+<span id="cb119-7"><a href="integrate-css-files-in-your-shiny-app.html#cb119-7"></a>    ), </span>
+<span id="cb119-8"><a href="integrate-css-files-in-your-shiny-app.html#cb119-8"></a>    <span class="kw">h2</span>(<span class="st">&quot;This is red&quot;</span>)</span>
+<span id="cb119-9"><a href="integrate-css-files-in-your-shiny-app.html#cb119-9"></a>  )</span>
+<span id="cb119-10"><a href="integrate-css-files-in-your-shiny-app.html#cb119-10"></a>}</span></code></pre></div>
+<p>A golem-based shiny app has the command <code>golem_add_external_resources()</code> in the UI definition. This
+function pulls in any CSS or JS files. But, to add those CSS / JS files you have to use the correct
+golem workflow:</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="integrate-css-files-in-your-shiny-app.html#cb120-1"></a><span class="co"># For CSS</span></span>
+<span id="cb120-2"><a href="integrate-css-files-in-your-shiny-app.html#cb120-2"></a>golem<span class="op">::</span><span class="kw">add_css_file</span>(<span class="st">&quot;style&quot;</span>)</span></code></pre></div>
+<p>This adds the file <code>inst/app/www/style.css</code> to your package.</p>
+<p>There are alternative ways to include CSS. In “Outstanding User Interfaces with Shiny”, the author
+recommends creating a dependency, and then including it as a tag in your UI:</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="integrate-css-files-in-your-shiny-app.html#cb121-1"></a><span class="co"># R/style.R</span></span>
+<span id="cb121-2"><a href="integrate-css-files-in-your-shiny-app.html#cb121-2"></a>css_dep &lt;-<span class="st"> </span><span class="cf">function</span>() {</span>
+<span id="cb121-3"><a href="integrate-css-files-in-your-shiny-app.html#cb121-3"></a>  <span class="kw">htmlDependency</span>(</span>
+<span id="cb121-4"><a href="integrate-css-files-in-your-shiny-app.html#cb121-4"></a>    <span class="dt">name =</span> <span class="st">&quot;css dep&quot;</span>, <span class="dt">version =</span> <span class="st">&quot;1.0&quot;</span>, <span class="dt">src =</span> path_to_css, <span class="dt">stylesheet =</span> filename</span>
+<span id="cb121-5"><a href="integrate-css-files-in-your-shiny-app.html#cb121-5"></a>  )</span>
+<span id="cb121-6"><a href="integrate-css-files-in-your-shiny-app.html#cb121-6"></a>}</span>
+<span id="cb121-7"><a href="integrate-css-files-in-your-shiny-app.html#cb121-7"></a></span>
+<span id="cb121-8"><a href="integrate-css-files-in-your-shiny-app.html#cb121-8"></a><span class="co"># In ui.R</span></span>
+<span id="cb121-9"><a href="integrate-css-files-in-your-shiny-app.html#cb121-9"></a>... <span class="kw">tagList</span>(tag, css_dep)</span></code></pre></div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="a-gentle-introduction-to-css.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="meeting-videos-17.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="getting-started-with-css.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="external-resources.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

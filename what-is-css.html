@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 Don’t Rush into Coding | Engineering Production-Grade Shiny Apps Book Club</title>
+  <title>18.1 What is CSS | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 Don’t Rush into Coding | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta property="og:title" content="18.1 What is CSS | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 Don’t Rush into Coding | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta name="twitter:title" content="18.1 What is CSS | Engineering Production-Grade Shiny Apps Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="meeting-videos-5.html"/>
-<link rel="next" href="meeting-videos-6.html"/>
+<link rel="prev" href="a-gentle-introduction-to-css.html"/>
+<link rel="next" href="getting-started-with-css.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -449,16 +449,78 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="dont-rush-into-coding" class="section level1">
-<h1><span class="header-section-number">Chapter 7</span> Don’t Rush into Coding</h1>
+<div id="what-is-css" class="section level2">
+<h2><span class="header-section-number">18.1</span> What is CSS</h2>
+<p>CSS</p>
+<ul>
+<li>“Cascading style sheets”</li>
+<li>Encodes webpage design
+<ul>
+<li>View a page without CSS (“Web Developer” -&gt; CSS -&gt; Disable All Styles)</li>
+</ul></li>
+</ul>
+<div id="default-css-for-shiny" class="section level3">
+<h3><span class="header-section-number">18.1.1</span> Default CSS for {shiny}</h3>
+<p>Without fluidPage:</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="what-is-css.html#cb102-1"></a><span class="kw">library</span>(shiny)</span>
+<span id="cb102-2"><a href="what-is-css.html#cb102-2"></a></span>
+<span id="cb102-3"><a href="what-is-css.html#cb102-3"></a>my_tags &lt;-<span class="st"> </span><span class="kw">tagList</span>(</span>
+<span id="cb102-4"><a href="what-is-css.html#cb102-4"></a>  <span class="kw">h1</span>(<span class="st">&quot;Hey&quot;</span>), </span>
+<span id="cb102-5"><a href="what-is-css.html#cb102-5"></a>  <span class="kw">h2</span>(<span class="st">&quot;You&quot;</span>), </span>
+<span id="cb102-6"><a href="what-is-css.html#cb102-6"></a>  <span class="kw">p</span>(<span class="st">&quot;You rock!&quot;</span>), </span>
+<span id="cb102-7"><a href="what-is-css.html#cb102-7"></a>  <span class="kw">selectInput</span>(<span class="st">&quot;what&quot;</span>, <span class="st">&quot;Do you&quot;</span>, <span class="kw">unique</span>(iris<span class="op">$</span>Species))</span>
+<span id="cb102-8"><a href="what-is-css.html#cb102-8"></a>)</span>
+<span id="cb102-9"><a href="what-is-css.html#cb102-9"></a></span>
+<span id="cb102-10"><a href="what-is-css.html#cb102-10"></a>ui1 &lt;-<span class="st"> </span><span class="cf">function</span>(){</span>
+<span id="cb102-11"><a href="what-is-css.html#cb102-11"></a>  my_tags</span>
+<span id="cb102-12"><a href="what-is-css.html#cb102-12"></a>}</span>
+<span id="cb102-13"><a href="what-is-css.html#cb102-13"></a></span>
+<span id="cb102-14"><a href="what-is-css.html#cb102-14"></a>ui2 &lt;-<span class="st"> </span><span class="cf">function</span>(){</span>
+<span id="cb102-15"><a href="what-is-css.html#cb102-15"></a>  <span class="kw">fluidPage</span>(my_tags)</span>
+<span id="cb102-16"><a href="what-is-css.html#cb102-16"></a>}</span>
+<span id="cb102-17"><a href="what-is-css.html#cb102-17"></a></span>
+<span id="cb102-18"><a href="what-is-css.html#cb102-18"></a>empty_server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session){}</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="what-is-css.html#cb103-1"></a><span class="kw">shinyApp</span>(ui1, empty_server)</span>
+<span id="cb103-2"><a href="what-is-css.html#cb103-2"></a></span>
+<span id="cb103-3"><a href="what-is-css.html#cb103-3"></a><span class="kw">shinyApp</span>(ui2, empty_server)</span></code></pre></div>
+<p>Show the HTML</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="what-is-css.html#cb104-1"></a><span class="kw">print</span>(<span class="kw">ui1</span>())</span></code></pre></div>
+<pre><code>## &lt;h1&gt;Hey&lt;/h1&gt;
+## &lt;h2&gt;You&lt;/h2&gt;
+## &lt;p&gt;You rock!&lt;/p&gt;
+## &lt;div class=&quot;form-group shiny-input-container&quot;&gt;
+##   &lt;label class=&quot;control-label&quot; id=&quot;what-label&quot; for=&quot;what&quot;&gt;Do you&lt;/label&gt;
+##   &lt;div&gt;
+##     &lt;select id=&quot;what&quot;&gt;&lt;option value=&quot;setosa&quot; selected&gt;setosa&lt;/option&gt;
+## &lt;option value=&quot;versicolor&quot;&gt;versicolor&lt;/option&gt;
+## &lt;option value=&quot;virginica&quot;&gt;virginica&lt;/option&gt;&lt;/select&gt;
+##     &lt;script type=&quot;application/json&quot; data-for=&quot;what&quot; data-nonempty=&quot;&quot;&gt;{&quot;plugins&quot;:[&quot;selectize-plugin-a11y&quot;]}&lt;/script&gt;
+##   &lt;/div&gt;
+## &lt;/div&gt;</code></pre>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="what-is-css.html#cb106-1"></a><span class="kw">print</span>(<span class="kw">ui2</span>())</span></code></pre></div>
+<pre><code>## &lt;div class=&quot;container-fluid&quot;&gt;
+##   &lt;h1&gt;Hey&lt;/h1&gt;
+##   &lt;h2&gt;You&lt;/h2&gt;
+##   &lt;p&gt;You rock!&lt;/p&gt;
+##   &lt;div class=&quot;form-group shiny-input-container&quot;&gt;
+##     &lt;label class=&quot;control-label&quot; id=&quot;what-label&quot; for=&quot;what&quot;&gt;Do you&lt;/label&gt;
+##     &lt;div&gt;
+##       &lt;select id=&quot;what&quot;&gt;&lt;option value=&quot;setosa&quot; selected&gt;setosa&lt;/option&gt;
+## &lt;option value=&quot;versicolor&quot;&gt;versicolor&lt;/option&gt;
+## &lt;option value=&quot;virginica&quot;&gt;virginica&lt;/option&gt;&lt;/select&gt;
+##       &lt;script type=&quot;application/json&quot; data-for=&quot;what&quot; data-nonempty=&quot;&quot;&gt;{&quot;plugins&quot;:[&quot;selectize-plugin-a11y&quot;]}&lt;/script&gt;
+##     &lt;/div&gt;
+##   &lt;/div&gt;
+## &lt;/div&gt;</code></pre>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="meeting-videos-5.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="meeting-videos-6.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="a-gentle-introduction-to-css.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="getting-started-with-css.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -489,7 +551,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-epgs/edit/main/07-Dont_Rush.Rmd",
+"link": "https://github.com/r4ds/bookclub-epgs/edit/main/18-css.Rmd",
 "text": "Edit"
 },
 "history": {

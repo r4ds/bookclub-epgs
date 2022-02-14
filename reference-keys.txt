@@ -217,6 +217,13 @@ intermediateadvanced-javascript
 meeting-videos-16
 cohort-1-16
 a-gentle-introduction-to-css
-slide-1-title
+what-is-css
+default-css-for-shiny
+getting-started-with-css
+integrate-css-files-in-your-shiny-app
+inline
+using-tagsstyle
+using-external-files
+external-resources
 meeting-videos-17
 cohort-1-17

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 Don’t Rush into Coding | Engineering Production-Grade Shiny Apps Book Club</title>
+  <title>18.2 Getting started with CSS | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 Don’t Rush into Coding | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta property="og:title" content="18.2 Getting started with CSS | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 Don’t Rush into Coding | Engineering Production-Grade Shiny Apps Book Club" />
+  <meta name="twitter:title" content="18.2 Getting started with CSS | Engineering Production-Grade Shiny Apps Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="meeting-videos-5.html"/>
-<link rel="next" href="meeting-videos-6.html"/>
+<link rel="prev" href="what-is-css.html"/>
+<link rel="next" href="integrate-css-files-in-your-shiny-app.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -449,16 +449,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="dont-rush-into-coding" class="section level1">
-<h1><span class="header-section-number">Chapter 7</span> Don’t Rush into Coding</h1>
+<div id="getting-started-with-css" class="section level2">
+<h2><span class="header-section-number">18.2</span> Getting started with CSS</h2>
+<ul>
+<li>HTML is packed full of tags</li>
+<li>You use CSS to explain how each HTML element should look</li>
+<li>If the element has this tag … it should look like this</li>
+</ul>
+<div class="sourceCode" id="cb108"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb108-1"><a href="getting-started-with-css.html#cb108-1"></a>h2 {</span>
+<span id="cb108-2"><a href="getting-started-with-css.html#cb108-2"></a>  <span class="kw">color</span>: <span class="cn">red</span><span class="op">;</span></span>
+<span id="cb108-3"><a href="getting-started-with-css.html#cb108-3"></a>}</span>
+<span id="cb108-4"><a href="getting-started-with-css.html#cb108-4"></a></span>
+<span id="cb108-5"><a href="getting-started-with-css.html#cb108-5"></a><span class="er">//</span></span>
+<span id="cb108-6"><a href="getting-started-with-css.html#cb108-6"></a>selector {</span>
+<span id="cb108-7"><a href="getting-started-with-css.html#cb108-7"></a>  property: value<span class="op">;</span></span>
+<span id="cb108-8"><a href="getting-started-with-css.html#cb108-8"></a>}</span></code></pre></div>
+<p>Selecting elements based on different types of properties:</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb109-1"><a href="getting-started-with-css.html#cb109-1"></a><span class="er">// examples from ui2() above</span></span>
+<span id="cb109-2"><a href="getting-started-with-css.html#cb109-2"></a></span>
+<span id="cb109-3"><a href="getting-started-with-css.html#cb109-3"></a><span class="er">// eg `h2` or `div`</span></span>
+<span id="cb109-4"><a href="getting-started-with-css.html#cb109-4"></a>the-name {</span>
+<span id="cb109-5"><a href="getting-started-with-css.html#cb109-5"></a>  property: value<span class="op">;</span></span>
+<span id="cb109-6"><a href="getting-started-with-css.html#cb109-6"></a>}</span>
+<span id="cb109-7"><a href="getting-started-with-css.html#cb109-7"></a></span>
+<span id="cb109-8"><a href="getting-started-with-css.html#cb109-8"></a><span class="er">// eg, `#what`</span></span>
+<span id="cb109-9"><a href="getting-started-with-css.html#cb109-9"></a><span class="pp">#the-id</span> {</span>
+<span id="cb109-10"><a href="getting-started-with-css.html#cb109-10"></a>  property: value<span class="op">;</span></span>
+<span id="cb109-11"><a href="getting-started-with-css.html#cb109-11"></a>}</span>
+<span id="cb109-12"><a href="getting-started-with-css.html#cb109-12"></a></span>
+<span id="cb109-13"><a href="getting-started-with-css.html#cb109-13"></a><span class="er">// eg, `.control-label`</span></span>
+<span id="cb109-14"><a href="getting-started-with-css.html#cb109-14"></a><span class="fu">.the-class</span> {</span>
+<span id="cb109-15"><a href="getting-started-with-css.html#cb109-15"></a>  property: value<span class="op">;</span></span>
+<span id="cb109-16"><a href="getting-started-with-css.html#cb109-16"></a>}</span></code></pre></div>
+<p>You can combine the selectors together:</p>
+<pre><code>h1,h2    // either `h1` or `h2`
+div h1   // an `h1` inside a `div`
+div &gt; h1 // an `h1` immediately inside a `div`
+a:hover  // an `a`, but only when the user hovers over it</code></pre>
+<p>and so on.</p>
+<p>See the wonderful tutorial at MDN for more on the various ways to select elements:</p>
+<p><a href="">https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors</a></p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="meeting-videos-5.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="meeting-videos-6.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="what-is-css.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="integrate-css-files-in-your-shiny-app.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -489,7 +527,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-epgs/edit/main/07-Dont_Rush.Rmd",
+"link": "https://github.com/r4ds/bookclub-epgs/edit/main/18-css.Rmd",
 "text": "Edit"
 },
 "history": {
