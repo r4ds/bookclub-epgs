@@ -1,0 +1,425 @@
+# Optimizing {shiny} code
+
+**Learning Objectives**
+
+- Major routes for optimising R/shiny code
+
+- Cacheing
+
+- Asynchronous code
+
+## Resources
+
+- Efficient R programming [https://csgillespie.github.io/efficientR/]()
+
+- Advanced R [https://adv-r.hadley.nz/perf-improve.html]()
+
+- Mastering Shiny [https://mastering-shiny.org/performance.html]()
+
+- RStudio caching blogposts:
+  - [https://shiny.rstudio.com/articles/plot-caching.html]() - the old way
+  - [https://shiny.rstudio.com/articles/caching.html]() - the new way
+
+Packages
+
+- {R.cache} [https://github.com/HenrikBengtsson/R.cache]()
+
+- {memoise} [https://github.com/r-lib/memoise]()
+
+- {future} [https://github.com/HenrikBengtsson/future]()
+
+- {promises} [https://rstudio.github.io/promises]()
+
+## Caching Elements
+
+### What is Caching
+
+- Store resource-intensive results
+
+- So they can be reused without recomputation
+
+- Downside: you can't cache 'em all
+
+Only cache if the thing:
+
+- would be identical each time it is made (for a given input)
+
+Good things to cache:
+
+- Plots
+
+- Database queries
+
+### Native caching in R
+
+{R.cache} and {memoise} work in a similar way:
+
+- Wrap a function with a higher-order function (`new_func <- memoise::memoise(initial_func)`)
+
+- Call the new function with some arguments (`new_func(x = 1, y = 2)`)
+  - it does the expensive computation
+  - then stores the result
+
+- Call the new function again
+  - if you've used the args before, it will return immediately with the stored result
+
+- The arguments are converted to a look-up key
+
+```{r memoise_your_first_fn, eval = FALSE}
+library(memoise)
+
+# tic/toc are used for timing
+library(tictoc)
+
+sleep_and_return_time <- function(seconds = 1) {
+  Sys.sleep(seconds)
+  return(Sys.time())
+}
+
+msleep_and_return_time <- memoise(sleep_and_return_time)
+
+# first call is sloooooooow
+tic()
+msleep_and_return_time(10)
+toc()
+
+# second call is fast
+tic()
+msleep_and_return_time(10)
+toc()
+```
+
+But .... why is `sleep_and_return_time` a bad example for a cacheable function?
+
+The book has a more reproducible example using database queries (there's a db-in-shiny example
+below, so we don't cover this example)
+
+{memoise} stores the cache on disk, you can set where on the file-system it is stored
+
+### Caching in {shiny}
+
+An app:
+
+```r
+library(shiny)
+
+ui <- function(){
+  tagList(
+    # The user can select one of the cut from ggplot2::diamonds,
+    # {shiny} will then query the SQL database to retrieve the
+    # first rows of the result
+    selectInput("cut", "cut", unique(ggplot2::diamonds$cut)),
+    tableOutput("tbl")
+  )
+}
+
+srv_builder <- function(con) {
+  server <- function(
+    input,
+    output,
+    session
+  ){
+    # Rendering the table of the SQL call
+    output$tbl <- renderTable({
+      # Using a memoised function allows to prevent from
+      # calling the SQL database every time the user inputs
+      # a change
+      memoised_fct_sql(input$cut, con)
+    })
+  }
+
+  server
+}
+
+# We create an in-memory database using SQLite
+con <- DBI::dbConnect(
+  RSQLite::SQLite(),
+  dbname = ":memory:"
+)
+
+# Writing a large dataset to the db
+DBI::dbWriteTable(
+  con,
+  "diams",
+  # This table will have 539400 rows
+  dplyr::bind_rows(
+    purrr::rerun(10, ggplot2::diamonds)
+  )
+)
+
+shinyApp(ui, server = srv_builder(con))
+```
+
+What haven't we defined here?
+
+```r
+library(memoise)
+
+fct_sql <- function(cut, con){
+  # NEVER EVER SPRINTF AN SQL CODE LIKE THAT
+  # IT'S SENSITIVE TO SQL INJECTIONS, WE'RE
+  # DOING IT FOR THE EXAMPLE
+  cli::cat_rule("Calling the SQL db")
+  results <- DBI::dbGetQuery(
+    con, sprintf(
+      "SELECT * FROM diams WHERE cut = '%s'",
+      cut
+    )
+  )
+  head(results)
+}
+
+# Using a local cache
+cache_dir <- cache_filesystem("cache")
+memoised_fct_sql <- memoise(fct_sql, cache = cache_dir)
+```
+
+App workflow:
+
+- Start the app
+- set input$cut to a new value
+- time how long it takes to render the new table
+- set input$cut to an unused value
+- note that it takes the same length of time
+- set input$cut to the first selected value
+- note that it is way faster than the original call
+
+{shiny} already has caching functionality:
+
+- `shiny::bindCache()`
+- [older] `shiny::renderCachedPlot()`
+
+Note from the RStudio shiny [blog](https://shiny.rstudio.com/articles/plot-caching.html):
+
+"""As of Shiny 1.6.0, we recommend using renderPlot() with bindCache() instead"""
+
+Example shiny app
+
+- taken from the book
+- but rewritten to use `renderPlot() %>% bindCache()` rather than `renderCachedPlot()`
+
+```{r shiny_cacheing, eval = FALSE}
+library(shiny)
+
+ui <- function() {
+  tagList(
+    # We select a data.frame to plot
+    selectInput(
+      "tbl",
+      "Table",
+      c("iris", "mtcars", "airquality")
+    ),
+    # This plotOutput will be cached
+    plotOutput("plot")
+  )
+}
+
+server <- function(
+  input,
+  output,
+  session
+) {
+  # The cache mechanism is made available by 'bindCache'
+  output$plot <- renderPlot({
+    # Plotting the selected data.frame
+    plot(get(input$tbl))
+  }) %>%
+    bindCache(
+    # List here all the reactive expression that will
+    # be used as cache key when running the app,
+    # you will see that the first time you plot one
+    # graph, it takes a couple of seconds,
+    # but the second time, it's almost
+    # instantaneous
+    input$tbl
+  )
+}
+
+shinyApp(ui, server)
+```
+
+Notes:
+
+- you can also cache on remote storage (e.g., S3)
+- you only have limited space - old cached values will be dropped
+
+## Asynchronous in {shiny}
+
+R is single threaded but the world isn't
+
+- B and C depend on A
+- D depends on B and C
+
+Synchronous code:
+
+- either A -> B -> C -> D
+- or A -> C -> B -> D
+
+If B runs on another computer and takes a long time
+
+```
+Synchronous version:
+
+A -> start-B             retrieve-B -> C -> D
+            \           /     (My-server)
+             \         /      ---------------
+              - run-B -       (Remote-server)
+```
+
+```
+Asynchronous version:
+
+A -> start-B -> C -> retrieve-B -> D
+       \              /    (My-server)
+        \            /     ---------------
+         - run B ----      (Remote-server)
+```
+
+Packages:
+
+- {future}: send computation elsewhere
+- {promises}: objects for handling async computation
+
+### Asynchronously ease cross-session issues
+
+- One R/shiny session
+- Multiple users
+- A few, specific, long-running operations
+
+"Promise" = A stand-in for the eventual result of an operation
+  - [https://rstudio.github.io/promises/articles/intro.html]()
+  - `%...>%`
+    - Promise-compatible pipe
+    - What happens on success
+  - `%...!%`
+    - What happens on failure
+
+```r
+library(shiny)
+library(future)
+library(promises)
+plan(multisession)
+
+ui <- function(){
+  tagList(
+    # This will receive the output of the future
+    verbatimTextOutput("rnorm")
+  )
+}
+
+server <- function(
+  input,
+  output,
+  session
+){
+  output$rnorm <- renderPrint({
+    # Sending the rnorm to be run in another session
+    future({
+      Sys.sleep(20)
+      return(rnorm(5))
+    }) %...>%
+      print(.) %...!%
+      stop(.)
+  })
+}
+
+s <- shinyApp(ui, server)
+```
+
+```r
+runApp(s, launch.browser = FALSE)
+```
+
+Plan:
+
+- run the above
+- launch the app in two separate browser windows (X and Y)
+- wait 20 seconds
+- If one session blocked the other:
+  - X results would show at ~ 20secs
+  - Y results at ~ 40secs
+- If there is no cross-session blocking
+  - Both X and Y results would show at ~ 20secs
+
+### Asynchronously ease within-session issues
+
+Compare this (which blocks):
+
+```r
+...
+output$rnorm <- renderPrint({
+  # Sending the rnorm to be run in another session
+  # At this point, {shiny} is waiting for the future
+  # to be solved before doing anything else
+  future({
+    Sys.sleep(3)
+    return(rnorm(5))
+  }) %...>%
+    print(.) %...!%
+    stop(.)
+  })
+...
+```
+
+with this (which doesn't block):
+
+```r
+rv <- reactiveValues(
+    output = NULL
+  )
+
+future({
+  Sys.sleep(5)
+  rnorm(5)
+}) %...>%
+  # When the future is resolved, we assign the
+  # output to rv$output
+  (function(result){
+    rv$output <- result
+  }) %...!%
+  # If ever the future outputs an error, we switch
+  # back to NULL for rv$output, and throw a warning
+  # with the error
+  (function(error){
+    rv$output <- NULL
+    warning(error)
+  })
+
+# output$rnorm will be printed whenever rv$output
+# is available (i.e. after around 5 seconds)
+output$rnorm <- renderPrint({
+  req(rv$output)
+})
+```
+
+### Common Pitfalls
+
+The first future sent needn't be the first to return
+
+- bookkeeping: check whether the future that returns is the one you need
+  - do you need the final future? (use an identifier)
+  - do you need the futures in sequence? (use a queue)
+
+
+## Meeting Videos
+
+### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/9rsY29U0218")`
+
+<details>
+  <summary> Meeting chat log </summary>
+```
+00:07:38	Ryan Metcalf:	https://www.scootersoftware.com/
+00:13:41	Ryan Metcalf:	http://www.math.rug.nl/~trentelman/jacob/pdflatex/pdflatex.html
+00:15:28	Ryan Metcalf:	One more link for you Federica: https://community.rstudio.com/t/rstudio-cant-find-pdflatex/49790
+00:15:56	Federica Gazzelloni:	this is mine: https://tug.org/mactex/faq/3-4.html
+01:02:16	Federica Gazzelloni:	library(promises) ?”%…>%”
+01:02:38	Federica Gazzelloni:	https://rstudio.github.io/promises/articles/overview.html#using-pipes
+01:08:58	Ryan Metcalf:	Link isn’t related to R necessarily, but does add a comparison or a more general framework towards Asynchronous web services. In the example, use Apache as the back end and Nginx managing the treading to the backend servers (Apache). I entered this world in eLearning and latency in rendering videos and SCORM content. https://www.digitalocean.com/community/tutorials/apache-vs-nginx-practical-considerations
+01:16:16	Dhiraj Khanna:	I did use asynchronous programming in Shiny a while back. Found it to be quite useful while fetching external data using an API that took a long time. The benefit of using async is that multiple users who are trying to make a call at the same time will not have to wait for one another, but it does come at a cost of a fairly large overhead. At least for me
+01:18:55	Dhiraj Khanna:	Adding async will make the call much slower for each person. So the tradeoff is either making the call fast for each single session, but multiple sessions have to queue up, OR making the call a bit slower but multiple sessions can run in parallel.
+01:19:55	Ryan Metcalf:	Good comment Dhiraj. This would make sense for sure!
+01:22:51	Dhiraj Khanna:	I am not too sure but I think shinyproxy kind of helps in parallel processing and multi threading
+```
+</details>
