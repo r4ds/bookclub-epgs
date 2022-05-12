@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>16.3 Asynchronous in {shiny} | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="16.3 Asynchronous in {shiny} | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
@@ -24,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-02-14" />
+<meta name="date" content="2022-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,8 +50,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/d3-3.3.8/d3.min.js"></script>
 <script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
@@ -60,7 +60,7 @@
 <script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/chromatography-0.1/chromatography.js"></script>
-<script src="libs/DiagrammeR-binding-1.0.8/DiagrammeR.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.9/DiagrammeR.js"></script>
 
 
 <style type="text/css">
@@ -449,8 +449,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="asynchronous-in-shiny" class="section level2">
-<h2><span class="header-section-number">16.3</span> Asynchronous in {shiny}</h2>
+<div id="asynchronous-in-shiny" class="section level2 hasAnchor">
+<h2><span class="header-section-number">16.3</span> Asynchronous in {shiny}<a href="asynchronous-in-shiny.html#asynchronous-in-shiny" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>R is single threaded but the world isn’t</p>
 <ul>
 <li>B and C depend on A</li>
@@ -479,8 +479,8 @@ A -&gt; start-B -&gt; C -&gt; retrieve-B -&gt; D
 <li>{future}: send computation elsewhere</li>
 <li>{promises}: objects for handling async computation</li>
 </ul>
-<div id="asynchronously-ease-cross-session-issues" class="section level3">
-<h3><span class="header-section-number">16.3.1</span> Asynchronously ease cross-session issues</h3>
+<div id="asynchronously-ease-cross-session-issues" class="section level3 hasAnchor">
+<h3><span class="header-section-number">16.3.1</span> Asynchronously ease cross-session issues<a href="asynchronous-in-shiny.html#asynchronously-ease-cross-session-issues" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>One R/shiny session</li>
 <li>Multiple users</li>
@@ -539,8 +539,8 @@ A -&gt; start-B -&gt; C -&gt; retrieve-B -&gt; D
 </ul></li>
 </ul>
 </div>
-<div id="asynchronously-ease-within-session-issues" class="section level3">
-<h3><span class="header-section-number">16.3.2</span> Asynchronously ease within-session issues</h3>
+<div id="asynchronously-ease-within-session-issues" class="section level3 hasAnchor">
+<h3><span class="header-section-number">16.3.2</span> Asynchronously ease within-session issues<a href="asynchronous-in-shiny.html#asynchronously-ease-within-session-issues" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Compare this (which blocks):</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="asynchronous-in-shiny.html#cb69-1"></a>...</span>
 <span id="cb69-2"><a href="asynchronous-in-shiny.html#cb69-2"></a>output<span class="op">$</span>rnorm &lt;-<span class="st"> </span><span class="kw">renderPrint</span>({</span>
@@ -583,8 +583,8 @@ A -&gt; start-B -&gt; C -&gt; retrieve-B -&gt; D
 <span id="cb70-25"><a href="asynchronous-in-shiny.html#cb70-25"></a>  <span class="kw">req</span>(rv<span class="op">$</span>output)</span>
 <span id="cb70-26"><a href="asynchronous-in-shiny.html#cb70-26"></a>})</span></code></pre></div>
 </div>
-<div id="common-pitfalls" class="section level3">
-<h3><span class="header-section-number">16.3.3</span> Common Pitfalls</h3>
+<div id="common-pitfalls" class="section level3 hasAnchor">
+<h3><span class="header-section-number">16.3.3</span> Common Pitfalls<a href="asynchronous-in-shiny.html#common-pitfalls" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The first future sent needn’t be the first to return</p>
 <ul>
 <li>bookkeeping: check whether the future that returns is the one you need

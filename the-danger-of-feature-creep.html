@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.3 The danger of feature-creep | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.3 The danger of feature-creep | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
@@ -24,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-02-14" />
+<meta name="date" content="2022-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,8 +50,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/d3-3.3.8/d3.min.js"></script>
 <script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
@@ -60,7 +60,7 @@
 <script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/chromatography-0.1/chromatography.js"></script>
-<script src="libs/DiagrammeR-binding-1.0.8/DiagrammeR.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.9/DiagrammeR.js"></script>
 
 
 <style type="text/css">
@@ -449,14 +449,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-danger-of-feature-creep" class="section level2">
-<h2><span class="header-section-number">6.3</span> The danger of feature-creep</h2>
+<div id="the-danger-of-feature-creep" class="section level2 hasAnchor">
+<h2><span class="header-section-number">6.3</span> The danger of feature-creep<a href="the-danger-of-feature-creep.html#the-danger-of-feature-creep" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <blockquote>
 <p>Rule of Parsimony: Write a big program only when it is clear by demonstration that nothing else will do.
 The Art of UNIX Programming (Raymond 2003)</p>
 </blockquote>
-<div id="what-is-feature-creep" class="section level3">
-<h3><span class="header-section-number">6.3.1</span> What is feature-creep?</h3>
+<div id="what-is-feature-creep" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.3.1</span> What is feature-creep?<a href="the-danger-of-feature-creep.html#what-is-feature-creep" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The process of adding features to the app that complicate the usage and the maintenance of the product, such as:</p>
 <ul>
 <li>easier navigation</li>
@@ -473,8 +473,8 @@ The Art of UNIX Programming (Raymond 2003)</p>
 <li>steeper learning curve</li>
 </ul>
 </div>
-<div id="too-much-reactivity" class="section level3">
-<h3><span class="header-section-number">6.3.2</span> Too much reactivity</h3>
+<div id="too-much-reactivity" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.3.2</span> Too much reactivity<a href="the-danger-of-feature-creep.html#too-much-reactivity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Prevent the implementation of “full reactivity”</li>
 </ul>
@@ -486,8 +486,8 @@ The Art of UNIX Programming (Raymond 2003)</p>
 <p>If the application reacts to all of the moves, the experience using the app can be bad, imagine that all the elements on the app update at any user input</p>
 <p>The best solution is to add <strong>one reactive button</strong> to give the user the opportunity to update results once all the changes have been made.</p>
 </div>
-<div id="too-much-interactivity" class="section level3">
-<h3><span class="header-section-number">6.3.3</span> Too much interactivity</h3>
+<div id="too-much-interactivity" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.3.3</span> Too much interactivity<a href="the-danger-of-feature-creep.html#too-much-interactivity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>A. Speed:</strong> use the features that assure fast visualizations at a given input</p>
 <p><strong>B. Visual noise:</strong> reduce the numbers of extra features</p>
 </div>

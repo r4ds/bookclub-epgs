@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.3 Structuring your app | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.3 Structuring your app | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
@@ -24,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-02-14" />
+<meta name="date" content="2022-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,8 +50,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/d3-3.3.8/d3.min.js"></script>
 <script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
@@ -60,7 +60,7 @@
 <script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/chromatography-0.1/chromatography.js"></script>
-<script src="libs/DiagrammeR-binding-1.0.8/DiagrammeR.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.9/DiagrammeR.js"></script>
 
 
 <style type="text/css">
@@ -449,19 +449,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="structuring-your-app" class="section level2">
-<h2><span class="header-section-number">3.3</span> Structuring your app</h2>
+<div id="structuring-your-app" class="section level2 hasAnchor">
+<h2><span class="header-section-number">3.3</span> Structuring your app<a href="structuring-your-app.html#structuring-your-app" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A shiny app has two main components:
 - Application logic is what makes your {shiny} app interactive
 - Business logic includes the components with the core algorithms and functions that make your application specific to your area of work</p>
-<div id="small-is-beautiful-bis-repetita" class="section level3">
-<h3><span class="header-section-number">3.3.1</span> Small is beautiful (bis repetita)</h3>
+<div id="small-is-beautiful-bis-repetita" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.3.1</span> Small is beautiful (bis repetita)<a href="structuring-your-app.html#small-is-beautiful-bis-repetita" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Long scripts are almost always synonymous with complexity when it comes to building software</li>
 </ul>
 </div>
-<div id="conventions-matter" class="section level3">
-<h3><span class="header-section-number">3.3.2</span> Conventions matter</h3>
+<div id="conventions-matter" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.3.2</span> Conventions matter<a href="structuring-your-app.html#conventions-matter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>app_*.R</code> (typically app_ui.R and app_server.R) contain the top-level functions defining your user interface and your server function.</p>
 <p><code>fct_*</code> files contain the business logic, which are potentially large functions. They are the backbone of the application and may not be specific to a given module. They can be added using {golem} with the add_fct(“name”) function.</p>
 <p><code>mod_*</code> files contain a unique module. Many {shiny} apps contain a series of tabs, or at least a tab-like pattern, so we suggest that you number them according to their step in the application. Tabs are almost always named in the user interface, so that you can use this tab name as the file name. For example, if you build a dashboard where the first tab is called “Import”, you should name your file mod_01_import.R. You can create this file with a module skeleton using golem::add_module(“01_import”).</p>

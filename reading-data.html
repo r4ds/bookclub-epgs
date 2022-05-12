@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>15.6 Reading data | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="15.6 Reading data | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
@@ -24,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-02-14" />
+<meta name="date" content="2022-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,8 +50,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/d3-3.3.8/d3.min.js"></script>
 <script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
@@ -60,7 +60,7 @@
 <script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/chromatography-0.1/chromatography.js"></script>
-<script src="libs/DiagrammeR-binding-1.0.8/DiagrammeR.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.9/DiagrammeR.js"></script>
 
 
 <style type="text/css">
@@ -449,22 +449,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="reading-data" class="section level2">
-<h2><span class="header-section-number">15.6</span> Reading data</h2>
-<div id="reading-external-datasets" class="section level3">
-<h3><span class="header-section-number">15.6.1</span> Reading external datasets</h3>
+<div id="reading-data" class="section level2 hasAnchor">
+<h2><span class="header-section-number">15.6</span> Reading data<a href="reading-data.html#reading-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="reading-external-datasets" class="section level3 hasAnchor">
+<h3><span class="header-section-number">15.6.1</span> Reading external datasets<a href="reading-data.html#reading-external-datasets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To include data inside your application:</p>
 <pre><code>    usethis::use_data_raw( name = &quot;my_dataset&quot;, open = FALSE ) command
     usethis::use_data(my_dataset)</code></pre>
 </div>
-<div id="including-data-in-your-application" class="section level3">
-<h3><span class="header-section-number">15.6.2</span> Including data in your application</h3>
+<div id="including-data-in-your-application" class="section level3 hasAnchor">
+<h3><span class="header-section-number">15.6.2</span> Including data in your application<a href="reading-data.html#including-data-in-your-application" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To upload data inside your application:</p>
 <pre><code>    shiny::fileInput()
     </code></pre>
 </div>
-<div id="using-external-databases" class="section level3">
-<h3><span class="header-section-number">15.6.3</span> Using external databases</h3>
+<div id="using-external-databases" class="section level3 hasAnchor">
+<h3><span class="header-section-number">15.6.3</span> Using external databases<a href="reading-data.html#using-external-databases" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To include data from external databases use:</p>
 <ul>
 <li>SQL databases designed to store tabular data</li>
@@ -472,8 +472,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Example of an app that uses on an external database is <code>{databasedemo}</code>, available at <a href="http://engineering-shiny.org/databasedemo/">engineering-shiny</a></p>
 </div>
-<div id="data-source-checklist" class="section level3">
-<h3><span class="header-section-number">15.6.4</span> Data-source checklist</h3>
+<div id="data-source-checklist" class="section level3 hasAnchor">
+<h3><span class="header-section-number">15.6.4</span> Data-source checklist<a href="reading-data.html#data-source-checklist" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:15-sources"></span>
 <img src="images/15-sources.png" alt="Data-source checklist" width="80%" />
 <p class="caption">

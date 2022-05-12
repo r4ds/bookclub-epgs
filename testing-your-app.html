@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11.3 Testing Your App | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11.3 Testing Your App | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
@@ -24,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-02-14" />
+<meta name="date" content="2022-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,8 +50,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/d3-3.3.8/d3.min.js"></script>
 <script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
@@ -60,7 +60,7 @@
 <script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/chromatography-0.1/chromatography.js"></script>
-<script src="libs/DiagrammeR-binding-1.0.8/DiagrammeR.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.9/DiagrammeR.js"></script>
 
 
 <style type="text/css">
@@ -449,8 +449,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="testing-your-app" class="section level2">
-<h2><span class="header-section-number">11.3</span> Testing Your App</h2>
+<div id="testing-your-app" class="section level2 hasAnchor">
+<h2><span class="header-section-number">11.3</span> Testing Your App<a href="testing-your-app.html#testing-your-app" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>What to test:</p>
 <ul>
 <li><p>business logic</p></li>
@@ -458,8 +458,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>reactive connections</p></li>
 <li><p>application load</p></li>
 </ul>
-<div id="testing-the-business-logic" class="section level3">
-<h3><span class="header-section-number">11.3.1</span> Testing the business logic</h3>
+<div id="testing-the-business-logic" class="section level3 hasAnchor">
+<h3><span class="header-section-number">11.3.1</span> Testing the business logic<a href="testing-your-app.html#testing-the-business-logic" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Good practice:</p>
 <ul>
 <li><p>business logic (non-reactive) is separated from interactive logic</p></li>
@@ -479,10 +479,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb25-7"><a href="testing-your-app.html#cb25-7"></a>    <span class="kw">expect_equal</span>(<span class="kw">meaning_of_life</span>(), <span class="dv">42</span>)</span>
 <span id="cb25-8"><a href="testing-your-app.html#cb25-8"></a>  })  </span>
 <span id="cb25-9"><a href="testing-your-app.html#cb25-9"></a>})</span></code></pre></div>
-<pre><code>## Test passed 😸</code></pre>
+<pre><code>## Test passed 🥇</code></pre>
 </div>
-<div id="shinytestserver" class="section level3">
-<h3><span class="header-section-number">11.3.2</span> shiny::testServer</h3>
+<div id="shinytestserver" class="section level3 hasAnchor">
+<h3><span class="header-section-number">11.3.2</span> shiny::testServer<a href="testing-your-app.html#shinytestserver" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For testing reactive updates to server-side values</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="testing-your-app.html#cb27-1"></a><span class="kw">library</span>(shiny)</span>
 <span id="cb27-2"><a href="testing-your-app.html#cb27-2"></a></span>
@@ -516,13 +516,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb27-30"><a href="testing-your-app.html#cb27-30"></a>    })</span>
 <span id="cb27-31"><a href="testing-your-app.html#cb27-31"></a>  })</span>
 <span id="cb27-32"><a href="testing-your-app.html#cb27-32"></a>})</span></code></pre></div>
-<pre><code>## Test passed 😀</code></pre>
+<pre><code>## Test passed 🎉</code></pre>
 </div>
-<div id="testing-the-interactive-logic" class="section level3">
-<h3><span class="header-section-number">11.3.3</span> Testing the interactive logic</h3>
+<div id="testing-the-interactive-logic" class="section level3 hasAnchor">
+<h3><span class="header-section-number">11.3.3</span> Testing the interactive logic<a href="testing-your-app.html#testing-the-interactive-logic" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Several options available for testing UI and interactivity</p>
-<div id="puppeteer" class="section level4">
-<h4><span class="header-section-number">11.3.3.1</span> Puppeteer</h4>
+<div id="puppeteer" class="section level4 hasAnchor">
+<h4><span class="header-section-number">11.3.3.1</span> Puppeteer<a href="testing-your-app.html#puppeteer" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Mimics a session on the app</p>
 <ul>
 <li><a href="https://developers.google.com/web/tools/puppeteer">Puppeteer</a></li>
@@ -610,8 +610,8 @@ we see it should probably have looked like this:</p>
 </ul></li>
 </ul>
 </div>
-<div id="crrri-and-crrry" class="section level4">
-<h4><span class="header-section-number">11.3.3.2</span> {crrri} and {crrry}</h4>
+<div id="crrri-and-crrry" class="section level4 hasAnchor">
+<h4><span class="header-section-number">11.3.3.2</span> {crrri} and {crrry}<a href="testing-your-app.html#crrri-and-crrry" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>That’s fine, but do we really want to have a node.js env in all our shiny projects?</p>
 <ul>
 <li><a href="https://rlesur.github.io/crrri/">{crrri}</a></li>
@@ -682,11 +682,11 @@ We can use javascript / jquery syntax to set the UI-attached values.</p>
 <li>click_on_id</li>
 </ul>
 </div>
-<div id="gremlin" class="section level4">
-<h4><span class="header-section-number">11.3.3.3</span> gremlin</h4>
+<div id="gremlin" class="section level4 hasAnchor">
+<h4><span class="header-section-number">11.3.3.3</span> gremlin<a href="testing-your-app.html#gremlin" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 </div>
-<div id="shinytest" class="section level4">
-<h4><span class="header-section-number">11.3.3.4</span> {shinytest}</h4>
+<div id="shinytest" class="section level4 hasAnchor">
+<h4><span class="header-section-number">11.3.3.4</span> {shinytest}<a href="testing-your-app.html#shinytest" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Similar to {puppeteer}-based tests</p>
 <p>Uses snapshots (browser images) to compare before/after source code changes</p>
 <p>[Interactive]</p>

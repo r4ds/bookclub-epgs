@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8.3 Setting things up with dev/01_start.R | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8.3 Setting things up with dev/01_start.R | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
@@ -24,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-02-14" />
+<meta name="date" content="2022-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,8 +50,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/d3-3.3.8/d3.min.js"></script>
 <script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
@@ -60,7 +60,7 @@
 <script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/chromatography-0.1/chromatography.js"></script>
-<script src="libs/DiagrammeR-binding-1.0.8/DiagrammeR.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.9/DiagrammeR.js"></script>
 
 
 <style type="text/css">
@@ -449,11 +449,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="setting-things-up-with-dev01_start.r" class="section level2">
-<h2><span class="header-section-number">8.3</span> Setting things up with <code>dev/01_start.R</code></h2>
+<div id="setting-things-up-with-dev01_start.r" class="section level2 hasAnchor">
+<h2><span class="header-section-number">8.3</span> Setting things up with <code>dev/01_start.R</code><a href="setting-things-up-with-dev01_start.html#setting-things-up-with-dev01_start.r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><code>dev/01_start.R</code> is the first file that you need to populate and run.</p>
-<div id="fill-the-description-and-set-options" class="section level3">
-<h3><span class="header-section-number">8.3.1</span> Fill the <code>DESCRIPTION</code> and set options</h3>
+<div id="fill-the-description-and-set-options" class="section level3 hasAnchor">
+<h3><span class="header-section-number">8.3.1</span> Fill the <code>DESCRIPTION</code> and set options<a href="setting-things-up-with-dev01_start.html#fill-the-description-and-set-options" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ol style="list-style-type: decimal">
 <li>Within the <code>dev/01_start.R</code> file, you need to populate some pertinent information related to your project.</li>
 </ol>
@@ -483,8 +483,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>NOTE: This adds your information to the <code>golem-config.yml</code> file and sets the <code>here</code> package root sentinel. This is important as <code>here</code> manages the <code>/root</code> of your project. If if you change your working directory in the project, you will still be able to create modules and CSS files in their correct folders.</p>
 </blockquote>
 </div>
-<div id="set-common-files" class="section level3">
-<h3><span class="header-section-number">8.3.2</span> Set common files</h3>
+<div id="set-common-files" class="section level3 hasAnchor">
+<h3><span class="header-section-number">8.3.2</span> Set common files<a href="setting-things-up-with-dev01_start.html#set-common-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>If you’d like to set your: Liscense, README, Code of Conduct, lifecycle badge, and NEWS,you can do so here.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="setting-things-up-with-dev01_start.html#cb19-1"></a><span class="co"># You can set another license here</span></span>
 <span id="cb19-2"><a href="setting-things-up-with-dev01_start.html#cb19-2"></a>usethis<span class="op">::</span><span class="kw">use_mit_license</span>( <span class="dt">name =</span> <span class="st">&quot;Golem User&quot;</span> )  </span>
@@ -497,12 +497,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Set up your version control account</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="setting-things-up-with-dev01_start.html#cb20-1"></a>usethis<span class="op">::</span><span class="kw">use_git</span>()</span></code></pre></div>
 </div>
-<div id="use-recommended-elements" class="section level3">
-<h3><span class="header-section-number">8.3.3</span> Use recommended elements</h3>
+<div id="use-recommended-elements" class="section level3 hasAnchor">
+<h3><span class="header-section-number">8.3.3</span> Use recommended elements<a href="setting-things-up-with-dev01_start.html#use-recommended-elements" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>golem::use_recommended_tests()</code> and <code>golem::use_recommended_deps()</code> sets a default testing infrastructure and adds dependencies to the application.</p>
 </div>
-<div id="add-utility-functions" class="section level3">
-<h3><span class="header-section-number">8.3.4</span> Add utility functions</h3>
+<div id="add-utility-functions" class="section level3 hasAnchor">
+<h3><span class="header-section-number">8.3.4</span> Add utility functions<a href="setting-things-up-with-dev01_start.html#add-utility-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The next two code snippets (steps) will add various functions which can be used along the process of building your app.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="setting-things-up-with-dev01_start.html#cb21-1"></a><span class="co"># These files will create R/golem_utils_ui.R </span></span>
 <span id="cb21-2"><a href="setting-things-up-with-dev01_start.html#cb21-2"></a><span class="co"># and R/golem_utils_server.R</span></span>
@@ -510,8 +510,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb21-4"><a href="setting-things-up-with-dev01_start.html#cb21-4"></a>golem<span class="op">::</span><span class="kw">use_utils_server</span>()</span></code></pre></div>
 <p>For example, using these utilities <code>list_to_li()</code> is a function to turn R lists into an HTML list. Another example is <code>with_red_star()</code> which puts a red astrix next to a mandatory input.</p>
 </div>
-<div id="changing-the-favicon" class="section level3">
-<h3><span class="header-section-number">8.3.5</span> Changing the favicon</h3>
+<div id="changing-the-favicon" class="section level3 hasAnchor">
+<h3><span class="header-section-number">8.3.5</span> Changing the favicon<a href="setting-things-up-with-dev01_start.html#changing-the-favicon" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>You have an option of changing icons associated with your app. By default is the golem hex. Should you provide your own favicon library, you can use this code snippet:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="setting-things-up-with-dev01_start.html#cb22-1"></a>golem<span class="op">::</span><span class="kw">use_favicon</span>( <span class="dt">path =</span> <span class="st">&quot;path/to/favicon&quot;</span>)</span></code></pre></div>
 <p>Once complete, you can move to the second step, <code>dev/02_dev.R</code></p>

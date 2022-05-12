@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>15.2 Reactivity anti-patterns | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="15.2 Reactivity anti-patterns | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
@@ -24,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-02-14" />
+<meta name="date" content="2022-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,8 +50,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/d3-3.3.8/d3.min.js"></script>
 <script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
@@ -60,7 +60,7 @@
 <script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/chromatography-0.1/chromatography.js"></script>
-<script src="libs/DiagrammeR-binding-1.0.8/DiagrammeR.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.9/DiagrammeR.js"></script>
 
 
 <style type="text/css">
@@ -449,8 +449,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="reactivity-anti-patterns" class="section level2">
-<h2><span class="header-section-number">15.2</span> Reactivity anti-patterns</h2>
+<div id="reactivity-anti-patterns" class="section level2 hasAnchor">
+<h2><span class="header-section-number">15.2</span> Reactivity anti-patterns<a href="reactivity-anti-patterns.html#reactivity-anti-patterns" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <blockquote>
 <p>A invalidates B which invalidates C which invalidates A which invalidates B which invalidates C, and so on…</p>
 </blockquote>
@@ -471,8 +471,8 @@ Figure 15.1: <a href="https://shiny.rstudio.com/articles/reactivity-overview.htm
 <p><code>dateInput()</code> and the <code>selectInput()</code> updates each other (cac_1)</p>
 <p>One way to solve this is to <strong>add some extra logic</strong> to the app by:</p>
 <p><code>selectInput()</code> and adding an the <code>observeEvent(input$year, {})</code> (cac_2)</p>
-<div id="observe-vs-observeevent" class="section level3">
-<h3><span class="header-section-number">15.2.1</span> observe vs observeEvent</h3>
+<div id="observe-vs-observeevent" class="section level3 hasAnchor">
+<h3><span class="header-section-number">15.2.1</span> observe vs observeEvent<a href="reactivity-anti-patterns.html#observe-vs-observeevent" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The main guideline is to use <code>observeEvent()</code> as much as possible, and avoid <code>observe()</code>as much as possible.</p>
 <p>Looking at the steps taken for building this first example app, we see that changing the text input doesn’t make any difference, but if we add the “reverse” opting, we can see the recursive taking action.</p>
 <p>In this example we use <code>obeserve()</code>: (cac_3)</p>
@@ -496,8 +496,8 @@ Figure 15.3: Recursivity
 </p>
 </div>
 </div>
-<div id="building-triggers-and-watchers" class="section level3">
-<h3><span class="header-section-number">15.2.2</span> Building triggers and watchers</h3>
+<div id="building-triggers-and-watchers" class="section level3 hasAnchor">
+<h3><span class="header-section-number">15.2.2</span> Building triggers and watchers<a href="reactivity-anti-patterns.html#building-triggers-and-watchers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>create “flag” objects with an <code>init</code> function</li>
 <li>trigg these flags with <code>trigger()</code></li>

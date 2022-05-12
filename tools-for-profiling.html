@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>14.2 Tools for profiling | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="14.2 Tools for profiling | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
@@ -24,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-02-14" />
+<meta name="date" content="2022-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,8 +50,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/d3-3.3.8/d3.min.js"></script>
 <script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
@@ -60,7 +60,7 @@
 <script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/chromatography-0.1/chromatography.js"></script>
-<script src="libs/DiagrammeR-binding-1.0.8/DiagrammeR.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.9/DiagrammeR.js"></script>
 
 
 <style type="text/css">
@@ -449,10 +449,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="tools-for-profiling" class="section level2">
-<h2><span class="header-section-number">14.2</span> Tools for profiling</h2>
-<div id="profiling-r-code" class="section level3">
-<h3><span class="header-section-number">14.2.1</span> Profiling R code</h3>
+<div id="tools-for-profiling" class="section level2 hasAnchor">
+<h2><span class="header-section-number">14.2</span> Tools for profiling<a href="tools-for-profiling.html#tools-for-profiling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="profiling-r-code" class="section level3 hasAnchor">
+<h3><span class="header-section-number">14.2.1</span> Profiling R code<a href="tools-for-profiling.html#profiling-r-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>{profvis} and the “flame graph”</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="tools-for-profiling.html#cb44-1"></a><span class="kw">library</span>(profvis)</span>
 <span id="cb44-2"><a href="tools-for-profiling.html#cb44-2"></a>top &lt;-<span class="st"> </span><span class="cf">function</span>(){</span>
@@ -493,11 +493,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>profvis does indicate memory used, but …</p></li>
 <li><p>{profmem}</p></li>
 </ul>
-<div id="identifying-bottlenecks-1" class="section level4">
-<h4><span class="header-section-number">14.2.1.1</span> Identifying bottlenecks</h4>
+<div id="identifying-bottlenecks-1" class="section level4 hasAnchor">
+<h4><span class="header-section-number">14.2.1.1</span> Identifying bottlenecks<a href="tools-for-profiling.html#identifying-bottlenecks-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 </div>
-<div id="benchmarking-r-code" class="section level4">
-<h4><span class="header-section-number">14.2.1.2</span> Benchmarking R code</h4>
+<div id="benchmarking-r-code" class="section level4 hasAnchor">
+<h4><span class="header-section-number">14.2.1.2</span> Benchmarking R code<a href="tools-for-profiling.html#benchmarking-r-code" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>""“never start optimizing if you cannot benchmark this optimization”""</p>
 <p>Recommend</p>
 <ul>
@@ -528,19 +528,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb45-18"><a href="tools-for-profiling.html#cb45-18"></a>)</span></code></pre></div>
 </div>
 </div>
-<div id="profiling-shiny" class="section level3">
-<h3><span class="header-section-number">14.2.2</span> Profiling {shiny}</h3>
-<div id="shiny-back-end" class="section level4">
-<h4><span class="header-section-number">14.2.2.1</span> Shiny back-end</h4>
+<div id="profiling-shiny" class="section level3 hasAnchor">
+<h3><span class="header-section-number">14.2.2</span> Profiling {shiny}<a href="tools-for-profiling.html#profiling-shiny" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="shiny-back-end" class="section level4 hasAnchor">
+<h4><span class="header-section-number">14.2.2.1</span> Shiny back-end<a href="tools-for-profiling.html#shiny-back-end" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Can use <code>profvis(print(run_app()))</code></p>
 </div>
-<div id="shiny-front-end" class="section level4">
-<h4><span class="header-section-number">14.2.2.2</span> Shiny front-end</h4>
+<div id="shiny-front-end" class="section level4 hasAnchor">
+<h4><span class="header-section-number">14.2.2.2</span> Shiny front-end<a href="tools-for-profiling.html#shiny-front-end" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>See: <a href="">https://engineering-shiny.org/need-for-optimization.html#b.-shiny-front-end</a></p>
 </div>
 </div>
-<div id="profiling-web-pages" class="section level3">
-<h3><span class="header-section-number">14.2.3</span> Profiling web pages</h3>
+<div id="profiling-web-pages" class="section level3 hasAnchor">
+<h3><span class="header-section-number">14.2.3</span> Profiling web pages<a href="tools-for-profiling.html#profiling-web-pages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
 </div>
             </section>

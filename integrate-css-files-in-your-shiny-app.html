@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>18.3 Integrate CSS files in your {shiny} app | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="18.3 Integrate CSS files in your {shiny} app | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
@@ -24,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-02-14" />
+<meta name="date" content="2022-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,8 +50,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/d3-3.3.8/d3.min.js"></script>
 <script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
@@ -60,7 +60,7 @@
 <script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/chromatography-0.1/chromatography.js"></script>
-<script src="libs/DiagrammeR-binding-1.0.8/DiagrammeR.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.9/DiagrammeR.js"></script>
 
 
 <style type="text/css">
@@ -449,16 +449,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="integrate-css-files-in-your-shiny-app" class="section level2">
-<h2><span class="header-section-number">18.3</span> Integrate CSS files in your {shiny} app</h2>
+<div id="integrate-css-files-in-your-shiny-app" class="section level2 hasAnchor">
+<h2><span class="header-section-number">18.3</span> Integrate CSS files in your {shiny} app<a href="integrate-css-files-in-your-shiny-app.html#integrate-css-files-in-your-shiny-app" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>CSS can be included in shiny apps in a few ways:</p>
 <ul>
 <li>inline</li>
 <li>in your <code>ui</code> definition</li>
 <li>in an imported file</li>
 </ul>
-<div id="inline" class="section level3">
-<h3><span class="header-section-number">18.3.1</span> Inline</h3>
+<div id="inline" class="section level3 hasAnchor">
+<h3><span class="header-section-number">18.3.1</span> Inline<a href="integrate-css-files-in-your-shiny-app.html#inline" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="integrate-css-files-in-your-shiny-app.html#cb111-1"></a>ui3 &lt;-<span class="st"> </span><span class="cf">function</span>(){</span>
 <span id="cb111-2"><a href="integrate-css-files-in-your-shiny-app.html#cb111-2"></a>  <span class="kw">tagList</span>(</span>
 <span id="cb111-3"><a href="integrate-css-files-in-your-shiny-app.html#cb111-3"></a>    <span class="kw">h2</span>(<span class="dt">style =</span> <span class="st">&quot;color:red;&quot;</span>, <span class="st">&quot;This is red&quot;</span>)</span>
@@ -468,8 +468,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="integrate-css-files-in-your-shiny-app.html#cb113-1"></a><span class="kw">print</span>(<span class="kw">ui3</span>())</span></code></pre></div>
 <pre><code>## &lt;h2 style=&quot;color:red;&quot;&gt;This is red&lt;/h2&gt;</code></pre>
 </div>
-<div id="using-tagsstyle" class="section level3">
-<h3><span class="header-section-number">18.3.2</span> Using tags$style()</h3>
+<div id="using-tagsstyle" class="section level3 hasAnchor">
+<h3><span class="header-section-number">18.3.2</span> Using tags$style()<a href="integrate-css-files-in-your-shiny-app.html#using-tagsstyle" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="integrate-css-files-in-your-shiny-app.html#cb115-1"></a>ui4 &lt;-<span class="st"> </span><span class="cf">function</span>(){</span>
 <span id="cb115-2"><a href="integrate-css-files-in-your-shiny-app.html#cb115-2"></a>  <span class="kw">tagList</span>(</span>
 <span id="cb115-3"><a href="integrate-css-files-in-your-shiny-app.html#cb115-3"></a>    tags<span class="op">$</span><span class="kw">style</span>(</span>
@@ -486,8 +486,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##       }&lt;/style&gt;
 ## &lt;h2&gt;This is red&lt;/h2&gt;</code></pre>
 </div>
-<div id="using-external-files" class="section level3">
-<h3><span class="header-section-number">18.3.3</span> Using external files</h3>
+<div id="using-external-files" class="section level3 hasAnchor">
+<h3><span class="header-section-number">18.3.3</span> Using external files<a href="integrate-css-files-in-your-shiny-app.html#using-external-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Provided you have this in the path <code>./www/style.css</code></p>
 <div class="sourceCode" id="cb118"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb118-1"><a href="integrate-css-files-in-your-shiny-app.html#cb118-1"></a>h2 {</span>
 <span id="cb118-2"><a href="integrate-css-files-in-your-shiny-app.html#cb118-2"></a>    <span class="kw">color</span>: <span class="cn">red</span><span class="op">;</span></span>

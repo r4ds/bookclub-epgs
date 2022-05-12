@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>17.3 Client-Side JavaScript | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="17.3 Client-Side JavaScript | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
@@ -24,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-02-14" />
+<meta name="date" content="2022-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,8 +50,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/d3-3.3.8/d3.min.js"></script>
 <script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
@@ -60,7 +60,7 @@
 <script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/chromatography-0.1/chromatography.js"></script>
-<script src="libs/DiagrammeR-binding-1.0.8/DiagrammeR.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.9/DiagrammeR.js"></script>
 
 
 <style type="text/css">
@@ -449,15 +449,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="client-side-javascript" class="section level2">
-<h2><span class="header-section-number">17.3</span> Client-Side JavaScript</h2>
+<div id="client-side-javascript" class="section level2 hasAnchor">
+<h2><span class="header-section-number">17.3</span> Client-Side JavaScript<a href="client-side-javascript.html#client-side-javascript" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This whole topic is related to JavaScript, but is stated with relation to R and Shiny. These three are all intertwined with each other. If extend beyond R and <code>{shiny}</code>, you can expand the interaction of your web app. Examples include: Small JavaScript functions that will prevent you from writing complex algorithmic logic in your application server.</p>
 <ul>
 <li><p><code>alert("message")</code> is a built-in alert-box mechanism. This is built into the user’s browser and can replace a call to the server, like <code>shinyalert</code>.</p></li>
 <li><p><code>var x = prompt("this", "that");</code> is a function that opens a built-in prompt window. We can recieve input and store it in a variable for future use.</p></li>
 </ul>
-<div id="common-patterns" class="section level3">
-<h3><span class="header-section-number">17.3.1</span> Common Patterns</h3>
+<div id="common-patterns" class="section level3 hasAnchor">
+<h3><span class="header-section-number">17.3.1</span> Common Patterns<a href="client-side-javascript.html#common-patterns" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Examples of Client-Side use of JavaScript:</p>
 <ul>
 <li><p><code>alert("message")</code> is a built-in alert-box mechanism. This is built into the user’s browser and can replace a call to the server, like <code>shinyalert</code>.</p></li>
@@ -470,8 +470,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Note that this code doesn’t remove the input values on the server side: the elements only disappear from the UI, but nothing is sent to the server side.</p>
 </blockquote>
 </div>
-<div id="where-to-put-them-back-to-javascript-events" class="section level3">
-<h3><span class="header-section-number">17.3.2</span> Where to put them: Back to JavaScript Events</h3>
+<div id="where-to-put-them-back-to-javascript-events" class="section level3 hasAnchor">
+<h3><span class="header-section-number">17.3.2</span> Where to put them: Back to JavaScript Events<a href="client-side-javascript.html#where-to-put-them-back-to-javascript-events" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>It is great we are discussing all levels of JavaScript implementation…but where to put them?</p>
 <p>Here are some examples of adding JavaScript functions to DOM events:</p>
 <ul>

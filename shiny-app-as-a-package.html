@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.1 {shiny} app as a package | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.1 {shiny} app as a package | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
@@ -24,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-02-14" />
+<meta name="date" content="2022-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,8 +50,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/d3-3.3.8/d3.min.js"></script>
 <script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
@@ -60,7 +60,7 @@
 <script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/chromatography-0.1/chromatography.js"></script>
-<script src="libs/DiagrammeR-binding-1.0.8/DiagrammeR.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.9/DiagrammeR.js"></script>
 
 
 <style type="text/css">
@@ -449,14 +449,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="shiny-app-as-a-package" class="section level2">
-<h2><span class="header-section-number">3.1</span> {shiny} app as a package</h2>
+<div id="shiny-app-as-a-package" class="section level2 hasAnchor">
+<h2><span class="header-section-number">3.1</span> {shiny} app as a package<a href="shiny-app-as-a-package.html#shiny-app-as-a-package" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li><code>golem</code> is an opinionated framework for building production-ready {shiny} applications</li>
 <li>learn the basic now…the rest of the book relies on it</li>
 </ul>
-<div id="what-is-in-a-production-grade-shiny-app" class="section level3">
-<h3><span class="header-section-number">3.1.1</span> What is in a production-grade {shiny} app?</h3>
+<div id="what-is-in-a-production-grade-shiny-app" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.1.1</span> What is in a production-grade {shiny} app?<a href="shiny-app-as-a-package.html#what-is-in-a-production-grade-shiny-app" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Use one single file, or split into two?….that is the question!</li>
 <li>We will discover, this is an arbitrary question when managing large production level shiny apps</li>
@@ -509,8 +509,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Finally, create a <code>tar.gz</code> file to make it easy for distribution</li>
 </ul>
 </div>
-<div id="resources" class="section level3">
-<h3><span class="header-section-number">3.1.2</span> Resources</h3>
+<div id="resources" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.1.2</span> Resources<a href="shiny-app-as-a-package.html#resources" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><a href="http://r-pkgs.had.co.nz/">R packages</a></li>
 <li><a href="https://speakerdeck.com/colinfay/building-a-package-that-lasts-erum-2018-workshop">Building a Package that Lasts</a></li>

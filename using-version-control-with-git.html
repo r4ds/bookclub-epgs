@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>12.2 Using version control with Git | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="12.2 Using version control with Git | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
@@ -24,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-02-14" />
+<meta name="date" content="2022-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,8 +50,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/d3-3.3.8/d3.min.js"></script>
 <script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
@@ -60,7 +60,7 @@
 <script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/chromatography-0.1/chromatography.js"></script>
-<script src="libs/DiagrammeR-binding-1.0.8/DiagrammeR.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.9/DiagrammeR.js"></script>
 
 
 <style type="text/css">
@@ -449,12 +449,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="using-version-control-with-git" class="section level2">
-<h2><span class="header-section-number">12.2</span> Using version control with Git</h2>
+<div id="using-version-control-with-git" class="section level2 hasAnchor">
+<h2><span class="header-section-number">12.2</span> Using version control with Git<a href="using-version-control-with-git.html#using-version-control-with-git" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Tools</strong>: Git, GitHub or GitLab</p>
 <p>These tools let you take control of the versions of you project workflow.</p>
-<div id="why-version-control" class="section level3">
-<h3><span class="header-section-number">12.2.1</span> Why version control?</h3>
+<div id="why-version-control" class="section level3 hasAnchor">
+<h3><span class="header-section-number">12.2.1</span> Why version control?<a href="using-version-control-with-git.html#why-version-control" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>code disappeared</li>
 <li>need to integrating changes in my Team’s project workflow</li>
@@ -473,8 +473,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>You will also need a test repository on GitHub</p></li>
 </ol>
 </div>
-<div id="git-basics-add---commit---push---pull" class="section level3">
-<h3><span class="header-section-number">12.2.2</span> Git basics: add - commit - push - pull</h3>
+<div id="git-basics-add---commit---push---pull" class="section level3 hasAnchor">
+<h3><span class="header-section-number">12.2.2</span> Git basics: add - commit - push - pull<a href="using-version-control-with-git.html#git-basics-add---commit---push---pull" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>New users might be challenged for username and password. Many general Git tools require authentication. The information that is needed is your <strong>PAT</strong>.</p>
 <p>You can stored your PAT with <code>gitcreds::gitcreds_set()</code> command. Once this is done correctly you don’t need to do that again unless you require more strict rules on your VC tool, so that it might require you to regularly update your credentials.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>The basic commands in Git are:</p>
@@ -489,13 +489,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>pull: receive the changes/updates from the repository</p></li>
 </ul>
 </div>
-<div id="about-branches" class="section level3">
-<h3><span class="header-section-number">12.2.3</span> About branches</h3>
+<div id="about-branches" class="section level3 hasAnchor">
+<h3><span class="header-section-number">12.2.3</span> About branches<a href="using-version-control-with-git.html#about-branches" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <strong>“main” branch</strong> is the one that appears at the beginning of the project, but other branches can be created. <strong>Secondary branches</strong> are work areas, usually for the other in the team to have a further layer of security of the “main” content.</p>
 <p>When you work on a shared project, your collaborators need to name a new branch to interact with the repository. This imply the creation of mirrored repositories that can be absolutely equal or slightly different, as the requested additions/modifications are accepted.</p>
 </div>
-<div id="issues" class="section level3">
-<h3><span class="header-section-number">12.2.4</span> Issues</h3>
+<div id="issues" class="section level3 hasAnchor">
+<h3><span class="header-section-number">12.2.4</span> Issues<a href="using-version-control-with-git.html#issues" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Issues</strong> are another way to advise the main repository of some modifications that would be needed. They are used to propose changes, to track a bug or to suggest a feature, and can be done directly by the GitHub page of the repository. An issue creates a <strong>“message exchange”</strong> form of communication with the repository owner, for advising about something that can be improved.</p>
 </div>
 </div>

@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.2 Using {shiny} modules | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.2 Using {shiny} modules | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
@@ -24,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-02-14" />
+<meta name="date" content="2022-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,8 +50,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/d3-3.3.8/d3.min.js"></script>
 <script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
@@ -60,7 +60,7 @@
 <script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/chromatography-0.1/chromatography.js"></script>
-<script src="libs/DiagrammeR-binding-1.0.8/DiagrammeR.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.9/DiagrammeR.js"></script>
 
 
 <style type="text/css">
@@ -449,11 +449,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="using-shiny-modules" class="section level2">
-<h2><span class="header-section-number">3.2</span> Using {shiny} modules</h2>
+<div id="using-shiny-modules" class="section level2 hasAnchor">
+<h2><span class="header-section-number">3.2</span> Using {shiny} modules<a href="using-shiny-modules.html#using-shiny-modules" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><em>Modulizing</em> code will be your success factor</p>
-<div id="why-shiny-modules" class="section level3">
-<h3><span class="header-section-number">3.2.1</span> Why {shiny} modules?</h3>
+<div id="why-shiny-modules" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.2.1</span> Why {shiny} modules?<a href="using-shiny-modules.html#why-shiny-modules" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ol style="list-style-type: decimal">
 <li>The one million “Validate” buttons problem</li>
 </ol>
@@ -477,8 +477,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Most of the time, modules are used to do the two first. In our case, we could say that 90% of the modules we write are never reused, they are here to allow us to split the codebase into smaller, more manageable pieces.</li>
 </ul>
 </div>
-<div id="when-to-use-shiny-modules" class="section level3">
-<h3><span class="header-section-number">3.2.2</span> When to use {shiny} modules</h3>
+<div id="when-to-use-shiny-modules" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.2.2</span> When to use {shiny} modules<a href="using-shiny-modules.html#when-to-use-shiny-modules" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Start right from the beginning</li>
 <li>Yes, this takes a bit more time, but you will be saving yourselve volumes in the future
@@ -487,15 +487,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 </div>
-<div id="a-practical-walkthrough" class="section level3">
-<h3><span class="header-section-number">3.2.3</span> A practical walkthrough</h3>
+<div id="a-practical-walkthrough" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.2.3</span> A practical walkthrough<a href="using-shiny-modules.html#a-practical-walkthrough" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>(Big code base example. Talk through the best way to compare)
 1. Your first {shiny} module
 2. Passing arguments to your modules
 - <a href="https://connect.thinkr.fr/tidytuesday201942/">UseLink</a></p>
 </div>
-<div id="communication-between-modules" class="section level3">
-<h3><span class="header-section-number">3.2.4</span> Communication between modules</h3>
+<div id="communication-between-modules" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.2.4</span> Communication between modules<a href="using-shiny-modules.html#communication-between-modules" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Three primary ways to share data amongst modules:
 - Returning a reactive function
 - The “stratégie du petit r” (to be pronounced with a French accent of course)

@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>17.4 JavaScript &lt;-&gt; {shiny} Communication | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="17.4 JavaScript &lt;-&gt; {shiny} Communication | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
@@ -24,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-02-14" />
+<meta name="date" content="2022-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,8 +50,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/d3-3.3.8/d3.min.js"></script>
 <script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
@@ -60,7 +60,7 @@
 <script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/chromatography-0.1/chromatography.js"></script>
-<script src="libs/DiagrammeR-binding-1.0.8/DiagrammeR.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.9/DiagrammeR.js"></script>
 
 
 <style type="text/css">
@@ -449,11 +449,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="javascript---shiny-communication" class="section level2">
-<h2><span class="header-section-number">17.4</span> JavaScript &lt;-&gt; <code>{shiny}</code> Communication</h2>
+<div id="javascript---shiny-communication" class="section level2 hasAnchor">
+<h2><span class="header-section-number">17.4</span> JavaScript &lt;-&gt; <code>{shiny}</code> Communication<a href="javascript---shiny-communication.html#javascript---shiny-communication" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Now that we have seen some client-side optimization, i.e. R does not do anything with these events when they happen (in fact R is not even aware they happened).</p>
-<div id="from-r-to-javascript" class="section level3">
-<h3><span class="header-section-number">17.4.1</span> From R to JavaScript</h3>
+<div id="from-r-to-javascript" class="section level3 hasAnchor">
+<h3><span class="header-section-number">17.4.1</span> From R to JavaScript<a href="javascript---shiny-communication.html#from-r-to-javascript" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Calling JS from the server side (i.e. from R) is done by defining a series of <code>CustomMessageHandler</code> functions: these are functions with one argument that can then be called using the <code>session$sendCustomMessage()</code> method from the server side.Or if you are using <code>{golem}</code>, using the <code>invoke_js()</code> function.</p>
 <p>Using the skeleton from <code>golem::add_js_handler("first_handler")</code>, we get this snippet:</p>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="javascript---shiny-communication.html#cb84-1"></a><span class="op">$</span>( document )<span class="kw">.ready</span>(<span class="cf">function</span>() {</span>
@@ -495,8 +495,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb87-16"><a href="javascript---shiny-communication.html#cb87-16"></a>  )</span>
 <span id="cb87-17"><a href="javascript---shiny-communication.html#cb87-17"></a>})</span></code></pre></div>
 </div>
-<div id="from-javascript-to-r" class="section level3">
-<h3><span class="header-section-number">17.4.2</span> From JavaScript to R</h3>
+<div id="from-javascript-to-r" class="section level3 hasAnchor">
+<h3><span class="header-section-number">17.4.2</span> From JavaScript to R<a href="javascript---shiny-communication.html#from-javascript-to-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>How can you do the opposite (send JavaScript calls to R)?</p>
 <p>There is an object called <code>Shiny</code> within your browser. This object can be used to send values to R by creating an <code>InputValue</code>.</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb88-1"><a href="javascript---shiny-communication.html#cb88-1"></a><span class="co">// This function from the Shiny JavaScript object</span></span>

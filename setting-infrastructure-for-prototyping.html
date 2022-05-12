@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8.4 Setting infrastructure for prototyping | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8.4 Setting infrastructure for prototyping | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
@@ -24,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-02-14" />
+<meta name="date" content="2022-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,8 +50,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/d3-3.3.8/d3.min.js"></script>
 <script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
@@ -60,7 +60,7 @@
 <script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/chromatography-0.1/chromatography.js"></script>
-<script src="libs/DiagrammeR-binding-1.0.8/DiagrammeR.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.9/DiagrammeR.js"></script>
 
 
 <style type="text/css">
@@ -449,18 +449,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="setting-infrastructure-for-prototyping" class="section level2">
-<h2><span class="header-section-number">8.4</span> Setting infrastructure for prototyping</h2>
-<div id="add-modules-in-dev02_dev.r" class="section level3">
-<h3><span class="header-section-number">8.4.1</span> Add modules in <code>dev/02_dev.R</code></h3>
+<div id="setting-infrastructure-for-prototyping" class="section level2 hasAnchor">
+<h2><span class="header-section-number">8.4</span> Setting infrastructure for prototyping<a href="setting-infrastructure-for-prototyping.html#setting-infrastructure-for-prototyping" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="add-modules-in-dev02_dev.r" class="section level3 hasAnchor">
+<h3><span class="header-section-number">8.4.1</span> Add modules in <code>dev/02_dev.R</code><a href="setting-infrastructure-for-prototyping.html#add-modules-in-dev02_dev.r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <code>golem::add_module()</code> function creates a module in the R folder. Each module created will follow the convention <code>mod_</code> and <code>mod_*_ui</code> and <code>mod*server</code> to the UI and server functions.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="setting-infrastructure-for-prototyping.html#cb23-1"></a><span class="co"># Creating a module skeleton</span></span>
 <span id="cb23-2"><a href="setting-infrastructure-for-prototyping.html#cb23-2"></a>golem<span class="op">::</span><span class="kw">add_module</span>(<span class="dt">name =</span> <span class="st">&quot;my_first_module&quot;</span>) </span></code></pre></div>
 <p>Here, you will paste (at the end of the file) that has to be copied and pasted inside your UI and server functions.</p>
 <p>This is the core of your application and where the development focus begins.</p>
 </div>
-<div id="add-css-and-js-files" class="section level3">
-<h3><span class="header-section-number">8.4.2</span> Add CSS and JS files</h3>
+<div id="add-css-and-js-files" class="section level3 hasAnchor">
+<h3><span class="header-section-number">8.4.2</span> Add CSS and JS files<a href="setting-infrastructure-for-prototyping.html#add-css-and-js-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>If you have particular “look and feel” of your app in the form</p>
 </div>
 </div>

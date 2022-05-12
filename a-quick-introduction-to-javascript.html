@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>17.2 A quick introduction to JavaScript | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="17.2 A quick introduction to JavaScript | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
@@ -24,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-02-14" />
+<meta name="date" content="2022-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,8 +50,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/d3-3.3.8/d3.min.js"></script>
 <script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
@@ -60,7 +60,7 @@
 <script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/chromatography-0.1/chromatography.js"></script>
-<script src="libs/DiagrammeR-binding-1.0.8/DiagrammeR.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.9/DiagrammeR.js"></script>
 
 
 <style type="text/css">
@@ -449,14 +449,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="a-quick-introduction-to-javascript" class="section level2">
-<h2><span class="header-section-number">17.2</span> A quick introduction to JavaScript</h2>
+<div id="a-quick-introduction-to-javascript" class="section level2 hasAnchor">
+<h2><span class="header-section-number">17.2</span> A quick introduction to JavaScript<a href="a-quick-introduction-to-javascript.html#a-quick-introduction-to-javascript" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>The fastest way to interact with JavaScript is from the Developer Tools of your favorite browser</li>
 <li>For example, enter the following in your Dev Tools Console: <code>var message = "Hello World"; alert(message);</code></li>
 </ul>
-<div id="including-javascript-code-in-your-app" class="section level3">
-<h3><span class="header-section-number">17.2.1</span> Including JavaScript code in your app</h3>
+<div id="including-javascript-code-in-your-app" class="section level3 hasAnchor">
+<h3><span class="header-section-number">17.2.1</span> Including JavaScript code in your app<a href="a-quick-introduction-to-javascript.html#including-javascript-code-in-your-app" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>There are three primary ways to include JavaScript code in your app:</p>
 <ul>
 <li>As an external file</li>
@@ -471,8 +471,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>golem::add_js_binding("name")</code>, for advanced, customer interaction for your shiny app</li>
 </ul>
 </div>
-<div id="understanding-html-class-and-id" class="section level3">
-<h3><span class="header-section-number">17.2.2</span> Understanding HTML, class, and id</h3>
+<div id="understanding-html-class-and-id" class="section level3 hasAnchor">
+<h3><span class="header-section-number">17.2.2</span> Understanding HTML, class, and id<a href="a-quick-introduction-to-javascript.html#understanding-html-class-and-id" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Think of your Web Page as a tree where the top of the page is your root node.</p>
 <ul>
 <li>Referenced as the Document Object Model (DOM)
@@ -500,8 +500,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </blockquote>
 <p>Elements can have a class which can apply to multiple elements. This can be used in JavaScript, but it is also very useful for styling elements in CSS.</p>
 </div>
-<div id="querying-in-vanilla-javascript" class="section level3">
-<h3><span class="header-section-number">17.2.3</span> Querying in Vanilla JavaScript</h3>
+<div id="querying-in-vanilla-javascript" class="section level3 hasAnchor">
+<h3><span class="header-section-number">17.2.3</span> Querying in Vanilla JavaScript<a href="a-quick-introduction-to-javascript.html#querying-in-vanilla-javascript" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The term <em>Vanilla JavaScript</em> refers to plain JavaScript, meaning, not external plugins.</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="a-quick-introduction-to-javascript.html#cb74-1"></a><span class="op">/</span><span class="er">/</span><span class="st"> </span>Given</span>
 <span id="cb74-2"><a href="a-quick-introduction-to-javascript.html#cb74-2"></a><span class="op">&lt;</span>div id =<span class="st"> &quot;first&quot;</span> name=<span class="st">&quot;number&quot;</span> class =<span class="st"> &quot;widediv&quot;</span><span class="op">&gt;</span>Hey<span class="op">&lt;</span><span class="er">/</span>div<span class="op">&gt;</span></span>
@@ -521,8 +521,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb74-16"><a href="a-quick-introduction-to-javascript.html#cb74-16"></a><span class="kw">document.getElementsByTagName</span>(<span class="st">&quot;div&quot;</span>)</span></code></pre></div>
 <p>This method comes with a hitch! Not all Browsers are created equal! This brings another angle of development consideration to our software development process. With relation to proprietary frameworks and a host of different Browser vendors (Mozilla Firefox, Google Chrome, Apple Safari, etc…) not all JavaScript versions are recognized.</p>
 </div>
-<div id="about-dom-events" class="section level3">
-<h3><span class="header-section-number">17.2.4</span> About DOM Events</h3>
+<div id="about-dom-events" class="section level3 hasAnchor">
+<h3><span class="header-section-number">17.2.4</span> About DOM Events<a href="a-quick-introduction-to-javascript.html#about-dom-events" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Within the Document Object Model, interactions are called <em>events</em>. JavaScript runtime is listening for these events. Better yet, this is were we can control the interaction of our users with our <code>{shiny}</code> apps. The following are examples of events:</p>
 <ul>
 <li><p><code>click</code> / <code>dblclick</code></p></li>
@@ -548,8 +548,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb76-3"><a href="a-quick-introduction-to-javascript.html#cb76-3"></a>});</span></code></pre></div>
 <p>The <code>$()</code> is considered jQuery and is a subset, lighter weight, more widely recognized method of running JavaScript.</p>
 </div>
-<div id="about-jquery-and-jquery-selectors" class="section level3">
-<h3><span class="header-section-number">17.2.5</span> About <code>jQuery</code> and <code>jQuery</code> selectors</h3>
+<div id="about-jquery-and-jquery-selectors" class="section level3 hasAnchor">
+<h3><span class="header-section-number">17.2.5</span> About <code>jQuery</code> and <code>jQuery</code> selectors<a href="a-quick-introduction-to-javascript.html#about-jquery-and-jquery-selectors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>jQuery is native to the <code>{shiny}</code> package. Examples of jQuery include:</p>
 <ul>
 <li><p><code>$("#firstinput")</code> to refer to the element with the id <code>firstinput</code></p></li>

@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.2 Simplicity is gold | Engineering Production-Grade Shiny Apps Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.2 Simplicity is gold | Engineering Production-Grade Shiny Apps Book Club" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-epgs" />
@@ -24,7 +23,7 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-02-14" />
+<meta name="date" content="2022-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,8 +50,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/d3-3.3.8/d3.min.js"></script>
 <script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
@@ -60,7 +60,7 @@
 <script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/chromatography-0.1/chromatography.js"></script>
-<script src="libs/DiagrammeR-binding-1.0.8/DiagrammeR.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.9/DiagrammeR.js"></script>
 
 
 <style type="text/css">
@@ -449,8 +449,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="simplicity-is-gold" class="section level2">
-<h2><span class="header-section-number">6.2</span> Simplicity is gold</h2>
+<div id="simplicity-is-gold" class="section level2 hasAnchor">
+<h2><span class="header-section-number">6.2</span> Simplicity is gold<a href="simplicity-is-gold.html#simplicity-is-gold" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Establish some <strong>rules</strong> about your app to be:</p>
 <ul>
 <li><strong>simple</strong> the app must be fast usable</li>
@@ -468,8 +468,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Don’t fight against the app but enjoy it (for <strong>fun</strong>)</p>
 </blockquote>
 <div class="figure"><span style="display:block;" id="fig:yesno"></span>
-<div id="htmlwidget-0fd4a9fceab2a11199e8" style="width:100%;height:100%;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0fd4a9fceab2a11199e8">{"x":{"diagram":"\ngraph LR\nA((YES))-. Yes and No of your app .-B((NO))\n  \n  style A fill:#f9f\n  style B fill:#bbf\n  \n "},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-482c6a54c3349fe50699" style="width:100%;height:100%;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-482c6a54c3349fe50699">{"x":{"diagram":"\ngraph LR\nA((YES))-. Yes and No of your app .-B((NO))\n  \n  style A fill:#f9f\n  style B fill:#bbf\n  \n "},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 6.2: Yes and No of your app
 </p>
@@ -490,15 +490,15 @@ Figure 6.2: Yes and No of your app
 <li>“don’t make me think”</li>
 <li>“rule of least surprise”: <strong>“Principle of Least Astonishment”</strong></li>
 </ol>
-<div id="how-we-read-the-web-scanning-content" class="section level3">
-<h3><span class="header-section-number">6.2.1</span> How we read the web: Scanning content</h3>
+<div id="how-we-read-the-web-scanning-content" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.2.1</span> How we read the web: Scanning content<a href="simplicity-is-gold.html#how-we-read-the-web-scanning-content" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The second part of this chapter focuses on what your audience is actually seeing about the app.</p>
 <blockquote>
 <p>The user of your app doesn’t read everything, but will be searching for <strong>“How to”?</strong></p>
 </blockquote>
 <div class="figure"><span style="display:block;" id="fig:howto"></span>
-<div id="htmlwidget-8d436128a6c8fef4abc1" style="width:100%;height:100%;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8d436128a6c8fef4abc1">{"x":{"diagram":"\ngraph LR\nA((scan))-->B>satisfice - satisfy and suffice]\n  \n  style A fill:#bbf\n  style B fill:#f96, stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5\n  \n  #style P fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5\n\n "},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-b0b12f564c707c9b71d9" style="width:100%;height:100%;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b0b12f564c707c9b71d9">{"x":{"diagram":"\ngraph LR\nA((scan))-->B>satisfice - satisfy and suffice]\n  \n  style A fill:#bbf\n  style B fill:#f96, stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5\n  \n  #style P fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5\n\n "},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 6.3: <strong>“How to”?</strong>
 </p>
@@ -534,8 +534,8 @@ Figure 6.3: <strong>“How to”?</strong>
 <span id="cb4-10"><a href="simplicity-is-gold.html#cb4-10"></a>    <span class="kw">continue_computing</span>()</span>
 <span id="cb4-11"><a href="simplicity-is-gold.html#cb4-11"></a>  }</span></code></pre></div>
 </div>
-<div id="building-a-self-evident-app-or-at-least-self-explanatory" class="section level3">
-<h3><span class="header-section-number">6.2.2</span> Building a self-evident app (or at least self-explanatory)</h3>
+<div id="building-a-self-evident-app-or-at-least-self-explanatory" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.2.2</span> Building a self-evident app (or at least self-explanatory)<a href="simplicity-is-gold.html#building-a-self-evident-app-or-at-least-self-explanatory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><strong>self-evident</strong>: no demo required</li>
 <li><strong>self-explanatory</strong>: no explanation required</li>
